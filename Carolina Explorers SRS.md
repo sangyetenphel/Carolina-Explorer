@@ -16,7 +16,7 @@
 - **Tourist (Customer):** A registered user who creates and manages tours.
 - **Tour Guide (Provider):** A registered user who creates and manages tours.
 - **Booking Request:** A request submitted by a tourist for a specific date and time.
-- **Itinerary::** A structured list of activities and details included in a tour.
+- **Itinerary:** A structured list of activities and details included in a tour.
 
 **Primary Users / Roles.**
 - **Customer (Tourist)** — Find and book tours that match location, schedule, and budget.
@@ -45,7 +45,9 @@
 
 ### 2.1 Customer Stories
 - **US‑CUST‑001 — Browse Tours by City**
-  _Story:_ **As a `tourist`, I want `to browse tour guides by city`, so that `I can find experiences in my destination`.**
+
+  _Story:_ **As a `tourist`, I want `to browse tour guides by city`, so that `I can find experiences in my destination.`**
+
   _Acceptance:_
   ```gherkin
   Scenario: Browse tours by city
@@ -55,7 +57,9 @@
   ```
 
 - **US‑CUST‑002 — Filter Tours**
-  _Story:_ **As a `tourist`, I want `to filter tours by price, group size, and tour type`, so that `can choose a tour that fits my budget and preferences.`.**
+
+  _Story:_ **As a `tourist`, I want `to filter tours by price, group size, and tour type`, so that `I can choose a tour that fits my budget and preferences.`**
+
   _Acceptance:_
   ```gherkin
   Scenario: Apply filters
@@ -64,7 +68,9 @@
     Then  only tours matching the selected criteria should appear
   ```
   - **US‑CUST‑003 — View Itinerary**
-  _Story:_ **As a `tourist`, I want `to view the itinerary`, so that `I know exactly what the tour includes.`.**
+
+  _Story:_ **As a `tourist`, I want `to view the itinerary`, so that `I know exactly what the tour includes.`**
+
   _Acceptance:_
   ```gherkin
   Scenario: View itinerary
@@ -74,7 +80,9 @@
   ```
 
 - **US‑CUST‑004 — Request Booking**
-  _Story:_ **As a `tourist`, I want `to request or book a tour date and time`, so that `that I can secure my spot.`.**
+
+  _Story:_ **As a `tourist`, I want `to request or book a tour date and time`, so that `that I can secure my spot.`**
+
   _Acceptance:_
   ```gherkin
   Scenario: Submit booking request
@@ -84,8 +92,10 @@
   ```
 
 ### 2.2 Provider Stories
-- **US‑PROV‑001 — Create and Manage Tours**  
-  _Story: As a tour guide, I want to create and manage tours so that I can showcase my local expertise. 
+- **US‑PROV‑001 — Create and Manage Tours**
+
+  _Story:_ As a tour guide, I want to create and manage tours so that I can showcase my local expertise.
+
   _Acceptance:_
   ```gherkin
   Scenario: Create a tour
@@ -94,8 +104,10 @@
     Then  the tour should appear in the public listing
   ```
 
-- **US‑PROV‑002 — Accept or Decline Booking**  
-  _Story: As a tour guide, I want to accept or decline booking requests so that I can control my availability and schedule.  
+- **US‑PROV‑002 — Accept or Decline Booking**
+
+  _Story:_ As a tour guide, I want to accept or decline booking requests so that I can control my availability and schedule.
+
   _Acceptance:_
   ```gherkin
   Scenario: Accept booking
@@ -111,8 +123,10 @@
     Then  the booking status should update to declined
   ```
 
-  - **US‑PROV‑003 — Leave Review**  
-  _Story: As a tour guide, I want to leave a review after a tour so that other users can make informed decisions.  
+- **US‑PROV‑003 — Leave Review**
+
+  _Story:_ As a tour guide, I want to leave a review after a tour so that other users can make informed decisions.
+
   _Acceptance:_
   ```gherkin
   Scenario: Submit review
@@ -139,15 +153,15 @@
 ---
 
 ## 5. Milestones (course‑aligned)
-- **M2 Requirements** — this file + stories opened as issues. 
-- **M3 High‑fidelity prototype** — core customer/provider flows fully interactive. 
-- **M4 Design** — architecture, schema, API outline. 
-- **M5 Backend API** — key endpoints + tests. 
-- **M6 Increment** — ≥2 use cases end‑to‑end. 
-- **M7 Final** — complete system & documentation. 
+- **M2 Requirements** — this file + stories opened as issues.
+- **M3 High‑fidelity prototype** — core customer/provider flows fully interactive.
+- **M4 Design** — architecture, schema, API outline.
+- **M5 Backend API** — key endpoints + tests.
+- **M6 Increment** — ≥2 use cases end‑to‑end.
+- **M7 Final** — complete system & documentation.
 
 ---
 
 ## 6. Change Management
-- Stories are living artifacts; changes are tracked via repository issues and linked pull requests.  
+- Stories are living artifacts; changes are tracked via repository issues and linked pull requests.
 - Major changes should update this SRS.
