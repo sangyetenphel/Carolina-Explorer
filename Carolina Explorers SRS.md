@@ -10,25 +10,32 @@
 ---
 
 ## 1. Overview
-**Vision.** One or two sentences: who this is for, the core problem, and the outcome.
+**Vision.** Carolina Express is a web-based tour discovery platform designed for tourists and new residents exploring North Carolina. The system helps users easily discover, filter, and request bookings for guided tours based on city, price, and preferences.
 
 **Glossary** Terms used in the project
-- **Term 1:** description.
-- **Term 2:** description
+- **Tourist (Customer):** A registered user who creates and manages tours.
+- **Tour Guide (Provider):** A registered user who creates and manages tours.
+- **Booking Request:** A request submitted by a tourist for a specific date and time.
+- **Itinerary::** A structured list of activities and details included in a tour.
 
 **Primary Users / Roles.**
-- **Customer (e.g., Student/Patient/Pet Owner/etc. )** — 1 line goal statement.
-- **Provider (e.g., Teacher/Doctor/Pet Sitter/etc. )** — 1 line goal statement.
-- **SysAdmin (optional)** — 1 line goal statement.
+- **Customer (Tourist)** — Find and book tours that match location, schedule, and budget.
+- **Provider (Tour Guide)** — Create tours and manage booking requests.
 
 **Scope (this semester).**
-- <capability 1>
-- <capability 2>
-- <capability 3>
+- <Account creation and login>
+- <Browse tours by city>
+- <Filter tours by price, group size, and type>
+- <View tour itinerary>
+- <Submit booking requests>
+- <Accept/decline booking requests>
+- <Review system>
 
 **Out of scope (deferred).**
-- <deferred 1>
-- <deferred 2>
+- <Payment processing>
+- <Messaging system>
+- <Provider analytics dashboard>
+- <Business sponsorships>
 
 > This document is **requirements‑level** and solution‑neutral; design decisions (UI layouts, API endpoints, schemas) are documented separately.
 
@@ -38,24 +45,43 @@
 Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
 ### 2.1 Customer Stories
-- **US‑CUST‑001 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+- **US‑CUST‑001 — <Browse Tours by City>**
+  _Story:_ **As a `<tourist>`, I want `<to browse tour guides by city>`, so that `<I can find experiences in my destination>`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Browse tours by city>
+    Given <I am logged in as a tourist>
+    When  <I select a city filter>
+    Then  <only tours from that city should be displayed>
   ```
 
-- **US‑CUST‑002 — <short title>**  
-  _Story:_ As a customer, I want … so that …  
+- **US‑CUST‑002 — <Filter Tours>**
+  _Story:_ **As a `<tourist>`, I want `<to filter tours by price, group size, and tour type>`, so that `<can choose a tour that fits my budget and preferences.>`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: <Apply filters>
+    Given <I am viewing available tours>
+    When  <I apply filters for price, group size, and type>
+    Then  <only tours matching the selected criteria should appear>
+  ```
+  - **US‑CUST‑003 — <View Itinerary>**
+  _Story:_ **As a `<tourist>`, I want `<to view the itinerary>`, so that `<I know exactly what the tour includes.>`.**
+  _Acceptance:_
+  ```gherkin
+  Scenario: <View itinerary>
+    Given <I select a specific tour>
+    When  <I open the tour details>
+    Then  <I should see the itinerary including activities and schedule>
+  ```
+
+- **US‑CUST‑004 — <Request Booking>**
+  _Story:_ **As a `<tourist>`, I want `<to request or book a tour date and time>`, so that `<that I can secure my spot.>`.**
+  _Acceptance:_
+  ```gherkin
+  Scenario: <Submit booking request>
+    Given <I am viewing a tour>
+    When  <I select a date and time and submit a request>
+    Then  <the provider should receive the booking request>
   ```
 
 ### 2.2 Provider Stories
