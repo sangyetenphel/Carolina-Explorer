@@ -85,24 +85,41 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   ```
 
 ### 2.2 Provider Stories
-- **US‑PROV‑001 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑001 — <Create and Manage Tours>**  
+  _Story: As a tour guide, I want to create and manage tours so that I can showcase my local expertise. 
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Create a tour
+    Given I am logged in as a provider
+    When  I enter tour details and submit
+    Then  the tour should appear in the public listing
   ```
 
-- **US‑PROV‑002 — <short title>**  
-  _Story:_ As a provider, I want … so that …  
+- **US‑PROV‑002 — <Accept or Decline Booking>**  
+  _Story: As a tour guide, I want to accept or decline booking requests so that I can control my availability and schedule.  
   _Acceptance:_
   ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
+  Scenario: Accept booking
+    Given I have received a booking request
+    When  I choose accept
+    Then  the booking status should update to confirmed
+  ```
+
+  ```gherkin
+  Scenario: Decline booking
+    Given I have received a booking request
+    When  I choose decline
+    Then  the booking status should update to declined
+  ```
+
+  - **US‑PROV‑003 — <Leave Review>**  
+  _Story: As a tour guide, I want to leave a review after a tour so that other users can make informed decisions.  
+  _Acceptance:_
+  ```gherkin
+  Scenario: Submit review
+    Given a tour has been completed
+    When I submit a rating and written review
+    Then the review should be visible to other users
   ```
 
 ### 2.3 SysAdmin Stories
@@ -129,16 +146,19 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
 ---
 
 ## 3. Non‑Functional Requirements (make them measurable)
-- **Performance:** description 
-- **Availability/Reliability:** description
-- **Security/Privacy:** description
-- **Usability:** description
+- **Performance:** Tour search results must load within 3 seconds under normal usage.
+- **Availability/Reliability:** The system must maintain at least 95% uptime during the semester.
+- **Security/Privacy:** User passwords must be encrypted and user data must not be publicly exposed.
+- **Usability:** A tourist must be able to complete a booking request in 5 steps or fewer.
 
 ---
 
 ## 4. Assumptions, Constraints, and Policies
-- list any rules, policies, assumptions, etc.
-
+- The application will be web-based.
+- Only registered users can book or create tours.
+- Payment processing is not included in this version.
+- Tour availability is managed manually by providers.
+- The system will be developed using tools and technologies approved in CSC 340.
 ---
 
 ## 5. Milestones (course‑aligned)
