@@ -42,7 +42,6 @@
 ---
 
 ## 2. Functional Requirements (User Stories)
-Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
 ### 2.1 Customer Stories
 - **US‑CUST‑001 — Browse Tours by City**
@@ -85,7 +84,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
   ```
 
 ### 2.2 Provider Stories
-- **US‑PROV‑001 — <Create and Manage Tours>**  
+- **US‑PROV‑001 — Create and Manage Tours**  
   _Story: As a tour guide, I want to create and manage tours so that I can showcase my local expertise. 
   _Acceptance:_
   ```gherkin
@@ -95,7 +94,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     Then  the tour should appear in the public listing
   ```
 
-- **US‑PROV‑002 — <Accept or Decline Booking>**  
+- **US‑PROV‑002 — Accept or Decline Booking**  
   _Story: As a tour guide, I want to accept or decline booking requests so that I can control my availability and schedule.  
   _Acceptance:_
   ```gherkin
@@ -112,7 +111,7 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     Then  the booking status should update to declined
   ```
 
-  - **US‑PROV‑003 — <Leave Review>**  
+  - **US‑PROV‑003 — Leave Review**  
   _Story: As a tour guide, I want to leave a review after a tour so that other users can make informed decisions.  
   _Acceptance:_
   ```gherkin
@@ -121,31 +120,9 @@ Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`
     When I submit a rating and written review
     Then the review should be visible to other users
   ```
-
-### 2.3 SysAdmin Stories
-- **US‑ADMIN‑001 — <short title>**  
-  _Story:_ As a sysadmin, I want … so that …  
-  _Acceptance:_
-  ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
-  ```
-
-- **US‑ADMIN‑002 — <short title>**  
-  _Story:_ As a sysadmin, I want … so that …  
-  _Acceptance:_
-  ```gherkin
-  Scenario: <happy path>
-    Given <preconditions>
-    When  <action>
-    Then  <observable outcome>
-  ```
-
 ---
 
-## 3. Non‑Functional Requirements (make them measurable)
+## 3. Non‑Functional Requirements
 - **Performance:** Tour search results must load within 3 seconds under normal usage.
 - **Availability/Reliability:** The system must maintain at least 95% uptime during the semester.
 - **Security/Privacy:** User passwords must be encrypted and user data must not be publicly exposed.
