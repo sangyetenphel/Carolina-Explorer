@@ -1,18 +1,18 @@
 
 # Requirements – Starter Template
 
-**Project Name:** Your App Name \
-**Team:** Names and roles \
-**Course:** CSC 340\
+**Project Name:** Carolina Explorers \
+**Team:** Ayusha Thapa (Provider) | Sangye Tengkhar (Customer) \
+**Course:** CSC 340-01\
 **Version:** 1.0\
-**Date:** 2026-01-30
+**Date:** 2026-02-13
 
 ---
 
 ## 1. Overview
 **Vision.** Carolina Express is a web-based tour discovery platform designed for tourists and new residents exploring North Carolina. The system helps users easily discover, filter, and request bookings for guided tours based on city, price, and preferences.
 
-**Glossary** Terms used in the project
+**Glossary**
 - **Tourist (Customer):** A registered user who creates and manages tours.
 - **Tour Guide (Provider):** A registered user who creates and manages tours.
 - **Booking Request:** A request submitted by a tourist for a specific date and time.
@@ -22,20 +22,20 @@
 - **Customer (Tourist)** — Find and book tours that match location, schedule, and budget.
 - **Provider (Tour Guide)** — Create tours and manage booking requests.
 
-**Scope (this semester).**
-- <Account creation and login>
-- <Browse tours by city>
-- <Filter tours by price, group size, and type>
-- <View tour itinerary>
-- <Submit booking requests>
-- <Accept/decline booking requests>
-- <Review system>
+**Scope**
+- Account creation and login
+- Browse tours by city
+- Filter tours by price, group size, and type
+- View tour itinerary
+- Submit booking requests
+- Accept/decline booking requests
+- Review system
 
-**Out of scope (deferred).**
-- <Payment processing>
-- <Messaging system>
-- <Provider analytics dashboard>
-- <Business sponsorships>
+**Out of scope**
+- Payment processing
+- Messaging system
+- Provider analytics dashboard
+- Business sponsorships
 
 > This document is **requirements‑level** and solution‑neutral; design decisions (UI layouts, API endpoints, schemas) are documented separately.
 
@@ -45,43 +45,43 @@
 Write each story as: **As a `<role>`, I want `<capability>`, so that `<benefit>`.** Each story includes at least one **Given/When/Then** scenario.
 
 ### 2.1 Customer Stories
-- **US‑CUST‑001 — <Browse Tours by City>**
-  _Story:_ **As a `<tourist>`, I want `<to browse tour guides by city>`, so that `<I can find experiences in my destination>`.**
+- **US‑CUST‑001 — Browse Tours by City**
+  _Story:_ **As a `tourist`, I want `to browse tour guides by city`, so that `I can find experiences in my destination`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <Browse tours by city>
-    Given <I am logged in as a tourist>
-    When  <I select a city filter>
-    Then  <only tours from that city should be displayed>
+  Scenario: Browse tours by city
+    Given I am logged in as a tourist
+    When  I select a city filter
+    Then  only tours from that city should be displayed
   ```
 
-- **US‑CUST‑002 — <Filter Tours>**
-  _Story:_ **As a `<tourist>`, I want `<to filter tours by price, group size, and tour type>`, so that `<can choose a tour that fits my budget and preferences.>`.**
+- **US‑CUST‑002 — Filter Tours**
+  _Story:_ **As a `tourist`, I want `to filter tours by price, group size, and tour type`, so that `can choose a tour that fits my budget and preferences.`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <Apply filters>
-    Given <I am viewing available tours>
-    When  <I apply filters for price, group size, and type>
-    Then  <only tours matching the selected criteria should appear>
+  Scenario: Apply filters
+    Given I am viewing available tours
+    When  I apply filters for price, group size, and type
+    Then  only tours matching the selected criteria should appear
   ```
-  - **US‑CUST‑003 — <View Itinerary>**
-  _Story:_ **As a `<tourist>`, I want `<to view the itinerary>`, so that `<I know exactly what the tour includes.>`.**
+  - **US‑CUST‑003 — View Itinerary**
+  _Story:_ **As a `tourist`, I want `to view the itinerary`, so that `I know exactly what the tour includes.`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <View itinerary>
-    Given <I select a specific tour>
-    When  <I open the tour details>
-    Then  <I should see the itinerary including activities and schedule>
+  Scenario: View itinerary
+    Given I select a specific tour
+    When  I open the tour details
+    Then  I should see the itinerary including activities and schedule
   ```
 
-- **US‑CUST‑004 — <Request Booking>**
-  _Story:_ **As a `<tourist>`, I want `<to request or book a tour date and time>`, so that `<that I can secure my spot.>`.**
+- **US‑CUST‑004 — Request Booking**
+  _Story:_ **As a `tourist`, I want `to request or book a tour date and time`, so that `that I can secure my spot.`.**
   _Acceptance:_
   ```gherkin
-  Scenario: <Submit booking request>
-    Given <I am viewing a tour>
-    When  <I select a date and time and submit a request>
-    Then  <the provider should receive the booking request>
+  Scenario: Submit booking request
+    Given I am viewing a tour
+    When  I select a date and time and submit a request
+    Then  the provider should receive the booking request
   ```
 
 ### 2.2 Provider Stories
