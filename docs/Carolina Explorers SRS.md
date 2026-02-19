@@ -1,7 +1,7 @@
 
 # Requirements – Starter Template
 
-**Project Name:** Carolina Explorers \
+**Project Name:** Carolina Explorer \
 **Team:** Ayusha Thapa (Provider) | Sangye Tengkhar (Customer) \
 **Course:** CSC 340-01\
 **Version:** 1.0\
@@ -10,7 +10,7 @@
 ---
 
 ## 1. Overview
-**Vision.** Carolina Express is a web-based tour discovery platform designed for tourists and new residents exploring North Carolina. The system helps users easily discover, filter, and request bookings for guided tours based on city, price, and preferences.
+**Vision.** Carolina Explorer is a web-based tour discovery platform designed for tourists and new residents exploring North Carolina. The system helps users easily discover, filter, and request bookings for guided tours based on city, price, and preferences.
 
 **Glossary**
 - **Tourist (Customer):** A registered user who creates and manages tours.
