@@ -91,9 +91,9 @@
     Then  the provider should receive the booking request
   ```
 
-- **US‑PROV‑005 — Leave Review**
+- **US‑CUST‑005 — Leave Review**
 
-  _Story:_ As a tourist, I want to leave a review after a tour so that other users can make informed decisions.
+  _Story:_ **As a `tourist`, I want `to leave a review after a tour` so that `other users can make informed decisions.`**
   
   _Acceptance:_
   ```gherkin
