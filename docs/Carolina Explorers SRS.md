@@ -95,7 +95,8 @@ Scenario: Customer logs in
     When  I apply filters for price, group size, and type
     Then  only tours matching the selected criteria should appear
   ```
-  - **US‑CUST‑003 — View Itinerary**
+
+- **US‑CUST‑003 — View Itinerary**
 
   _Story:_ **As a `tourist`, I want `to view the itinerary`, so that `I know exactly what the tour includes.`**
 
@@ -144,7 +145,7 @@ Scenario: Customer logs in
     Then a provider account should be created
   ```
   
-  - **US-PROV-00B — Provider Login**
+- **US-PROV-00B — Provider Login**
 
   _Story:_ **As a `tour guide`, I want `to log in to my account`, so that `I can manage tours and booking requests.`**
 
