@@ -62,7 +62,7 @@ Scenario: Customer signs up
 
 __Story__: **As a `tourist`, I want `to log in to my account`, so that `I can access booking features.`**
 
-__Acceptance__:
+_Acceptance_:
   ```gherkin
 Scenario: Customer logs in
   Given I have a customer account
