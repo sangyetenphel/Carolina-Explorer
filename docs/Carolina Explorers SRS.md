@@ -13,13 +13,13 @@
 **Vision.** Carolina Explorer is a web-based tour discovery platform designed for tourists and new residents exploring North Carolina. The system helps users easily discover, filter, and request bookings for guided tours based on city, price, and preferences.
 
 **Glossary**
-- **Tourist (Customer):** A registered user who creates and manages tours.
+- **Tourist (Customer):** A registered user who searches and books tours.
 - **Tour Guide (Provider):** A registered user who creates and manages tours.
 - **Booking Request:** A request submitted by a tourist for a specific date and time.
 - **Itinerary:** A structured list of activities and details included in a tour.
 
 **Primary Users / Roles.**
-- **Customer (Tourist)** — Find and book tours that match location, schedule, and budget.
+- **Customer (Tourist)** — Find and book tours that match location, schedule, and group size.
 - **Provider (Tour Guide)** — Create tours and manage booking requests.
 
 **Scope**
@@ -51,7 +51,7 @@
   _Acceptance:_
   ```gherkin
   Scenario: Browse tours by city
-    Given I am logged in as a tourist
+    Given I am a customer
     When  I select a city filter
     Then  only tours from that city should be displayed
   ```
@@ -91,6 +91,18 @@
     Then  the provider should receive the booking request
   ```
 
+- **US‑PROV‑003 — Leave Review**
+
+  _Story:_ As a tourist, I want to leave a review after a tour so that other users can make informed decisions.
+  
+  _Acceptance:_
+  ```gherkin
+  Scenario: Submit review
+    Given a tour has been completed
+    When I submit a rating and written review
+    Then the review should be visible to other users
+  ```
+
 ### 2.2 Provider Stories
 - **US‑PROV‑001 — Create and Manage Tours**
 
@@ -122,18 +134,7 @@
     When  I choose decline
     Then  the booking status should update to declined
   ```
-
-- **US‑PROV‑003 — Leave Review**
-
-  _Story:_ As a tour guide, I want to leave a review after a tour so that other users can make informed decisions.
-
-  _Acceptance:_
-  ```gherkin
-  Scenario: Submit review
-    Given a tour has been completed
-    When I submit a rating and written review
-    Then the review should be visible to other users
-  ```
+  
 ---
 
 ## 3. Non‑Functional Requirements
