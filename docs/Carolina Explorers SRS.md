@@ -44,6 +44,34 @@
 ## 2. Functional Requirements (User Stories)
 
 ### 2.1 Customer Stories
+- **US-CUST-00A — Customer Registration**
+
+__Story__: **As a `tourist`, I want `to create a customer account`, so that `I can browse and book tours.`**
+
+_Acceptance_:
+```gherkin
+Scenario: Customer signs up
+  Given I am a new user
+  When I submit valid registration information
+  Then a customer account should be created
+```
+
+---
+
+- **US-CUST-00B — Customer Login**
+
+__Story__: **As a `tourist`, I want `to log in to my account`, so that `I can access booking features.`**
+
+__Acceptance__:
+  ```gherkin
+Scenario: Customer logs in
+  Given I have a customer account
+  When I enter valid credentials
+  Then I should be logged in as a customer
+```
+
+---
+
 - **US‑CUST‑001 — Browse Tours by City**
 
   _Story:_ **As a `tourist`, I want `to browse tour guides by city`, so that `I can find experiences in my destination.`**
@@ -93,7 +121,7 @@
 
 - **US‑CUST‑005 — Leave Review**
 
-  _Story:_ **As a `tourist`, I want `to leave a review after a tour` so that `other users can make informed decisions.`**
+  _Story:_ **As a `tourist`, I want `to leave a review after a tour`, so that `other users can make informed decisions.`**
   
   _Acceptance:_
   ```gherkin
@@ -104,9 +132,33 @@
   ```
 
 ### 2.2 Provider Stories
+- **US-PROV-00A — Provider Registration**
+
+  _Story:_ **As a `tour guide`, I want `to create a provider account`, so that `I can offer and manage tours.`**
+
+  _Acceptance:_
+  ```gherkin
+  Scenario: Provider signs up
+    Given I am a new provider
+    When I submit valid registration information
+    Then a provider account should be created
+  ```
+  
+  - **US-PROV-00B — Provider Login**
+
+  _Story:_ **As a `tour guide`, I want `to log in to my account`, so that `I can manage tours and booking requests.`**
+
+  _Acceptance:_
+  ```gherkin
+  Scenario: Provider logs in
+    Given I have a provider account
+    When I enter valid credentials
+    Then I should be logged in as a provider
+  ```
+  
 - **US‑PROV‑001 — Create and Manage Tours**
 
-  _Story:_ As a tour guide, I want to create and manage tours so that I can showcase my local expertise.
+  _Story:_ **As a `tour guide`, I want `to create and manage tours`, so that `I can showcase my local expertise.`**
 
   _Acceptance:_
   ```gherkin
@@ -118,7 +170,7 @@
 
 - **US‑PROV‑002 — Accept or Decline Booking**
 
-  _Story:_ As a tour guide, I want to accept or decline booking requests so that I can control my availability and schedule.
+  _Story:_ **As a `tour guide`, I want to `accept or decline booking`, requests so that `I can control my availability and schedule.`**
 
   _Acceptance:_
   ```gherkin
