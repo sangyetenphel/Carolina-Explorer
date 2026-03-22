@@ -18,14 +18,7 @@ public class TourGuide extends User {
     @Enumerated(EnumType.STRING)
     private City tourGuideCity;
 
-    private int yearsOfExperience;
+    private Integer yearsOfExperience;
 
     private String bio;
-}
-
-enum City {
-    ASHEVILLE,
-    CHARLOTTE,
-    RALEIGH,
-    WILMINGTON
 }
