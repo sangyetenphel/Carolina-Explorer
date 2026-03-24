@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
 @Table(name = "tour_guides")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "tour_guide_id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TourGuide extends User {
 
     private String bio;
@@ -25,4 +25,5 @@ public class TourGuide extends User {
     @OneToMany(mappedBy = "tourGuide", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tourGuide")
     private List<Tour> tours;
+
 }
