@@ -28,7 +28,6 @@ The Carolina Explorer Backend API provides a RESTful interface for managing:
 - **Bookings**: Reservations made by tourists for specific tours
 - **Reviews**: Feedback provided by tourists after completing a booking
 - **Search & Filtering**: Browse tours by city, category, and price
-- **Audit Logs (Future)**: Administrative tracking of system actions
 
 ---
 ## 2. User Roles
