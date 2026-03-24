@@ -1,6 +1,10 @@
 package com.carolina_explorer.service;
 
 import com.carolina_explorer.entity.Tour;
+import com.carolina_explorer.entity.City;
+import com.carolina_explorer.entity.Category;
+import com.carolina_explorer.entity.TourGuide;
+import com.carolina_explorer.repository.TourGuideRepository;
 import com.carolina_explorer.repository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,18 @@ public class TourService {
     @Autowired
     private TourRepository tourRepository;
 
+    @Autowired
+    private TourGuideRepository tourGuideRepository;
+
     public Tour createTour(Tour tour) {
+
+    if (tour.getTourGuideId() != null) {
+        TourGuide guide = tourGuideRepository.findById(tour.getTourGuideId())
+            .orElseThrow(() -> new RuntimeException("TourGuide not found"));
+
+        tour.setTourGuide(guide);
+    }
+
         return tourRepository.save(tour);
     }
 
@@ -27,11 +42,16 @@ public class TourService {
     }
 
     public List<Tour> getToursByCity(String city) {
-        return tourRepository.findByCity(city);
+        return tourRepository.findByCity(City.valueOf(city.toUpperCase()));
     }
 
     public List<Tour> getToursByCategory(String category) {
-        return tourRepository.findByCategory(category);
+        try {
+            Category cat = Category.valueOf(category.toUpperCase());
+            return tourRepository.findByCategory(cat);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid category: " + category);
+        }
     }
 
     public List<Tour> getToursByPrice(Double price) {
