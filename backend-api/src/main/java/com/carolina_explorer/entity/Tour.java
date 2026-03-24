@@ -15,13 +15,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Tour {
 
+    @Transient
+    private Long tourGuideId;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tourId;
 
     @ManyToOne
     @JoinColumn(name = "tour_guide_id", nullable = false)
-    @JsonIgnoreProperties("tours")
+    @JsonIgnoreProperties({"tours", "hibernateLazyInitializer", "handler"})
     private TourGuide tourGuide;
 
     @Column(nullable = false)
@@ -37,8 +40,6 @@ public class Tour {
     private Double price;
 
     private Double duration; // hours
-
-    private Integer groupSize;
 
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -62,16 +63,4 @@ public class Tour {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-}
-
-enum Category {
-    FOOD,
-    HISTORY,
-    NATURE,
-    ADVENTURE
-}
-
-enum GroupType {
-    PRIVATE,
-    PUBLIC
 }
