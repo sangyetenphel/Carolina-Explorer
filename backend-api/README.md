@@ -371,12 +371,11 @@ POST /bookings
 Content-Type: application/json
 
 {
-  "touristId": 2,
-  "tourId": 3,
+  "tourist": {"userId": 2},
+  "tour": {"tourId": 5},
   "groupSize": 4,
   "tourDate": "2026-04-01",
-  "tourStartTime": "10:00 AM",
-  "groupType": "PRIVATE",
+  "groupType": "PUBLIC",
   "specialRequest": "Window seat if possible"
 }
 ```
@@ -384,13 +383,22 @@ Content-Type: application/json
 **Response:**
 ```json
 {
-  "bookingId": 1,
+  "bookingId": 2,
+  "tourist": {
+    "userId": 2,
+    "firstName": "John",
+    "lastName": "Smith"
+  },
+  "tour": {
+    "tourId": 5,
+    "title": "Raleigh Food Tour",
+    "city": "RALEIGH"
+  },
   "tourDate": "2026-04-01",
   "groupSize": 4,
-  "groupType": "PRIVATE",
+  "groupType": "PUBLIC",
   "specialRequest": "Window seat if possible",
-  "createdAt": "2026-01-15T10:30:00",
-  "updatedAt": "2026-01-15T10:30:00"
+  "createdAt": "2026-03-24T12:56:02.091331"
 }
 ```
 
