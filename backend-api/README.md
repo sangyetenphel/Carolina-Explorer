@@ -17,7 +17,7 @@
     - [Tour Management](#tour-management)
     - [Booking Management](#booking-management)
     - [Review Management](#review-management)
-5. [Use Case Mapping](#use-case-mapping)
+5. [Use Case Mapping](#5use-case-mapping)
 
 ---
 ## 1. Overview
