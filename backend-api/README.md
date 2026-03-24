@@ -304,10 +304,9 @@ GET /tours
 **Example with filters:**
 ```http
 GET /tours                     // all tours
-GET /tours?city=ASHEVILLE     // filter by city
-GET /tours?category=FOOD      // filter by category
-GET /tours?price=100          // filter by price
-GET /tours?city=ASHEVILLE&category=FOOD&price=100
+GET /tours/city/ASHEVILLE     // filter by city
+GET /tours/category/FOOD      // filter by category
+GET /tours/price/100          // filter by price
 ```
 
 **Status Code:** `200 OK`
