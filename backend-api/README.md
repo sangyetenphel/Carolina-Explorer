@@ -463,9 +463,9 @@ POST /reviews
 Content-Type: application/json
 
 {
-  "bookingId": 1,
+  "booking": { "bookingId": 1 },
   "rating": 5,
-  "comment": "Amazing experience!"
+  "comment": "Great experience!"
 }
 ```
 
