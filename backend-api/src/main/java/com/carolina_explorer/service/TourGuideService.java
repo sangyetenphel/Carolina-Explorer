@@ -26,19 +26,33 @@ public class TourGuideService {
         return tourGuideRepository.findById(id);
     }
 
-    public TourGuide updateTourGuide(Long id, TourGuide details) {
+    public TourGuide updateTourGuide(Long id, TourGuide updatedGuide) {
+
         return tourGuideRepository.findById(id).map(guide -> {
-            if (details.getEmail() != null) {
-                guide.setEmail(details.getEmail());
+
+            if (updatedGuide.getFirstName() != null) {
+                guide.setFirstName(updatedGuide.getFirstName());
             }
-            if (details.getBio() != null) {
-                guide.setBio(details.getBio());
+
+            if (updatedGuide.getLastName() != null) {
+                guide.setLastName(updatedGuide.getLastName());
             }
-            if (details.getYearsOfExperience() != null) {
-                guide.setYearsOfExperience(details.getYearsOfExperience());
+
+            if (updatedGuide.getEmail() != null) {
+                guide.setEmail(updatedGuide.getEmail());
             }
+
+            if (updatedGuide.getBio() != null) {
+                guide.setBio(updatedGuide.getBio());
+            }
+
+            if (updatedGuide.getYearsOfExperience() != null) {
+                guide.setYearsOfExperience(updatedGuide.getYearsOfExperience());
+            }
+
             return tourGuideRepository.save(guide);
-        }).orElseThrow(() -> new RuntimeException("TourGuide not found"));
+
+        }).orElseThrow(() -> new RuntimeException("Tour guide not found"));
     }
 
     public void deleteTourGuide(Long id) {
