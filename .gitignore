@@ -3,3 +3,7 @@
 **/.DS_Store
 
 backend-api/target/
+
+target/
+*.jar
+*.class
