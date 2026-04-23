@@ -2,90 +2,100 @@
 <html>
 <head>
     <title>Tours</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6fb;
         }
 
         .container {
             display: flex;
             max-width: 1200px;
             margin: auto;
-            padding: 40px;
-            gap: 30px;
+            padding: 50px 20px;
+            gap: 40px;
         }
 
-        /* LEFT SIDE (TOURS) */
+        /* TITLE */
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* LEFT */
         .left {
             flex: 2;
-        }
-
-        .title {
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 20px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 25px;
         }
 
+        /* CARD */
         .card {
             background: white;
-            border-radius: 12px;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: 0.25s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card img {
             width: 100%;
-            height: 140px;
+            height: 170px;
             object-fit: cover;
         }
 
         .card-body {
-            padding: 12px;
+            padding: 16px;
         }
 
         .badge {
             font-size: 11px;
             background: #eef3ff;
             color: #2a6df4;
-            padding: 3px 8px;
-            border-radius: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
             display: inline-block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .card-title {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 16px;
         }
 
         .desc {
             font-size: 13px;
             color: #666;
-            margin: 5px 0;
+            margin: 6px 0;
         }
 
         .price {
-            font-weight: bold;
-            margin-top: 5px;
+            font-weight: 600;
+            margin-top: 6px;
         }
 
         .rating {
-            font-size: 12px;
-            color: #ffaa00;
+            font-size: 13px;
+            color: #f5a623;
+            margin-top: 3px;
         }
 
         .link {
@@ -93,19 +103,20 @@
             margin-top: 8px;
             color: #2a6df4;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
         }
 
-        /* RIGHT SIDE (MAP) */
+        /* RIGHT (MAP) */
         .right {
             flex: 1;
         }
 
         .map {
             width: 100%;
-            height: 500px;
-            border-radius: 12px;
+            height: 520px;
+            border-radius: 18px;
             border: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
     </style>
@@ -113,58 +124,61 @@
 
 <body>
 
-<div class="container">
+    <#include "navbar.ftlh">
 
-    <!-- LEFT SIDE -->
-    <div class="left">
+    <div class="container">
 
-        <div class="title">
-            Explore ${selectedCity?capitalize}
-        </div>
+        <!-- LEFT -->
+        <div class="left">
 
-        <div class="grid">
+            <div class="title">
+                🧭 Explore ${selectedCity?capitalize}
+            </div>
 
-            <#list tours as tour>
-                <div class="card">
+            <div class="grid">
 
-                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+                <#list tours as tour>
+                    <div class="card">
 
-                    <div class="card-body">
+                        <!-- FIXED IMAGE -->
+                        <img src="${(tour.images[0].imageUrl)!'/images/placeholder.jpg'}">
 
-                        <div class="badge">${tour.category}</div>
+                        <div class="card-body">
 
-                        <div class="card-title">${tour.title}</div>
+                            <div class="badge">${tour.category}</div>
 
-                        <div class="desc">${tour.description}</div>
+                            <div class="card-title">${tour.title}</div>
 
-                        <div class="price">$${tour.price} / person</div>
+                            <div class="desc">${tour.description}</div>
 
-                        <div class="rating">⭐ 4.5 (120)</div>
+                            <div class="price">$${tour.price} / person</div>
 
-                        <a class="link" href="/tours/${tour.tourId}">
-                            View →
-                        </a>
+                            <div class="rating">⭐ 4.5 (120)</div>
+
+                            <a class="link" href="/tours/${tour.tourId}">
+                                View →
+                            </a>
+
+                        </div>
 
                     </div>
+                </#list>
 
-                </div>
-            </#list>
+            </div>
+
+        </div>
+
+        <!-- RIGHT MAP -->
+        <div class="right">
+
+            <iframe
+                class="map"
+                src="https://maps.google.com/maps?q=${selectedCity}&output=embed">
+            </iframe>
 
         </div>
 
     </div>
-
-    <!-- RIGHT SIDE (MAP) -->
-    <div class="right">
-
-        <iframe
-            class="map"
-            src="https://maps.google.com/maps?q=${selectedCity}&output=embed">
-        </iframe>
-
-    </div>
-
-</div>
 
 </body>
 </html>

@@ -2,4 +2,12 @@
 .DS_Store
 **/.DS_Store
 
+/target/
+/*.jar
+
+*.log
 backend-api/target/
+
+target/
+*.jar
+*.class
