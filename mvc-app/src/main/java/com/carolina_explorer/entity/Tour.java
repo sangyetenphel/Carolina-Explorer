@@ -1,12 +1,13 @@
 package com.carolina_explorer.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tours")
@@ -15,18 +16,17 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Tour {
 
-    @Transient
-    private Long tourGuideId;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tourId;
 
+    // RELATIONSHIP
     @ManyToOne
     @JoinColumn(name = "tour_guide_id", nullable = false)
     @JsonIgnoreProperties({"tours", "hibernateLazyInitializer", "handler"})
     private TourGuide tourGuide;
 
+    // BASIC INFO
     @Column(nullable = false)
     private String title;
 
@@ -36,17 +36,41 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     private City city;
 
-    @Column(nullable = false)
-    private Double price;
-
-    private Double duration; // hours
-
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @Enumerated(EnumType.STRING)
     private GroupType groupType;
 
+    private Integer durationHours;
+
+    // PRICING
+    @Column(nullable = false)
+    private Double price;
+
+    private Integer minGuests;
+    private Integer maxGuests;
+
+    private Integer ageRequirement;
+
+    // DETAILS
+    @Column(columnDefinition = "TEXT")
+    private String itinerary;
+
+    @Column(columnDefinition = "TEXT")
+    private String includes;
+
+    // AVAILABILITY
+    private LocalDate availableDate;
+
+    private Double rating;
+    private Integer reviewCount;
+
+    // IMAGES
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TourImage> images;
+
+    // TIMESTAMPS
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

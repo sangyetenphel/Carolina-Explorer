@@ -50,8 +50,3 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 }
-
-enum UserRole {
-    TOURIST,
-    TOUR_GUIDE
-}
