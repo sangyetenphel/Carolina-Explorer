@@ -50,8 +50,11 @@ public class User {
         updatedAt = LocalDateTime.now();
     }
 }
+<<<<<<< HEAD
 
 enum UserRole {
     TOURIST,
     TOUR_GUIDE
 }
+=======
+>>>>>>> main
