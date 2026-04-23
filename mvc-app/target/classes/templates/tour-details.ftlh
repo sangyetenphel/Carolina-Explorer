@@ -2,19 +2,6 @@
 <html>
 <head>
     <title>Tour Details</title>
-<<<<<<< HEAD
-</head>
-<body>
-
-<h1>${tour.title}</h1>
-
-<p>${tour.description}</p>
-<p>Price: $${tour.price}</p>
-<p>City: ${tour.city}</p>
-<p>Category: ${tour.category}</p>
-
-<a href="/tours">Back to Tours</a>
-=======
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -244,7 +231,6 @@
     </div>
 
 </div>
->>>>>>> main
 
 </body>
 </html>

@@ -6,10 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 import java.util.List;
 
 @Entity
@@ -21,25 +17,15 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TourGuide extends User {
 
-<<<<<<< HEAD
-=======
     // Allow long bios 
     @Column(columnDefinition = "TEXT")
->>>>>>> main
     private String bio;
 
     private Integer yearsOfExperience;
 
-<<<<<<< HEAD
-    @OneToMany(mappedBy = "tourGuide", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("tourGuide")
-    private List<Tour> tours;
-
-=======
     private String profileImageUrl;
 
     @OneToMany(mappedBy = "tourGuide", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tourGuide")
     private List<Tour> tours;
->>>>>>> main
 }

@@ -1,14 +1,6 @@
 package com.carolina_explorer.entity;
 
 import jakarta.persistence.*;
-<<<<<<< HEAD
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import java.time.LocalDateTime;
-=======
 import lombok.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
->>>>>>> main
 
 @Entity
 @Table(name = "tours")
@@ -25,29 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 public class Tour {
 
-<<<<<<< HEAD
-    @Transient
-    private Long tourGuideId;
-
-=======
->>>>>>> main
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tourId;
 
-<<<<<<< HEAD
-=======
     // RELATIONSHIP
->>>>>>> main
     @ManyToOne
     @JoinColumn(name = "tour_guide_id", nullable = false)
     @JsonIgnoreProperties({"tours", "hibernateLazyInitializer", "handler"})
     private TourGuide tourGuide;
 
-<<<<<<< HEAD
-=======
     // BASIC INFO
->>>>>>> main
     @Column(nullable = false)
     private String title;
 
@@ -57,22 +36,12 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     private City city;
 
-<<<<<<< HEAD
-    @Column(nullable = false)
-    private Double price;
-
-    private Double duration; // hours
-
-=======
->>>>>>> main
     @Enumerated(EnumType.STRING)
     private Category category;
 
     @Enumerated(EnumType.STRING)
     private GroupType groupType;
 
-<<<<<<< HEAD
-=======
     private Integer durationHours;
 
     // PRICING
@@ -102,7 +71,6 @@ public class Tour {
     private List<TourImage> images;
 
     // TIMESTAMPS
->>>>>>> main
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

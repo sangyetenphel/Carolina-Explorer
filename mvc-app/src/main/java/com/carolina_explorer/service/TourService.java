@@ -23,13 +23,8 @@ public class TourService {
 
     public Tour createTour(Tour tour) {
 
-<<<<<<< HEAD
-    if (tour.getTourGuideId() != null) {
-        TourGuide guide = tourGuideRepository.findById(tour.getTourGuideId())
-=======
     if (tour.getTourGuide().getUserId() != null) {
         TourGuide guide = tourGuideRepository.findById(tour.getTourGuide().getUserId())
->>>>>>> main
             .orElseThrow(() -> new RuntimeException("TourGuide not found"));
 
         tour.setTourGuide(guide);

@@ -2,41 +2,24 @@
 <html>
 <head>
     <title>Carolina Explorer</title>
-<<<<<<< HEAD
-=======
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
->>>>>>> main
 
     <style>
         body {
             margin: 0;
-<<<<<<< HEAD
-            font-family: Arial, sans-serif;
-=======
             font-family: "Plus Jakarta Sans", sans-serif;
->>>>>>> main
             background: #f5f7fa;
         }
 
         /* NAVBAR */
-<<<<<<< HEAD
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 40px;
-            background: white;
-            align-items: center;
-        }
-=======
->>>>>>> main
 
         .logo {
             font-weight: bold;
@@ -61,15 +44,6 @@
         .hero {
             text-align: center;
             padding: 80px 20px 40px;
-<<<<<<< HEAD
-            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-=======
             /* background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470') center/cover; */
             background: url('/images/hero-image.jpg') 50% 25% / cover no-repeat;
             /* color: white; */
@@ -95,7 +69,6 @@
             padding: 0;
             color: black;
             font-weight: 500;
->>>>>>> main
         }
 
         /* SEARCH (FIGMA STYLE) */
@@ -123,11 +96,7 @@
         }
 
         .search-box button {
-<<<<<<< HEAD
-            background: #2a6df4;
-=======
             background: #ffca00;
->>>>>>> main
             color: white;
             border: none;
             padding: 10px 16px;
@@ -135,23 +104,16 @@
             cursor: pointer;
         }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
         /* SECTION */
         .section {
             padding: 60px 40px;
             text-align: center;
         }
 
-<<<<<<< HEAD
-=======
         .bi-geo-alt {
             margin-right: 10px;
         }
 
->>>>>>> main
         .cards {
             display: flex;
             justify-content: center;
@@ -184,8 +146,6 @@
             margin: 10px 0;
         }
 
-<<<<<<< HEAD
-=======
         .section {
             padding: 60px 20px;
             background: #f8fafc;
@@ -341,16 +301,11 @@
             color: black;
         }
 
->>>>>>> main
         .footer {
             background: white;
             padding: 30px;
             text-align: center;
-<<<<<<< HEAD
-            margin-top: 50px;
-=======
             /* margin-top: 50px; */
->>>>>>> main
         }
     </style>
 </head>
@@ -358,16 +313,6 @@
 <body>
 
 <!-- NAVBAR -->
-<<<<<<< HEAD
-<div class="navbar">
-    <div class="logo">Carolina Explorer</div>
-    <div class="nav-links">
-        <a href="/tours">Explore</a>
-        <a href="#">Login</a>
-        <a class="btn" href="#">Sign Up</a>
-    </div>
-</div>
-=======
  <#include "navbar.ftlh">
 <!-- <div class="navbar">
     <div class="logo">Carolina Explorer</div>
@@ -377,19 +322,14 @@
         <a class="btn" href="#">Sign Up</a>
     </div>
 </div> -->
->>>>>>> main
 
 <!-- HERO -->
 <div class="hero">
     <h1>Carolina Explorer</h1>
-<<<<<<< HEAD
-    <p>Discover North Carolina’s best tours and experiences</p>
-=======
     <div class="subtext">
         <p>Welcome to North Carolina, a state filled with charming cities, relaxing beaches, and breathtaking peaks.</p>
         <p>It’s time to escape to your next adventure.</p>
     </div>
->>>>>>> main
 
     <!-- SEARCH FORM -->
     <form action="/tours" method="get" class="search-container">
@@ -405,84 +345,22 @@
             </select>
 
             <!-- WHEN -->
-<<<<<<< HEAD
-            <input type="date" name="date">
-=======
             <input type="date" name="date" placeholder="When">
->>>>>>> main
 
             <!-- WHO -->
             <input type="number" name="guests" placeholder="Guests" min="1">
 
-<<<<<<< HEAD
-            <button type="submit">🔍</button>
-=======
             <button type="submit"><i class="bi bi-search"></i></button>
->>>>>>> main
         </div>
     </form>
 </div>
 
 <!-- CITY SECTION -->
 <div class="section">
-<<<<<<< HEAD
-    <h2>Explore by City</h2>
-
-    <div class="cards">
-
-        <a href="/tours?city=ASHEVILLE">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
-                <h3>Asheville</h3>
-                <p>Mountains, food, and culture</p>
-            </div>
-        </a>
-
-        <a href="/tours?city=CHARLOTTE">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-                <h3>Charlotte</h3>
-                <p>Modern city & nightlife</p>
-            </div>
-        </a>
-
-        <a href="/tours?city=RALEIGH">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1587502537104-aac10f4e76c3">
-                <h3>Raleigh</h3>
-                <p>Historic + vibrant</p>
-            </div>
-        </a>
-
-        <a href="/tours?city=WILMINGTON">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
-                <h3>Wilmington</h3>
-                <p>Beach & coastal vibes</p>
-            </div>
-        </a>
-
-    </div>
-</div>
-
-<!-- FEATURED -->
-<div class="section">
-    <h2>Featured Tours</h2>
-
-    <div class="cards">
-        <#list tours as tour>
-            <div class="card">
-                <h3>${tour.title}</h3>
-                <p>$${tour.price}</p>
-                <a href="/tours/${tour.tourId}">View</a>
-            </div>
-        </#list>
-    </div>
-=======
 
     <!-- TITLE -->
     <div class="section-header">
-        
+
         <h2><i class="bi bi-geo-alt"></i>Explore by City</h2>
         <p>Find unforgettable experiences in North Carolina’s most vibrant cities.</p>
     </div>
@@ -563,7 +441,6 @@
 
     </div>
 
->>>>>>> main
 </div>
 
 <!-- FOOTER -->
