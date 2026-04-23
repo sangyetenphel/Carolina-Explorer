@@ -2,4 +2,11 @@
 .DS_Store
 **/.DS_Store
 
+<<<<<<< HEAD
+/target/
+/*.jar
+
+*.log
+=======
 backend-api/target/
+>>>>>>> main

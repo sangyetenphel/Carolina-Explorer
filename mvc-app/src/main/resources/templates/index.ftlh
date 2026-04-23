@@ -6,7 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -103,7 +103,6 @@
             border-radius: 50%;
             cursor: pointer;
         }
-
 
         /* SECTION */
         .section {
@@ -361,7 +360,7 @@
 
     <!-- TITLE -->
     <div class="section-header">
-        
+
         <h2><i class="bi bi-geo-alt"></i>Explore by City</h2>
         <p>Find unforgettable experiences in North Carolina’s most vibrant cities.</p>
     </div>
