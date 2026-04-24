@@ -1,6 +1,8 @@
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/Application.java
+/Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/config/SecurityConfig.java
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/controller/TourController.java
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/controller/TourGuideController.java
+/Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/controller/TouristController.java
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/controller/TouristViewController.java
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/entity/Booking.java
 /Users/sangyetenphel/Library/CloudStorage/OneDrive-UNCG/CSC 340-01/Carolina-Explorer/mvc-app/src/main/java/com/carolina_explorer/entity/Category.java

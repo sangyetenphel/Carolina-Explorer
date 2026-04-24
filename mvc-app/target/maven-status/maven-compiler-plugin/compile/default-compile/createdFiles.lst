@@ -8,8 +8,10 @@ com/carolina_explorer/repository/ReviewRepository.class
 com/carolina_explorer/entity/Tour.class
 com/carolina_explorer/entity/City.class
 com/carolina_explorer/entity/Review.class
+com/carolina_explorer/config/SecurityConfig.class
 com/carolina_explorer/service/TouristService.class
 com/carolina_explorer/entity/Category.class
+com/carolina_explorer/controller/TouristController.class
 com/carolina_explorer/entity/TourImage.class
 com/carolina_explorer/repository/TourGuideRepository.class
 com/carolina_explorer/service/TourGuideService.class
