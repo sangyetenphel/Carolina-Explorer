@@ -29,7 +29,7 @@ public class TourGuideController {
         // set role automatically
         guide.setRole(UserRole.TOUR_GUIDE);
 
-        // DEBUG (optional but helpful)
+        // DEBUG
         System.out.println("Guide registered: " + guide.getEmail());
 
         tourGuideService.createTourGuide(guide);

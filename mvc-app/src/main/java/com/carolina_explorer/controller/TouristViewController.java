@@ -42,7 +42,7 @@ public class TouristViewController {
         model.addAttribute("tours", tours);
         model.addAttribute("selectedCity", city);
 
-        return "tours"; // your second page (city-style UI)
+        return "tours";
     }
 
     // TOUR DETAILS PAGE
