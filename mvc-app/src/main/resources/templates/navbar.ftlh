@@ -40,14 +40,14 @@
 
     <nav class="d-flex justify-content-between align-items-center px-5 py-3 bg-white shadow-sm">
         <!-- <a href="/">
-            <img src="/images/logo.png" 
+            <img src="/images/logo.png"
                 alt="Carolina Explorer"
                 style="height:40px;">
         </a> -->
         <a href="/" class="logo-text">
             Carolina Explorer
         </a>
-        
+
 
         <div>
             <a href="/guides/signup" class="me-3 text-dark text-decoration-none">
@@ -62,8 +62,5 @@
         </div>
     </nav>
 
-
-
-        
     </body>
 </html>
