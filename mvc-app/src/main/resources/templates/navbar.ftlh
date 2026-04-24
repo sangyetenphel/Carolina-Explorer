@@ -47,9 +47,32 @@
         <a href="/" class="logo-text">
             Carolina Explorer
         </a>
-
-
         <div>
+            <#if Session.loggedInUser??>
+
+                <!-- Logged IN Navbar -->
+                <a href="/" class="me-3 text-dark text-decoration-none">Explore</a>
+                <a href="#" class="me-3 text-dark text-decoration-none">My Bookings</a>
+                <a href="#" class="me-3 text-dark text-decoration-none">Profile</a>
+                <a href="/logout" class="btn px-3">Logout</a>
+
+            <#else>
+
+                <!-- Logged OUT Navbar -->
+                <a href="/guides/signup" class="me-3 text-dark text-decoration-none">
+                    Become a tour guide
+                </a>
+                <a href="/login" class="me-3 text-dark text-decoration-none">
+                    Log in
+                </a>
+                <a href="/signup" class="btn px-3">
+                    Sign Up
+                </a>
+
+            </#if>
+        </div>
+
+        <!-- <div>
             <a href="/guides/signup" class="me-3 text-dark text-decoration-none">
                 Become a tour guide
             </a>
@@ -59,7 +82,7 @@
             <a href="/signup" class="btn px-3">
                 Sign Up
             </a>
-        </div>
+        </div> -->
     </nav>
 
     </body>
