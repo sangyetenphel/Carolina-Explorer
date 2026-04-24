@@ -7,3 +7,7 @@
 
 *.log
 backend-api/target/
+
+target/
+*.jar
+*.class
