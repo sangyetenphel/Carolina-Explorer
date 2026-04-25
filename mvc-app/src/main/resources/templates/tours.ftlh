@@ -127,6 +127,11 @@
     <#include "navbar.ftlh">
 
     <div class="container">
+        <!-- <#if booking??>
+            <div class="alert alert-success">
+                Booking successful!
+            </div>
+        </#if> -->
 
         <!-- LEFT -->
         <div class="left">
