@@ -195,27 +195,29 @@
                 <h5>${tour.title}</h5>
                 <h6>$${tour.price} per person</h6>
 
-                <form>
+                <form action="/bookings" method="post">
+
+                    <input type="hidden" name="tourId" value="${tour.tourId}">
 
                     <div class="mb-3">
                         <label>Select Date</label>
-                        <input type="date" class="form-control">
+                        <input type="date" name="date" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label>Guests</label>
-                        <input type="number" class="form-control">
+                        <input type="number" name="guests" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label>Tour Type</label><br>
-                        <input type="radio" name="type"> Public<br>
-                        <input type="radio" name="type"> Private
+                        <input type="radio" name="groupType" value="PUBLIC"> Public<br>
+                        <input type="radio" name="groupType" value="PRIVATE"> Private
                     </div>
 
                     <div class="mb-3">
                         <label>Special Requests</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea name="notes" class="form-control"></textarea>
                     </div>
 
                     <button class="btn btn-primary w-100">
