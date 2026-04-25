@@ -132,7 +132,12 @@
         <div class="left">
 
             <div class="title">
-                🧭 Explore ${selectedCity?capitalize}
+                <!-- 🧭 Explore ${selectedCity?capitalize! ""} -->
+                 <#if selectedCity??>
+                    <h2>${selectedCity?capitalize} Tours</h2>
+                <#else>
+                    <h2>All Tours</h2>
+                </#if>
             </div>
 
             <div class="grid">

@@ -104,6 +104,54 @@
             cursor: pointer;
         }
 
+        .filter-btn {
+            /* background: #1a2b49; */
+            /* color: white; */
+            color: #1a2b49;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 12px;
+            margin-left: 20px;
+        }
+
+        .custom-footer {
+            display: flex;
+            justify-content: flex-end; /* pushes everything right */
+            gap: 6px;
+            border-top: none; /* removes bootstrap line */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* CLEAR BUTTON (light grey) */
+        .btn-clear {
+            background: #e5e7eb;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        /* SEARCH BUTTON */
+        .btn-search {
+            background: #1f3c88;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            color: white;
+            font-weight: 500;
+        }
+
+        /* hover effects */
+        .btn-search:hover {
+            background: #162d66;
+        }
+
+        .btn-clear:hover {
+            background: #d1d5db;
+        }
+
         /* SECTION */
         .section {
             padding: 60px 40px;
@@ -312,28 +360,21 @@
 
 <body>
 
-<!-- NAVBAR -->
- <#include "navbar.ftlh">
-<!-- <div class="navbar">
-    <div class="logo">Carolina Explorer</div>
-    <div class="nav-links">
-        <a href="/guides/signup">Become a tour guide</a>
-        <a href="#">Login</a>
-        <a class="btn" href="#">Sign Up</a>
-    </div>
-</div> -->
+    <!-- NAVBAR -->
+    <#include "navbar.ftlh">
 
-<!-- HERO -->
-<div class="hero">
-    <h1>Carolina Explorer</h1>
-    <div class="subtext">
-        <p>Welcome to North Carolina, a state filled with charming cities, relaxing beaches, and breathtaking peaks.</p>
-        <p>It’s time to escape to your next adventure.</p>
-    </div>
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Carolina Explorer</h1>
+        <div class="subtext">
+            <p>Welcome to North Carolina, a state filled with charming cities, relaxing beaches, and breathtaking peaks.</p>
+            <p>It’s time to escape to your next adventure.</p>
+        </div>
 
-    <!-- SEARCH FORM -->
-    <form action="/tours" method="get" class="search-container">
-        <div class="search-box">
+        <!-- SEARCH FORM -->
+    <div class="search-container">
+
+        <form action="/tours" method="get" class="search-box">
 
             <!-- WHERE -->
             <select name="city">
@@ -345,108 +386,157 @@
             </select>
 
             <!-- WHEN -->
-            <input type="date" name="date" placeholder="When">
+            <input type="date" name="date">
 
             <!-- WHO -->
             <input type="number" name="guests" placeholder="Guests" min="1">
 
-            <button type="submit"><i class="bi bi-search"></i></button>
+            <!-- SEARCH BUTTON -->
+            <button type="submit">
+                <i class="bi bi-search"></i>
+            </button>
+
+        </form>
+
+        <!-- FILTER BUTTON (NOW ON RIGHT) -->
+        <button type="button"
+                class="filter-btn"
+                data-bs-toggle="modal"
+                data-bs-target="#filterModal">
+            <i class="bi bi-sliders"></i> Filters
+        </button>
+
+    </div>
+    </div>
+
+    <!-- CITY SECTION -->
+    <div class="section">
+
+        <!-- TITLE -->
+        <div class="section-header">
+
+            <h2><i class="bi bi-geo-alt"></i>Explore by City</h2>
+            <p>Find unforgettable experiences in North Carolina’s most vibrant cities.</p>
         </div>
-    </form>
-</div>
 
-<!-- CITY SECTION -->
-<div class="section">
+        <!-- GRID -->
+        <div class="city-grid">
 
-    <!-- TITLE -->
-    <div class="section-header">
+            <a href="/tours?city=ASHEVILLE" class="city-card">
+                <img src="/images/asheville.jpg">
+                <h3>Asheville</h3>
+                <p>Mountain views, craft culture, and unforgettable food scenes.</p>
+            </a>
 
-        <h2><i class="bi bi-geo-alt"></i>Explore by City</h2>
-        <p>Find unforgettable experiences in North Carolina’s most vibrant cities.</p>
-    </div>
+            <a href="/tours?city=CHARLOTTE" class="city-card">
+                <img src="/images/charlotte.jpg">
+                <h3>Charlotte</h3>
+                <p>Modern skyline meets Southern charm and vibrant nightlife.</p>
+            </a>
 
-    <!-- GRID -->
-    <div class="city-grid">
+            <a href="/tours?city=RALEIGH" class="city-card">
+                <img src="/images/raleigh.jpg">
+                <h3>Raleigh</h3>
+                <p>Historic streets, creative energy, and hidden local gems.</p>
+            </a>
 
-        <a href="/tours?city=ASHEVILLE" class="city-card">
-            <img src="/images/asheville.jpg">
-            <h3>Asheville</h3>
-            <p>Mountain views, craft culture, and unforgettable food scenes.</p>
-        </a>
+            <a href="/tours?city=WILMINGTON" class="city-card">
+                <img src="/images/wilmington.jpg">
+                <h3>Wilmington</h3>
+                <p>Coastal breezes, riverfront walks, and beachside adventures.</p>
+            </a>
 
-        <a href="/tours?city=CHARLOTTE" class="city-card">
-            <img src="/images/charlotte.jpg">
-            <h3>Charlotte</h3>
-            <p>Modern skyline meets Southern charm and vibrant nightlife.</p>
-        </a>
-
-        <a href="/tours?city=RALEIGH" class="city-card">
-            <img src="/images/raleigh.jpg">
-            <h3>Raleigh</h3>
-            <p>Historic streets, creative energy, and hidden local gems.</p>
-        </a>
-
-        <a href="/tours?city=WILMINGTON" class="city-card">
-            <img src="/images/wilmington.jpg">
-            <h3>Wilmington</h3>
-            <p>Coastal breezes, riverfront walks, and beachside adventures.</p>
-        </a>
+        </div>
 
     </div>
 
-</div>
+    <!-- FEATURED -->
+    <div class="section feature-section">
 
-<!-- FEATURED -->
-<div class="section feature-section">
+        <div class="section-header">
+            <h2><i class="bi bi-backpack"></i> Featured Experiences</h2>
+            <p>Handpicked tours across North Carolina.</p>
+        </div>
 
-    <div class="section-header">
-        <h2><i class="bi bi-backpack"></i> Featured Experiences</h2>
-        <p>Handpicked tours across North Carolina.</p>
-    </div>
+        <div class="featured-grid">
 
-    <div class="featured-grid">
+            <#list tours as tour>
+            <a href="/tours/${tour.tourId}" class="featured-card">
 
-        <#list tours as tour>
-        <a href="/tours/${tour.tourId}" class="featured-card">
+                <!-- IMAGE -->
+                <div class="featured-img">
+                    <img src="${(tour.images[0].imageUrl)!'/images/default.jpg'}">
 
-            <!-- IMAGE -->
-            <div class="featured-img">
-                <img src="${(tour.images[0].imageUrl)!'/images/default.jpg'}">
-
-                <!-- CATEGORY TAG -->
-                <span class="tag">${tour.category}</span>
-            </div>
-
-            <!-- CONTENT -->
-            <div class="featured-body">
-
-                <h4>${tour.title}</h4>
-
-                <p class="desc">
-                    ${tour.description?substring(0, 80)!''}...
-                </p>
-
-                <p class="price">$${tour.price} <span>/ person</span></p>
-
-                <!-- RATING -->
-                <div class="rating">
-                    ⭐⭐⭐⭐⭐
-                    <span> ${tour.rating!4.5} <span class="text-muted">(${tour.reviewCount!120})</span></span>
+                    <!-- CATEGORY TAG -->
+                    <span class="tag">${tour.category}</span>
                 </div>
 
-            </div>
+                <!-- CONTENT -->
+                <div class="featured-body">
 
-        </a>
-        </#list>
+                    <h4>${tour.title}</h4>
+
+                    <p class="desc">
+                        ${tour.description?substring(0, 80)!''}...
+                    </p>
+
+                    <p class="price">$${tour.price} <span>/ person</span></p>
+
+                    <!-- RATING -->
+                    <div class="rating">
+                        ⭐⭐⭐⭐⭐
+                        <span> ${tour.rating!4.5} <span class="text-muted">(${tour.reviewCount!120})</span></span>
+                    </div>
+
+                </div>
+
+            </a>
+            </#list>
+
+        </div>
 
     </div>
 
-</div>
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>© 2026 Carolina Explorer</p>
+    </div>
 
-<!-- FOOTER -->
-<div class="footer">
-    <p>© 2026 Carolina Explorer</p>
-</div>
 
-</body>
+    <div class="modal fade" id="filterModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4">
+
+                <h5 class="mb-3">Filters</h5>
+
+                <!-- PRICE -->
+                <div class="mb-3">
+                    <label>Minimum Price ($)</label>
+                    <input type="number" name="minPrice" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                    <label>Maximum Price ($)</label>
+                    <input type="number" name="maxPrice" class="form-control">
+                </div>
+
+                <!-- CATEGORY -->
+                <div class="mb-3">
+                    <label>Category</label><br>
+                    <input type="checkbox" name="category" value="FOOD"> Food & Drinks<br>
+                    <input type="checkbox" name="category" value="HISTORY"> History & Culture<br>
+                    <input type="checkbox" name="category" value="NATURE"> Nature & Outdoors
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="modal-footer custom-footer">
+                    <button type="reset" class="btn-clear">Clear all</button>
+                    <button type="submit" class="btn-search">Search tours</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </html>

@@ -83,7 +83,7 @@
 
         <!-- MAIN IMAGE -->
         <div class="col-md-7">
-            <img 
+            <img
                 src="${(tour.images[0].imageUrl)!'https://via.placeholder.com/800x500'}"
                 class="w-100"
                 style="
@@ -100,7 +100,7 @@
                 <#list tour.images[1..] as img>
                     <#if img?index < 4>
                         <div class="col-6" style="height:50%;">
-                            <img 
+                            <img
                                 src="${img.imageUrl!''}"
                                 class="w-100 h-100"
                                 style="
@@ -122,7 +122,7 @@
         <img src="https://i.pravatar.cc/40" class="rounded-circle">
 
         <div class="fw-medium">
-            Hosted by 
+            Hosted by
             ${(tour.tourGuide.firstName)!'Local'} ${(tour.tourGuide.lastName)!'Guide'}
         </div>
 
