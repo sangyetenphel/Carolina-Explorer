@@ -58,6 +58,17 @@ public class TourService {
         return tourRepository.findByPriceLessThanEqual(price);
     }
 
+    public List<Tour> getTopTours() {
+    return tourRepository.findAll()
+            .stream()
+            .sorted((a, b) -> Double.compare(
+                    b.getRating() != null ? b.getRating() : 0,
+                    a.getRating() != null ? a.getRating() : 0
+            ))
+            .limit(3)
+            .toList();
+    }
+
     public Tour updateTour(Long id, Tour tourDetails) {
         return tourRepository.findById(id).map(tour -> {
 

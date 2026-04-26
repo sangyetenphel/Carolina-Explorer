@@ -69,7 +69,7 @@
 
         <span class="badge rounded-pill px-3 py-2" 
             style="background:#e0e7ff; color:#1f3c88;">
-            ${tour.category}
+            ${tour.category.displayName}
         </span>
 
         <span style="color:#fbbf24;">★★★★★</span>

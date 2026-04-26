@@ -115,9 +115,9 @@
             <div class="mb-3">
                 <label class="form-label">Tour Category</label>
                 <select name="category" class="form-select">
-                    <option value="FOOD">Food</option>
-                    <option value="HISTORY">History</option>
-                    <option value="NATURE">Nature</option>
+                    <option value="FOOD">Food & Drinks</option>
+                    <option value="HISTORY">History & Culture</option>
+                    <option value="NATURE">Nature & Outdoors</option>
                     <option value="ADVENTURE">Adventure</option>
                 </select>
             </div>

@@ -77,4 +77,8 @@ public class TouristService {
     public Tourist getTouristByEmail(String email) {
         return touristRepository.findByEmail(email);
     }
+
+    public Tourist save(Tourist tourist) {
+        return touristRepository.save(tourist);
+    }
 }
