@@ -123,13 +123,25 @@ Scenario: Customer logs in
 - **US‑CUST‑005 — Leave Review**
 
   _Story:_ **As a `tourist`, I want `to leave a review after a tour`, so that `other users can make informed decisions.`**
-  
+
   _Acceptance:_
   ```gherkin
   Scenario: Submit review
     Given a tour has been completed
     When I submit a rating and written review
     Then the review should be visible to other users
+  ```
+
+- **US‑CUST‑006 — Tourist Profile Page**
+
+  _Story:_ **As a `tourist`, I want `to view and manage my profile`, so that `I can track my trips, update my profile picture, and manage my activity.`**
+
+  _Acceptance:_
+  ```gherkin
+  Scenario: View profile details
+    Given I am logged in
+    When I navigate to the profile page
+    Then I should see my name, profile picture, trip count, and review count
   ```
 
 ### 2.2 Provider Stories

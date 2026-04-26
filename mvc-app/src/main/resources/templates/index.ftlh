@@ -86,6 +86,7 @@
             gap: 10px;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: box-shadow 0.2s ease; /* smooth shadow transition */
         }
 
         .search-box select,
@@ -93,8 +94,11 @@
             border: none;
             padding: 10px;
             outline: none;
+            font-size: 1rem;
+            background: transparent;
         }
 
+        /* SEARCH BUTTON  */
         .search-box button {
             background: #ffca00;
             color: white;
@@ -102,16 +106,63 @@
             padding: 10px 16px;
             border-radius: 50%;
             cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
+        .search-box button:hover {
+            background: #e5b500;      /* slightly richer yellow on hover */
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .search-box button:active {
+            transform: scale(0.98);
+        }
+
+        /* Search box container hover */
+        .search-box:hover {
+            box-shadow: 2px 12px 20px rgba(0,0,0,0.12);
+        }
+
+        /*  FILTER BUTTON  */
         .filter-btn {
-            /* background: #1a2b49; */
-            /* color: white; */
+            background: white;
             color: #1a2b49;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 12px;
+            border: 1px solid #e2e8f0;   /* always visible subtle border */
+            padding: 8px 20px;            /* better vertical padding */
+            border-radius: 40px;          /* fully rounded pill */
             margin-left: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .filter-btn:hover {
+            background: #f8fafc;          /* very light grey */
+            border-color: #cbd5e1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn:active {
+            transform: translateY(1px);
+        }
+
+
+        .search-box button:focus-visible,
+        .filter-btn:focus-visible {
+            outline: 2px solid #ffca00;
+            outline-offset: 2px;
+        }
+
+        .bi-sliders {
+            margin-right: 2px;
         }
 
         .custom-footer {
@@ -198,7 +249,7 @@
             padding: 60px 20px;
             background: #f8fafc;
             text-align: center;
-            margin-top: 30px;
+            /* margin-top: 30px; */
         }
 
         .section-header h2 {
@@ -355,6 +406,97 @@
             text-align: center;
             /* margin-top: 50px; */
         }
+
+        /* FORCE override bootstrap */
+        .modal-content {
+            border-radius: 18px !important;
+            border: none !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+            padding: 20px !important;
+            text-align: left !important;
+        }
+
+        /* TITLE */
+        .modal-content h5 {
+            text-align: center !important;
+            font-weight: 600 !important;
+            margin-bottom: 25px !important;
+            font-size: 20px;
+        }
+
+        /* LABELS */
+        .modal-content label {
+            font-weight: 600 !important;
+            font-size: 14px !important;
+            margin-bottom: 6px !important;
+            display: block !important;
+            color: #1f3c88 !important;
+        }
+
+        /* INPUTS (IMPORTANT FIX) */
+        .modal-content .form-control {
+            border-radius: 10px !important;
+            padding: 12px !important;
+            border: 1px solid #d1d5db !important;
+            font-size: 14px !important;
+        }
+
+        /* SPACING */
+        .modal-content .mb-3 {
+            margin-bottom: 20px !important;
+        }
+
+        /* CATEGORY */
+        .modal-content .category-group div {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        /* GUIDE CTA SECTION */
+        .guide-cta {
+            background: #e9eff7; /* soft blue like figma */
+            padding: 80px 20px;
+        }
+
+        /* CENTER CONTENT BUT KEEP TEXT LEFT */
+        .guide-content {
+            max-width: 900px;
+            margin: auto;
+            text-align: left; /* IMPORTANT (not center) */
+        }
+
+        /* TITLE */
+        .guide-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1f3c88;
+            margin-bottom: 10px;
+        }
+
+        /* SUBTEXT */
+        .guide-content p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        /* BUTTON */
+        .guide-btn {
+            background: #ffca00;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        /* HOVER */
+        .guide-btn:hover {
+            background: #e6b800;
+        }
     </style>
 </head>
 
@@ -372,41 +514,78 @@
         </div>
 
         <!-- SEARCH FORM -->
-    <div class="search-container">
+         <form action="/tours" method="get">
+            <div class="search-container">
+                <div class="search-box">
+                    <!-- WHERE -->
+                    <select name="city">
+                        <option value="">Where</option>
+                        <option value="ASHEVILLE">Asheville</option>
+                        <option value="CHARLOTTE">Charlotte</option>
+                        <option value="RALEIGH">Raleigh</option>
+                        <option value="WILMINGTON">Wilmington</option>
+                    </select>
 
-        <form action="/tours" method="get" class="search-box">
+                    <!-- WHEN -->
+                    <input type="date" name="date">
 
-            <!-- WHERE -->
-            <select name="city">
-                <option value="">Where</option>
-                <option value="ASHEVILLE">Asheville</option>
-                <option value="CHARLOTTE">Charlotte</option>
-                <option value="RALEIGH">Raleigh</option>
-                <option value="WILMINGTON">Wilmington</option>
-            </select>
+                    <!-- WHO -->
+                    <input type="number" name="guests" placeholder="Guests" min="1">
 
-            <!-- WHEN -->
-            <input type="date" name="date">
+                    <!-- SEARCH BUTTON -->
+                    <button type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
 
-            <!-- WHO -->
-            <input type="number" name="guests" placeholder="Guests" min="1">
+                <!-- FILTER BUTTON (NOW ON RIGHT) -->
+                <button type="button"
+                        class="filter-btn"
+                        data-bs-toggle="modal"
+                        data-bs-target="#filterModal">
+                    <i class="bi bi-sliders"></i> Filters
+                </button>
+            </div>
 
-            <!-- SEARCH BUTTON -->
-            <button type="submit">
-                <i class="bi bi-search"></i>
-            </button>
+            <div class="modal fade" id="filterModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
 
+                        <h5>Filters</h5>
+
+                        <!-- MIN PRICE -->
+                        <div class="mb-3">
+                            <label>Minimum Price ($)</label>
+                            <input type="number" name="minPrice" class="form-control" placeholder="Type here...">
+                        </div>
+
+                        <!-- MAX PRICE -->
+                        <div class="mb-3">
+                            <label>Maximum Price ($)</label>
+                            <input type="number" name="maxPrice" class="form-control" placeholder="Type here...">
+                        </div>
+
+                        <!-- CATEGORY -->
+                        <div class="mb-3">
+                            <label>Category</label>
+
+                            <div class="category-group">
+                                <div><input type="checkbox" name="category" value="FOOD"> Food & Drinks</div>
+                                <div><input type="checkbox" name="category" value="HISTORY"> History & Culture</div>
+                                <div><input type="checkbox" name="category" value="NATURE"> Nature & Outdoors</div>
+                            </div>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="custom-footer">
+                            <button type="reset" class="btn-clear">Clear all</button>
+                            <button type="submit" class="btn-search">Search tours</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </form>
-
-        <!-- FILTER BUTTON (NOW ON RIGHT) -->
-        <button type="button"
-                class="filter-btn"
-                data-bs-toggle="modal"
-                data-bs-target="#filterModal">
-            <i class="bi bi-sliders"></i> Filters
-        </button>
-
-    </div>
     </div>
 
     <!-- CITY SECTION -->
@@ -450,6 +629,53 @@
 
     </div>
 
+
+    <!-- TOUR TYPE SECTION -->
+    <div class="section feature-section">
+
+    <div class="section-header">
+        <h2><i class="bi bi-suitcase2"></i> Browse by Tour Type</h2>
+        <p>Discover tours curated around what you love most.</p>
+    </div>
+
+    <div class="featured-grid">
+
+        <a href="/tours?category=FOOD" class="featured-card">
+            <div class="featured-img">
+                <img src="/images/food.jpg">
+            </div>
+
+            <div class="featured-body">
+                <h4>Food & Drinks</h4>
+                <p class="desc">Savor local cuisine and authentic culinary experiences.</p>
+            </div>
+        </a>
+
+         <a href="/tours?category=HISTORY" class="featured-card">
+            <div class="featured-img">
+                <img src="/images/history.jpg">
+            </div>
+
+            <div class="featured-body">
+                <h4>History & Culture</h4>
+                <p class="desc">Discover people, places, and moments that define local culture.</p>
+            </div>
+        </a>
+
+        <a href="/tours?category=NATURE" class="featured-card">
+            <div class="featured-img">
+                <img src="/images/nature.jpg">
+            </div>
+
+            <div class="featured-body">
+                <h4>Nature & Outdoors</h4>
+                <p class="desc">Experience mountains, rivers, and coastlines up close.</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+
     <!-- FEATURED -->
     <div class="section feature-section">
 
@@ -460,7 +686,7 @@
 
         <div class="featured-grid">
 
-            <#list tours as tour>
+            <#list featuredTours as tour>
             <a href="/tours/${tour.tourId}" class="featured-card">
 
                 <!-- IMAGE -->
@@ -468,7 +694,7 @@
                     <img src="${(tour.images[0].imageUrl)!'/images/default.jpg'}">
 
                     <!-- CATEGORY TAG -->
-                    <span class="tag">${tour.category}</span>
+                    <span class="tag">${tour.category.displayName}</span>
                 </div>
 
                 <!-- CONTENT -->
@@ -497,46 +723,23 @@
 
     </div>
 
+    <!-- BECOME A GUIDE SECTION -->
+    <div class="guide-cta">
+
+        <div class="guide-content">
+            <h2>Share Your Local Expertise. Become a Guide.</h2>
+            <p>Create and manage full-day experiences across North Carolina.</p>
+
+            <a href="/guides/signup" class="guide-btn">Become a guide</a>
+        </div>
+
+    </div>
+
     <!-- FOOTER -->
     <div class="footer">
         <p>© 2026 Carolina Explorer</p>
     </div>
 
-
-    <div class="modal fade" id="filterModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-4">
-
-                <h5 class="mb-3">Filters</h5>
-
-                <!-- PRICE -->
-                <div class="mb-3">
-                    <label>Minimum Price ($)</label>
-                    <input type="number" name="minPrice" class="form-control">
-                </div>
-
-                <div class="mb-3">
-                    <label>Maximum Price ($)</label>
-                    <input type="number" name="maxPrice" class="form-control">
-                </div>
-
-                <!-- CATEGORY -->
-                <div class="mb-3">
-                    <label>Category</label><br>
-                    <input type="checkbox" name="category" value="FOOD"> Food & Drinks<br>
-                    <input type="checkbox" name="category" value="HISTORY"> History & Culture<br>
-                    <input type="checkbox" name="category" value="NATURE"> Nature & Outdoors
-                </div>
-
-                <!-- BUTTONS -->
-                <div class="modal-footer custom-footer">
-                    <button type="reset" class="btn-clear">Clear all</button>
-                    <button type="submit" class="btn-search">Search tours</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </form>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </html>

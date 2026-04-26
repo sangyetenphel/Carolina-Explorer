@@ -8,7 +8,7 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: "Plus Jakarta Sans", sans-serif;
             background: #f4f6fb;
         }
 
@@ -138,10 +138,11 @@
 
             <div class="title">
                 <!-- 🧭 Explore ${selectedCity?capitalize! ""} -->
+
                  <#if selectedCity??>
-                    <h2>${selectedCity?capitalize} Tours</h2>
+                    <h2>🧭 Explore ${selectedCity?capitalize}</h2>
                 <#else>
-                    <h2>All Tours</h2>
+                    <h2>🧭 Explore All Tours</h2>
                 </#if>
             </div>
 
@@ -155,7 +156,7 @@
 
                         <div class="card-body">
 
-                            <div class="badge">${tour.category}</div>
+                            <div class="badge">${tour.category.displayName}</div>
 
                             <div class="card-title">${tour.title}</div>
 

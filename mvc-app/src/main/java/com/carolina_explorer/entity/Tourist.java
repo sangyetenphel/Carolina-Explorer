@@ -13,4 +13,6 @@ import lombok.NoArgsConstructor;
 @PrimaryKeyJoinColumn(name = "tourist_id")
 public class Tourist extends User {
     // No extra fields needed for now
+    @Column(name = "profile_image")
+    private String profileImage;
 }

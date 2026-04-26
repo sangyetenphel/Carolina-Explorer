@@ -6,31 +6,39 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-        <style>
-            .logo-text {
-                font-size: 24px;
-                font-weight: 400;
-                font-style: normal;
-                letter-spacing: 1px;
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
-                color: #002868;
+    <style>
+        .logo-text {
+            font-size: 24px;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 1px;
 
-                text-decoration: none;
+            color: #002868;
 
-                font-family: "Gasoek One", sans-serif;
+            text-decoration: none;
 
-                transition: 0.2s ease;
-            }
+            font-family: "Gasoek One", sans-serif;
 
-            .logo-text:hover {
-                color: #162d66;
-            }
+            transition: 0.2s ease;
+        }
 
-            .btn {
+        .logo-text:hover {
+            color: #162d66;
+        }
+
+        .btn {
             background: #002868;
             color: white;
             padding: 8px 14px;
             border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #1e3a8a;
+            color: white;
         }
 
     </style>
@@ -51,9 +59,7 @@
             <#if Session.loggedInUser??>
 
                 <!-- Logged IN Navbar -->
-                <a href="/" class="me-3 text-dark text-decoration-none">Explore</a>
-                <a href="#" class="me-3 text-dark text-decoration-none">My Bookings</a>
-                <a href="#" class="me-3 text-dark text-decoration-none">Profile</a>
+                <a href="/profile" class="me-3 text-dark text-decoration-none">View profile</a>
                 <a href="/logout" class="btn px-3">Logout</a>
 
             <#else>

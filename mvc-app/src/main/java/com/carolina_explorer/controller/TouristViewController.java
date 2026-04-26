@@ -25,9 +25,12 @@ public class TouristViewController {
     ) {
         model.addAttribute("tours", tourService.getAllTours());
 
-        model.addAttribute("selectedCity", city != null ? city : "");
-        model.addAttribute("selectedDate", date != null ? date : "");
-        model.addAttribute("selectedGuests", guests != null ? guests : "");
+        model.addAttribute("featuredTours", tourService.getTopTours());
+
+
+        // model.addAttribute("selectedCity", city != null ? city : "");
+        // model.addAttribute("selectedDate", date != null ? date : "");
+        // model.addAttribute("selectedGuests", guests != null ? guests : "");
 
         return "index";
     }
