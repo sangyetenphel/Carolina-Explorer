@@ -56,29 +56,29 @@ public class TouristController {
         return "redirect:/?signup=success";
     }
 
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String showLoginPage() {
+    //     return "login";
+    // }
 
-    @PostMapping("/login")
-    public String login(
-            @RequestParam String email,
-            @RequestParam String password,
-            jakarta.servlet.http.HttpSession session
-    ) {
+    // @PostMapping("/login")
+    // public String login(
+    //         @RequestParam String email,
+    //         @RequestParam String password,
+    //         jakarta.servlet.http.HttpSession session
+    // ) {
 
-        Tourist tourist = touristService.login(email, password);
+    //     Tourist tourist = touristService.login(email, password);
 
-        if (tourist == null) {
-            return "redirect:/login?error=true";
-        }
+    //     if (tourist == null) {
+    //         return "redirect:/login?error=true";
+    //     }
 
-        // store user in session
-        session.setAttribute("loggedInUser", tourist);
+    //     // store user in session
+    //     session.setAttribute("loggedInUser", tourist);
 
-        return "redirect:/?login=success";
-    }
+    //     return "redirect:/?login=success";
+    // }
 
     @GetMapping("/logout")
     public String logout(jakarta.servlet.http.HttpSession session) {

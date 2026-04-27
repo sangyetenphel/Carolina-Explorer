@@ -56,7 +56,7 @@
             Carolina Explorer
         </a>
         <div>
-            <#if Session.loggedInUser??>
+            <#if loggedInUser??>
 
                 <!-- Logged IN Navbar -->
                 <a href="/profile" class="me-3 text-dark text-decoration-none">View profile</a>
