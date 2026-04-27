@@ -237,6 +237,79 @@
         margin: 28px 0 24px 0;
         width: 100%;
     }
+
+    .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+/* Card */
+.review-card {
+    padding: 10px 0;
+}
+
+/* HEADER ROW */
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+/* Avatar */
+.review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Text block */
+.review-header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tour title */
+.review-tour {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Location */
+.review-location {
+    font-size: 14px;
+    color: #717171;
+    margin: 0;
+}
+
+/* Host */
+.review-host {
+    font-size: 14px;
+    color: #717171;
+    margin: 0;
+}
+
+/* Stars */
+.review-stars {
+    margin: 8px 0 4px;
+    font-size: 14px;
+}
+
+/* Date */
+.review-date {
+    font-size: 14px;
+    color: #717171;
+    margin-bottom: 8px;
+}
+
+/* Comment */
+.review-text {
+    font-size: 15px;
+    line-height: 1.5;
+}
 </style>
 <body>
     <#include "navbar.ftlh">
@@ -331,7 +404,8 @@
 
                         <div class="trip-footer">
                             <!-- <span class="trip-date">${booking.tourDate}</span> -->
-                            <a href="/reviews/write/${booking.bookingId}" class="write-review-btn">
+                            <a href="/tours/${booking.tour.tourId}?review=true&bookingId=${booking.bookingId}"
+                                class="write-review-btn">
                                 Leave a review
                             </a>
                         </div>
@@ -347,18 +421,56 @@
         <div class="section">
             <h2>My Reviews</h2>
 
-            <#if reviews?? && reviews?size > 0>
-                <#list reviews as review>
-                    <div class="review-card">
-                        <h4>${review.tour.title}</h4>
-                        <p>${review.comment}</p>
-                        <span>⭐ ${review.rating}</span>
-                    </div>
-                </#list>
+            <#if reviews?has_content>
+                <div class="reviews-grid">
+                    <#list reviews as review>
+                        <div class="review-card">
+
+                            <!-- TOP ROW -->
+                            <div class="review-header">
+
+                                <!-- LEFT: HOST IMAGE -->
+                                <img class="review-avatar"
+                                    src="${(review.booking.tour.tourGuide.profileImageUrl)!'/images/default-avatar.png'}" />
+
+                                <!-- RIGHT: TEXT -->
+                                <div class="review-header-info">
+                                    <h4 class="review-tour">
+                                        ${review.booking.tour.title}
+                                    </h4>
+
+                                    <p class="review-location">
+                                        ${review.booking.tour.city}, North Carolina
+                                    </p>
+
+                                    <p class="review-host">
+                                        Hosted by ${review.booking.tour.tourGuide.firstName} ${review.booking.tour.tourGuide.lastName}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- STARS -->
+                            <div class="review-stars">
+                                <#list 1..review.rating as i>⭐</#list>
+                            </div>
+
+                            <!-- DATE -->
+                            <p class="review-date">
+                                ${review.createdAt?datetime.iso?string("MMMM yyyy")}
+                            </p>
+
+                            <!-- COMMENT -->
+                            <p class="review-text">
+                                ${review.comment}
+                            </p>
+
+                        </div>
+                    </#list>
+                </div>
             <#else>
                 <p>No reviews yet</p>
             </#if>
-
         </div>
     </div>
 

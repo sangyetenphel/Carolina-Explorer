@@ -19,7 +19,7 @@ public class Review {
     private Long reviewId;
 
     @OneToOne
-    @JoinColumn(name = "booking_id", nullable = false)
+    @JoinColumn(name = "booking_id", nullable = false, unique = true)
     private Booking booking;
 
     @Column(nullable = false)

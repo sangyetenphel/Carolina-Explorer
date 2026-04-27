@@ -103,12 +103,19 @@ public class TouristViewController {
 
     // TOUR DETAILS PAGE
     @GetMapping("/tours/{id}")
-    public String getTourDetails(@PathVariable Long id, Model model) {
+    public String getTourDetails(
+            @PathVariable Long id,
+            @RequestParam(required = false) Boolean review,
+            @RequestParam(required = false) Long bookingId,
+            Model model
+    ) {
 
         Tour tour = tourService.getTourById(id)
                 .orElseThrow(() -> new RuntimeException("Tour not found"));
 
         model.addAttribute("tour", tour);
+        model.addAttribute("reviewMode", review != null && review);
+        model.addAttribute("bookingId", bookingId);
 
         return "tour-details";
     }

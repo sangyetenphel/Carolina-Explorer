@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class TourGuide extends User {
 
-    // Allow long bios 
+    // Allow long bios
     @Column(columnDefinition = "TEXT")
     private String bio;
 

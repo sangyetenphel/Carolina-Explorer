@@ -195,36 +195,72 @@
                 <h5>${tour.title}</h5>
                 <h6>$${tour.price} per person</h6>
 
-                <form action="/bookings" method="post">
+                <#if reviewMode?? && reviewMode>
 
-                    <input type="hidden" name="tourId" value="${tour.tourId}">
+                    <!-- REVIEW FORM -->
+                    <form action="/reviews" method="post">
 
-                    <div class="mb-3">
-                        <label>Select Date</label>
-                        <input type="date" name="date" class="form-control" required>
-                    </div>
+                        <input type="hidden" name="tourId" value="${tour.tourId}">
+                        <input type="hidden" name="bookingId" value="${bookingId}">
 
-                    <div class="mb-3">
-                        <label>Guests</label>
-                        <input type="number" name="guests" class="form-control" required>
-                    </div>
+                        <div class="mb-3">
+                            <label>Rating</label>
+                            <select name="rating" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="5">⭐ 5</option>
+                                <option value="4">⭐ 4</option>
+                                <option value="3">⭐ 3</option>
+                                <option value="2">⭐ 2</option>
+                                <option value="1">⭐ 1</option>
+                            </select>
+                        </div>
 
-                    <div class="mb-3">
-                        <label>Tour Type</label><br>
-                        <input type="radio" name="groupType" value="PUBLIC"> Public<br>
-                        <input type="radio" name="groupType" value="PRIVATE"> Private
-                    </div>
+                        <div class="mb-3">
+                            <label>Review</label>
+                            <textarea name="comment" class="form-control" required></textarea>
+                        </div>
 
-                    <div class="mb-3">
-                        <label>Special Requests</label>
-                        <textarea name="notes" class="form-control"></textarea>
-                    </div>
+                        <button class="btn btn-success w-100">
+                            Submit Review
+                        </button>
 
-                    <button class="btn btn-primary w-100">
-                        Book Now
-                    </button>
+                    </form>
 
-                </form>
+                <#else>
+
+                    <!-- ORIGINAL BOOKING FORM -->
+                    <form action="/bookings" method="post">
+
+                        <input type="hidden" name="tourId" value="${tour.tourId}">
+
+                        <div class="mb-3">
+                            <label>Select Date</label>
+                            <input type="date" name="date" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Guests</label>
+                            <input type="number" name="guests" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Tour Type</label><br>
+                            <input type="radio" name="groupType" value="PUBLIC"> Public<br>
+                            <input type="radio" name="groupType" value="PRIVATE"> Private
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Special Requests</label>
+                            <textarea name="notes" class="form-control"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary w-100">
+                            Book Now
+                        </button>
+
+                    </form>
+
+                </#if>
 
             </div>
 
