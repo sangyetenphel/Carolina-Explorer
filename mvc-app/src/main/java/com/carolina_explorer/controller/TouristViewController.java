@@ -2,6 +2,9 @@ package com.carolina_explorer.controller;
 
 import com.carolina_explorer.entity.Tour;
 import com.carolina_explorer.service.TourService;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +24,14 @@ public class TouristViewController {
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String date,
             @RequestParam(required = false) Integer guests,
-            Model model
+            Model model,
+            HttpSession session
     ) {
         model.addAttribute("tours", tourService.getAllTours());
 
         model.addAttribute("featuredTours", tourService.getTopTours());
+
+        model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
 
 
         // model.addAttribute("selectedCity", city != null ? city : "");
