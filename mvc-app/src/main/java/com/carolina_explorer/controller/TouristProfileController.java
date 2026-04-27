@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carolina_explorer.entity.Booking;
+import com.carolina_explorer.entity.Review;
 import com.carolina_explorer.entity.Tourist;
 import com.carolina_explorer.service.BookingService;
 import com.carolina_explorer.service.TouristService;
+import com.carolina_explorer.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -27,6 +29,9 @@ public class TouristProfileController {
 
     @Autowired
     private TouristService touristService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     @GetMapping
     public String profile(HttpSession session, Model model) {
@@ -56,6 +61,9 @@ public class TouristProfileController {
                 .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
                 .toList();
 
+        // Reviews
+        List<Review> reviews = reviewService.getReviewsByTourist(fullTourist.getUserId());
+
         // Send to frontend
         model.addAttribute("tourist", fullTourist);
         model.addAttribute("bookings", bookings);
@@ -65,6 +73,9 @@ public class TouristProfileController {
         model.addAttribute("pastBookings", pastBookings);
 
         model.addAttribute("upcomingCount", upcomingBookings.size());
+
+        model.addAttribute("reviews", reviews);
+        model.addAttribute("reviewCount", reviews.size());
 
         return "profile";
     }
