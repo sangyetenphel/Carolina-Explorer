@@ -61,4 +61,20 @@ public class ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
+
+    public double getAverageRatingForGuide(Long guideId) {
+
+        List<Review> reviews = reviewRepository
+            .findByBookingTourTourGuideUserId(guideId);
+
+        if (reviews.isEmpty()) return 0;
+
+        double total = 0;
+
+        for (Review r : reviews) {
+            total += r.getRating();
+        }
+
+        return total / reviews.size();
+    }
 }
