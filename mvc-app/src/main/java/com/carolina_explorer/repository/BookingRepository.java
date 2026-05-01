@@ -7,6 +7,7 @@ import com.carolina_explorer.entity.Tourist;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -18,4 +19,6 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     boolean existsByTouristAndTour(Tourist tourist, Tour tour);
 
     List<Booking> findByTour_TourGuide_UserIdAndStatus(Long guideId, BookingStatus status);
+
+    boolean existsByTourAndTourDate(Tour tour, LocalDate tourDate);
 }

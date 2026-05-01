@@ -29,7 +29,7 @@ public class BookingController {
     @PostMapping("/")
     public String createBooking(
             @RequestParam Long tourId,
-            @RequestParam LocalDate date,
+            @RequestParam LocalDate tourDate,
             @RequestParam Integer guests,
             @RequestParam(required = false) GroupType groupType,
             @RequestParam(required = false) String notes,
@@ -53,7 +53,7 @@ public class BookingController {
         booking.setTourist(tourist);
         booking.setTour(tour);
 
-        booking.setTourDate(date);
+        booking.setTourDate(tourDate);
         booking.setGroupSize(guests);
         booking.setGroupType(groupType);
         booking.setSpecialRequest(notes);

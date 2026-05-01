@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
         .logo-text {
             font-size: 24px;
@@ -56,39 +58,53 @@
             Carolina Explorer
         </a>
         <div>
-            <#if loggedInUser??>
+        <#if loggedInUser??>
 
-                <!-- Logged IN Navbar -->
-                <a href="/profile" class="me-3 text-dark text-decoration-none">View profile</a>
-                <a href="/logout" class="btn px-3">Logout</a>
+            <#-- TOUR GUIDE NAVBAR -->
+            <#if loggedInUser.role?string == "TOUR_GUIDE">
 
+                <a href="/guides/dashboard" class="me-3 text-dark text-decoration-none">
+                    Dashboard
+                </a>
+
+                <a href="/tours/create" class="me-3 text-dark text-decoration-none">
+                    Create Tour
+                </a>
+
+                <a href="/logout" class="btn px-3">
+                    Logout
+                </a>
+
+            <#-- TOURIST NAVBAR -->
             <#else>
 
-                <!-- Logged OUT Navbar -->
-                <a href="/guides/signup" class="me-3 text-dark text-decoration-none">
-                    Become a tour guide
+                <a href="/profile" class="me-3 text-dark text-decoration-none">
+                    View Profile
                 </a>
-                <a href="/login" class="me-3 text-dark text-decoration-none">
-                    Log in
-                </a>
-                <a href="/signup" class="btn px-3">
-                    Sign Up
+
+                <a href="/logout" class="btn px-3">
+                    Logout
                 </a>
 
             </#if>
-        </div>
 
-        <!-- <div>
+        <#else>
+
+            <!-- Logged OUT Navbar -->
             <a href="/guides/signup" class="me-3 text-dark text-decoration-none">
                 Become a tour guide
             </a>
+
             <a href="/login" class="me-3 text-dark text-decoration-none">
                 Log in
             </a>
+
             <a href="/signup" class="btn px-3">
                 Sign Up
             </a>
-        </div> -->
+
+        </#if>
+        </div>
     </nav>
 
     </body>

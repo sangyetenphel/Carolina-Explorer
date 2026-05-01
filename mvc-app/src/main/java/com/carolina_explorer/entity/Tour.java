@@ -5,8 +5,8 @@ import lombok.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -60,8 +60,7 @@ public class Tour {
     @Column(columnDefinition = "TEXT")
     private String includes;
 
-    // AVAILABILITY
-    private LocalDate availableDate;
+    private LocalTime startTime;
 
     private Double rating;
     private Integer reviewCount;

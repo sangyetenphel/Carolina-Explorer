@@ -31,8 +31,8 @@ public class BookingService {
                 .orElseThrow(() -> new RuntimeException("Tour not found"));
 
         // Prevent duplicate booking
-        if (bookingRepository.existsByTouristAndTour(tourist, tour)) {
-            throw new IllegalArgumentException("Booking already exists");
+        if (bookingRepository.existsByTourAndTourDate(tour, booking.getTourDate())) {
+            throw new IllegalArgumentException("This date is already booked");
         }
 
         // reattach full objects
