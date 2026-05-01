@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
 
 @Controller
+@RequestMapping("/bookings")
 public class BookingController {
 
     @Autowired
@@ -25,7 +26,7 @@ public class BookingController {
     @Autowired
     private TourService tourService;
 
-    @PostMapping("/bookings")
+    @PostMapping("/")
     public String createBooking(
             @RequestParam Long tourId,
             @RequestParam LocalDate date,
@@ -60,5 +61,17 @@ public class BookingController {
         bookingService.createBooking(booking);
 
         return "redirect:/tours?booking=success";
+    }
+
+    @PostMapping("/{id}/accept")
+    public String accept(@PathVariable Long id) {
+        bookingService.acceptBooking(id);
+        return "redirect:/guides/dashboard?accepted=true";
+    }
+
+    @PostMapping("/{id}/reject")
+    public String reject(@PathVariable Long id) {
+        bookingService.rejectBooking(id);
+        return "redirect:/guides/dashboard";
     }
 }

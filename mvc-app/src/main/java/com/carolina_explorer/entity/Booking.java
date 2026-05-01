@@ -40,6 +40,9 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private GroupType groupType;      // optional
 
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
+
     private String specialRequest;    // optional
 
     private LocalDateTime createdAt;

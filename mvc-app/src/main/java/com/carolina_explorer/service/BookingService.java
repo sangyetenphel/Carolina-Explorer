@@ -53,4 +53,45 @@ public class BookingService {
     public List<Booking> getBookingsByTour(Long tourId) {
         return bookingRepository.findByTourTourId(tourId);
     }
+
+    public List<Booking> getPendingBookingsForGuide(Long guideId) {
+        return bookingRepository.findByTour_TourGuide_UserIdAndStatus(guideId, BookingStatus.PENDING);
+    }
+
+    public void acceptBooking(Long id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow();
+        booking.setStatus(BookingStatus.ACCEPTED);
+        bookingRepository.save(booking);
+    }
+
+    public void rejectBooking(Long id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow();
+        booking.setStatus(BookingStatus.REJECTED);
+        bookingRepository.save(booking);
+    }
+
+    public List<Booking> getAcceptedBookingsForGuide(Long guideId) {
+        return bookingRepository.findByTour_TourGuide_UserIdAndStatus(guideId, BookingStatus.ACCEPTED);
+    }
+
+    public double calculateEarningsForGuide(Long guideId) {
+
+        List<Booking> bookings =
+            bookingRepository.findByTour_TourGuide_UserIdAndStatus(
+                guideId,
+                BookingStatus.ACCEPTED
+            );
+
+        double total = 0;
+
+        for (Booking b : bookings) {
+            if (b.getTour() != null && b.getGroupSize() != null) {
+                total += b.getTour().getPrice() * b.getGroupSize();
+            }
+        }
+
+        return total;
+    }
 }

@@ -2,6 +2,9 @@ package com.carolina_explorer.service;
 
 import com.carolina_explorer.entity.TourGuide;
 import com.carolina_explorer.repository.TourGuideRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +64,11 @@ public class TourGuideService {
 
     public TourGuide getByEmail(String email) {
         return tourGuideRepository.findByEmail(email);
+    }
+
+    @Transactional
+    public TourGuide getGuideWithTours(Long id) {
+        return tourGuideRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Guide not found"));
     }
 }

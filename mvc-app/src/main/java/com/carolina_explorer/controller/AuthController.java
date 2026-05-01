@@ -43,7 +43,7 @@ public class AuthController {
 
         // redirect based on role
         if (user.getRole() == UserRole.TOUR_GUIDE) {
-            return "redirect:/guide/dashboard";
+            return "redirect:/guides/dashboard";
         }
 
         return "redirect:/"; // tourist goes home
