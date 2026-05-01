@@ -199,6 +199,17 @@ Scenario: Customer logs in
     When  I choose decline
     Then  the booking status should update to declined
   ```
+
+  - **US‑PROV‑003 — Provider Dashboard**
+  _Story:_ **As a `tour guide`, I want to `acesss a dashboard`, so that `I can see all tour related information such as upcoming tours, earnings, reviews etc.`**
+
+  _Acceptance:_
+  ```gherkin
+  Scenario: View Provider dashboard
+    Given I have loggedIn as a tour guide
+    When  I click on the dashboard
+    Then I should be able to see all my information in one place
+  ```
   
 ---
 
