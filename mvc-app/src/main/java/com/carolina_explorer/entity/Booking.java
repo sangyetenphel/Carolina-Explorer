@@ -32,8 +32,6 @@ public class Booking {
     @Column(nullable = false)
     private LocalDate tourDate;
 
-    private String tourStartTime;     // optional
-
     @Column(nullable = false)
     private Integer groupSize;
 

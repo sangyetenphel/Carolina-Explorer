@@ -235,7 +235,7 @@
 
                         <div class="mb-3">
                             <label>Select Date</label>
-                            <input type="date" name="date" class="form-control" required>
+                            <input type="date" name="tourDate" class="form-control" required>
                         </div>
 
                         <div class="mb-3">

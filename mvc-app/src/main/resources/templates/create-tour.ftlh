@@ -203,6 +203,11 @@
                 <input type="date" name="availableDate" class="form-control">
             </div>
 
+            <div class="mb-3">
+                <label>Start Time</label>
+                <input type="time" name="startTime" class="form-control" required>
+            </div>
+
             <!-- IMAGES -->
             <div class="mb-4">
                 <label class="form-label">Tour Images</label>
