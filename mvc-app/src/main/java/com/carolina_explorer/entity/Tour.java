@@ -30,6 +30,9 @@ public class Tour {
     @Column(nullable = false)
     private String title;
 
+    @Column(length = 200)
+    private String shortDescription;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 

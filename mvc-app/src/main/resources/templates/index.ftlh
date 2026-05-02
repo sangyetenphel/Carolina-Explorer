@@ -703,7 +703,11 @@
                     <h4>${tour.title}</h4>
 
                     <p class="desc">
-                        ${tour.description?substring(0, 80)!''}...
+                        <#if tour.shortDescription?has_content>
+                            ${tour.shortDescription}
+                        <#else>
+                            ${tour.description?truncate(100, "...")}
+                        </#if>
                     </p>
 
                     <p class="price">$${tour.price} <span>/ person</span></p>
