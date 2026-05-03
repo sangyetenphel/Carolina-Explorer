@@ -1,6 +1,8 @@
 package com.carolina_explorer.controller;
 
+import com.carolina_explorer.entity.Review;
 import com.carolina_explorer.entity.Tour;
+import com.carolina_explorer.service.ReviewService;
 import com.carolina_explorer.service.TourService;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,9 @@ public class TouristViewController {
     @Autowired
     private TourService tourService;
 
+    @Autowired
+    private ReviewService reviewService;
+
     // HOME PAGE
     @GetMapping("/")
     public String home(
@@ -27,9 +32,29 @@ public class TouristViewController {
             Model model,
             HttpSession session
     ) {
-        model.addAttribute("tours", tourService.getAllTours());
 
-        model.addAttribute("featuredTours", tourService.getTopTours());
+        List<Tour> tours = tourService.getAllTours();
+
+        for (Tour t : tours) {
+            double avg = reviewService.getAverageRatingForTour(t.getTourId());
+            int count = reviewService.getReviewCountForTour(t.getTourId());
+
+            t.setRating(avg);
+            t.setReviewCount(count);
+        }
+
+        List<Tour> featured = tourService.getTopTours();
+
+        for (Tour t : featured) {
+            double avg = reviewService.getAverageRatingForTour(t.getTourId());
+            int count = reviewService.getReviewCountForTour(t.getTourId());
+
+            t.setRating(avg);
+            t.setReviewCount(count);
+        }
+
+        model.addAttribute("tours", tours);
+        model.addAttribute("featuredTours", featured);
 
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
 
@@ -99,6 +124,14 @@ public class TouristViewController {
                     .toList();
         }
 
+        for (Tour t : tours) {
+            double avg = reviewService.getAverageRatingForTour(t.getTourId());
+            int count = reviewService.getReviewCountForTour(t.getTourId());
+
+            t.setRating(avg);
+            t.setReviewCount(count);
+        }
+
         model.addAttribute("tours", tours);
         model.addAttribute("selectedCity", city != null ? city : "");
         model.addAttribute("selectedDate", date != null ? date : "");
@@ -118,8 +151,17 @@ public class TouristViewController {
 
         Tour tour = tourService.getTourById(id)
                 .orElseThrow(() -> new RuntimeException("Tour not found"));
+        
+        double avg = reviewService.getAverageRatingForTour(id);
+        int count = reviewService.getReviewCountForTour(id);
+
+        List<Review> reviews = reviewService.getReviewsByTour(id);
+
+        tour.setRating(avg);
+        tour.setReviewCount(count);
 
         model.addAttribute("tour", tour);
+        model.addAttribute("reviews", reviews);
         model.addAttribute("reviewMode", review != null && review);
         model.addAttribute("bookingId", bookingId);
 

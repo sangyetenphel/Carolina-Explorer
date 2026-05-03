@@ -4,6 +4,11 @@
     <title>Tours</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
     <style>
         body {
@@ -41,28 +46,54 @@
             gap: 25px;
         }
 
+        /* CLICKABLE CARD LINK */
+        .tour-card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
         /* CARD */
         .card {
             background: white;
-            border-radius: 18px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            transition: 0.25s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            transition: all 0.25s ease;
+            cursor: pointer;
         }
 
+
         .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+        }
+
+        .image-wrapper {
+            position: relative;
         }
 
         .card img {
             width: 100%;
-            height: 170px;
+            height: 160px;
             object-fit: cover;
         }
 
         .card-body {
-            padding: 16px;
+            padding: 14px 16px;
+        }
+
+        .badge-overlay {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            color: #1f3c88;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .badge {
@@ -78,24 +109,64 @@
 
         .card-title {
             font-weight: 600;
-            font-size: 16px;
+            font-size: 15px;
+            margin-bottom: 2px;
         }
 
+        /* GUIDE NAME */
+        .guide {
+            font-size: 12px;
+            color: #8a8a8a;
+            margin-bottom: 6px;
+        }
+
+        /* DESCRIPTION */
         .desc {
             font-size: 13px;
             color: #666;
-            margin: 6px 0;
+            line-height: 1.4;
+            margin-bottom: 6px;
         }
 
+        /* PRICE */
         .price {
             font-weight: 600;
-            margin-top: 6px;
+            font-size: 14px;
         }
 
+        /* RATING */
         .rating {
-            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* .stars {
             color: #f5a623;
-            margin-top: 3px;
+            font-size: 13px;
+        } */
+
+        .stars .bi-star-fill {
+            color: #f5a623;
+        }
+
+        .stars .bi-star-half {
+            color: #f5a623;
+        }
+
+        .stars .bi-star {
+            color: #ddd;   /* EMPTY stars = gray */
+        }
+
+        .rating-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .rating-count {
+            font-size: 12px;
+            color: #8a8a8a;
         }
 
         .link {
@@ -137,42 +208,162 @@
         <div class="left">
 
             <div class="title">
-                <!-- 🧭 Explore ${selectedCity?capitalize! ""} -->
 
                  <#if selectedCity??>
-                    <h2>🧭 Explore ${selectedCity?capitalize}</h2>
+                    <h2>
+                        <i class="bi bi-house-door"></i>
+                        Explore ${selectedCity?capitalize}
+                    </h2>
                 <#else>
-                    <h2>🧭 Explore All Tours</h2>
+                    <h2>
+                        <i class="bi bi-house-door"></i>
+                        Explore All Tours
+                    </h2>
                 </#if>
             </div>
 
             <div class="grid">
 
                 <#list tours as tour>
+                    <a href="/tours/${tour.tourId}" class="tour-card-link">
+
                     <div class="card">
 
-                        <!-- FIXED IMAGE -->
-                        <img src="${(tour.images[0].imageUrl)!'/images/placeholder.jpg'}">
+                        <!-- IMAGE WRAPPER -->
+                        <div class="image-wrapper">
+
+                            <img src="${(tour.images[0].imageUrl)!'/images/placeholder.jpg'}">
+
+                            <!-- CATEGORY BADGE (TOP RIGHT) -->
+                            <div class="badge-overlay">
+                                ${tour.category.displayName}
+                            </div>
+
+                        </div>
 
                         <div class="card-body">
 
-                            <div class="badge">${tour.category.displayName}</div>
-
+                            <!-- TITLE -->
                             <div class="card-title">${tour.title}</div>
 
-                            <div class="desc">${tour.description}</div>
+                            <!-- GUIDE -->
+                            <div class="guide">
+                                by ${tour.tourGuide.firstName} ${tour.tourGuide.lastName}
+                            </div>
 
+                            <!-- SHORT DESCRIPTION -->
+                            <div class="desc">
+                                ${tour.shortDescription!tour.description?truncate(100, "...")}
+                            </div>
+
+                            <!-- PRICE -->
                             <div class="price">$${tour.price} / person</div>
 
-                            <div class="rating">⭐ 4.5 (120)</div>
+                            <!-- RATING -->
+                            <!-- <#assign rating = (tour.rating!0)?number>
+                            <#assign fullStars = rating?floor>
+                            <#assign hasHalf = ((rating - fullStars) >= 0.5)>
 
-                            <a class="link" href="/tours/${tour.tourId}">
-                                View →
-                            </a>
+                            <#if hasHalf>
+                                <#assign emptyStars = 5 - fullStars - 1>
+                            <#else>
+                                <#assign emptyStars = 5 - fullStars>
+                            </#if>
+
+                            <div class="rating">
+
+                                <span class="stars">
+
+                                    <#if fullStars gt 0>
+                                        <#list 1..fullStars as i>
+                                            <i class="bi bi-star-fill"></i>
+                                        </#list>
+                                    </#if>
+
+                                    <#if hasHalf>
+                                        <i class="bi bi-star-half"></i>
+                                    </#if>
+
+                                    <#if emptyStars gt 0>
+                                        <#list 1..emptyStars as i>
+                                            <i class="bi bi-star"></i>
+                                        </#list>
+                                    </#if>
+
+                                </span>
+
+                                <#if tour.reviewCount?has_content && (tour.reviewCount > 0)>
+                                    <span class="rating-value">
+                                        ${rating?string("0.0")}
+                                    </span>
+
+                                    <span class="rating-count">
+                                        (${tour.reviewCount!0})
+                                    </span>
+                                <#else>
+                                    <span class="rating-count">
+                                        No reviews yet
+                                    </span>
+                                </#if>
+                            </div> -->
+
+                            <!-- RATING -->
+                            <#assign rating = (tour.rating!0)?number>
+                            <#assign fullStars = rating?floor>
+                            <#assign hasHalf = ((rating - fullStars) >= 0.5)>
+
+                            <#if hasHalf>
+                                <#assign emptyStars = 5 - fullStars - 1>
+                            <#else>
+                                <#assign emptyStars = 5 - fullStars>
+                            </#if>
+
+                            <div class="rating">
+
+                                <#if tour.reviewCount?has_content && (tour.reviewCount > 0)>
+
+                                    <span class="stars">
+
+                                        <#if fullStars gt 0>
+                                            <#list 1..fullStars as i>
+                                                <i class="bi bi-star-fill"></i>
+                                            </#list>
+                                        </#if>
+
+                                        <#if hasHalf>
+                                            <i class="bi bi-star-half"></i>
+                                        </#if>
+
+                                        <#if emptyStars gt 0>
+                                            <#list 1..emptyStars as i>
+                                                <i class="bi bi-star"></i>
+                                            </#list>
+                                        </#if>
+
+                                    </span>
+
+                                    <span class="rating-value">
+                                        ${rating?string("0.0")}
+                                    </span>
+
+                                    <span class="rating-count">
+                                        (${tour.reviewCount})
+                                    </span>
+
+                                <#else>
+
+                                    <span class="rating-count">
+                                        No reviews yet
+                                    </span>
+
+                                </#if>
+
+                            </div>
 
                         </div>
 
                     </div>
+                    </a>
                 </#list>
 
             </div>
@@ -190,6 +381,8 @@
         </div>
 
     </div>
+    <!-- FOOTER -->
+    <#include "footer.ftlh">
 
 </body>
 </html>

@@ -157,7 +157,13 @@
             <h5>Tour Itinerary</h5>
 
             <div class="mb-3">
-                <label class="form-label">Short Description</label>
+                <label>Short Description</label>
+                <textarea name="shortDescription" class="form-control" maxlength="200"
+                    placeholder="Quick summary for homepage..."></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Full Description</label>
                 <textarea name="description" class="form-control"></textarea>
             </div>
 
