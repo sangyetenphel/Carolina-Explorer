@@ -1,7 +1,11 @@
 package com.carolina_explorer.controller;
 
+import com.carolina_explorer.entity.TourGuide;
+import com.carolina_explorer.entity.Tourist;
 import com.carolina_explorer.entity.User;
 import com.carolina_explorer.entity.UserRole;
+import com.carolina_explorer.service.TourGuideService;
+import com.carolina_explorer.service.TouristService;
 import com.carolina_explorer.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,12 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TourGuideService tourGuideService;
+
+    @Autowired
+    private TouristService touristService;
+
     // show login page
     @GetMapping("/login")
     public String loginPage() {
@@ -25,7 +35,7 @@ public class AuthController {
     }
 
     // handle login form
-    @PostMapping("/login")
+   @PostMapping("/login")
     public String login(
             @RequestParam String email,
             @RequestParam String password,
@@ -38,14 +48,26 @@ public class AuthController {
             return "redirect:/login?error=true";
         }
 
-        // store user in session
-        session.setAttribute("loggedInUser", user);
-
-        // redirect based on role
         if (user.getRole() == UserRole.TOUR_GUIDE) {
+
+            TourGuide guide = tourGuideService.getTourGuideById(user.getUserId())
+                    .orElseThrow();
+
+            session.setAttribute("loggedInUser", guide);
+
             return "redirect:/guides/dashboard";
         }
 
-        return "redirect:/"; // tourist goes home
+        if (user.getRole() == UserRole.TOURIST) {
+
+            Tourist tourist = touristService.getTouristById(user.getUserId())
+                    .orElseThrow();
+
+            session.setAttribute("loggedInUser", tourist);
+
+            return "redirect:/";
+        }
+
+        return "redirect:/";
     }
 }
