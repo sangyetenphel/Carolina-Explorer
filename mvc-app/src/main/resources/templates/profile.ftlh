@@ -239,116 +239,94 @@
     }
 
     .reviews-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-}
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
 
-/* Card */
-.review-card {
-    padding: 10px 0;
-}
+    /* Card */
+    .review-card {
+        padding: 10px 0;
+    }
 
-/* HEADER ROW */
-.review-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-}
+    /* HEADER ROW */
+    .review-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+    }
 
-/* Avatar */
-.review-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+    /* Avatar */
+    .review-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 
-/* Text block */
-.review-header-info {
-    display: flex;
-    flex-direction: column;
-}
+    /* Text block */
+    .review-header-info {
+        display: flex;
+        flex-direction: column;
+    }
 
-/* Tour title */
-.review-tour {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 0;
-}
+    /* Tour title */
+    .review-tour {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+    }
 
-/* Location */
-.review-location {
-    font-size: 14px;
-    color: #717171;
-    margin: 0;
-}
+    /* Location */
+    .review-location {
+        font-size: 14px;
+        color: #717171;
+        margin: 0;
+    }
 
-/* Host */
-.review-host {
-    font-size: 14px;
-    color: #717171;
-    margin: 0;
-}
+    /* Host */
+    .review-host {
+        font-size: 14px;
+        color: #717171;
+        margin: 0;
+    }
 
-/* Stars */
-.review-stars {
-    margin: 8px 0 4px;
-    font-size: 14px;
-}
+    /* Stars */
+    .review-stars {
+        margin: 8px 0 4px;
+        font-size: 14px;
+    }
 
-/* Date */
-.review-date {
-    font-size: 14px;
-    color: #717171;
-    margin-bottom: 8px;
-}
+    /* Date */
+    .review-date {
+        font-size: 14px;
+        color: #717171;
+        margin-bottom: 8px;
+    }
 
-/* Comment */
-.review-text {
-    font-size: 15px;
-    line-height: 1.5;
-}
+    /* Comment */
+    .review-text {
+        font-size: 15px;
+        line-height: 1.5;
+    }
 
-/* EMPTY STATE */
-.empty-state {
-    /* width: 100%; */
-    /* text-align: center; */
-    /* padding: 40px 20px; */
-    color: #717171;
-    margin: 0;
-    padding: 0;
-}
+    .explore-btn {
+        background: #2f4b8f;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+    }
 
-/* .empty-state p{
-    margin: 0;
-    padding: 0;
-} */
+    .explore-btn:hover {
+        background: #1e3a7a;
+    }
 
-/* .empty-state i {
-    font-size: 40px;
-    margin-bottom: 10px;
-    display: block;
-} */
-
-/* .empty-state p {
-    font-size: 16px;
-    margin-bottom: 15px;
-} */
-
-.explore-btn {
-    background: #2f4b8f;
-    color: white;
-    padding: 10px 16px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.explore-btn:hover {
-    background: #1e3a7a;
-}
+    .bi {
+        color:#1f3c88;
+    }
 
 </style>
 <body>
@@ -364,7 +342,7 @@
 
                     <!-- EDIT ICON -->
                     <button class="edit-avatar-btn" onclick="openAvatarModal()">
-                        ✏️
+                        <i class="bi bi-pencil"></i>
                     </button>
                 </div>
 
@@ -427,9 +405,9 @@
                 </div>
             </div>
 
-            <div class="trip-slider" id="tripSlider">
 
-                <#if pastBookings?has_content>
+            <#if pastBookings?has_content>
+                <div class="trip-slider" id="tripSlider"></div>
                     <#list pastBookings as booking>
                         <div class="trip-card">
 
@@ -448,17 +426,10 @@
 
                         </div>
                     </#list>
-
-                <#else>
-
-                    <!-- EMPTY STATE -->
-                    <div class="empty-state">
-                        <p>No trips yet</p>
-                    </div>
-
-                </#if>
-
-            </div>
+                </div>
+            <#else>
+                <p class="text-muted">No trips yet</p>
+            </#if>
         </div>
 
         <hr>
@@ -514,7 +485,7 @@
                     </#list>
                 </div>
             <#else>
-                <p>No reviews yet</p>
+                <p class="text-muted">No reviews yet</p>
             </#if>
         </div>
     </div>
