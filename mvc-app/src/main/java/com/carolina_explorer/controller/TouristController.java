@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Controller
@@ -34,7 +35,8 @@ public class TouristController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String confirmPassword,
-            @RequestParam LocalDate dateOfBirth
+            @RequestParam LocalDate dateOfBirth,
+            RedirectAttributes redirectAttributes
     ) {
 
         // Basic validation
@@ -53,32 +55,14 @@ public class TouristController {
 
         touristService.createTourist(tourist);
 
-        return "redirect:/?signup=success";
+        // flash message
+            redirectAttributes.addFlashAttribute(
+                "successMessage",
+                "Account created successfully! Please log in 🎉"
+            );
+
+            return "redirect:/login";
     }
-
-    // @GetMapping("/login")
-    // public String showLoginPage() {
-    //     return "login";
-    // }
-
-    // @PostMapping("/login")
-    // public String login(
-    //         @RequestParam String email,
-    //         @RequestParam String password,
-    //         jakarta.servlet.http.HttpSession session
-    // ) {
-
-    //     Tourist tourist = touristService.login(email, password);
-
-    //     if (tourist == null) {
-    //         return "redirect:/login?error=true";
-    //     }
-
-    //     // store user in session
-    //     session.setAttribute("loggedInUser", tourist);
-
-    //     return "redirect:/?login=success";
-    // }
 
     @GetMapping("/logout")
     public String logout(jakarta.servlet.http.HttpSession session) {

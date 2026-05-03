@@ -45,13 +45,13 @@ public class TourGuideService {
                 guide.setEmail(updatedGuide.getEmail());
             }
 
-            if (updatedGuide.getBio() != null) {
-                guide.setBio(updatedGuide.getBio());
-            }
+            // if (updatedGuide.getBio() != null) {
+            //     guide.setBio(updatedGuide.getBio());
+            // }
 
-            if (updatedGuide.getYearsOfExperience() != null) {
-                guide.setYearsOfExperience(updatedGuide.getYearsOfExperience());
-            }
+            // if (updatedGuide.getYearsOfExperience() != null) {
+            //     guide.setYearsOfExperience(updatedGuide.getYearsOfExperience());
+            // }
 
             return tourGuideRepository.save(guide);
 

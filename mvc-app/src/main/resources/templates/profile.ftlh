@@ -310,6 +310,46 @@
     font-size: 15px;
     line-height: 1.5;
 }
+
+/* EMPTY STATE */
+.empty-state {
+    /* width: 100%; */
+    /* text-align: center; */
+    /* padding: 40px 20px; */
+    color: #717171;
+    margin: 0;
+    padding: 0;
+}
+
+/* .empty-state p{
+    margin: 0;
+    padding: 0;
+} */
+
+/* .empty-state i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    display: block;
+} */
+
+/* .empty-state p {
+    font-size: 16px;
+    margin-bottom: 15px;
+} */
+
+.explore-btn {
+    background: #2f4b8f;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.explore-btn:hover {
+    background: #1e3a7a;
+}
+
 </style>
 <body>
     <#include "navbar.ftlh">
@@ -389,29 +429,34 @@
 
             <div class="trip-slider" id="tripSlider">
 
-                <#list pastBookings![] as booking>
-                    <div class="trip-card">
+                <#if pastBookings?has_content>
+                    <#list pastBookings as booking>
+                        <div class="trip-card">
 
-                        <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                            <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
 
-                        <h4>${booking.tour.city}</h4>
-                        <p>${booking.tour.city}, North Carolina</p>
-                        <span>${booking.tourDate}</span>
+                            <h4>${booking.tour.city}</h4>
+                            <p>${booking.tour.city}, North Carolina</p>
+                            <span>${booking.tourDate}</span>
 
-                        <!-- <a href="/reviews/create?tourId=${booking.tour.tourId}" class="review-btn">
-                            Write Review
-                        </a> -->
-
-                        <div class="trip-footer">
-                            <!-- <span class="trip-date">${booking.tourDate}</span> -->
-                            <a href="/tours/${booking.tour.tourId}?review=true&bookingId=${booking.bookingId}"
+                            <div class="trip-footer">
+                                <a href="/tours/${booking.tour.tourId}?review=true&bookingId=${booking.bookingId}"
                                 class="write-review-btn">
-                                Leave a review
-                            </a>
-                        </div>
+                                    Leave a review
+                                </a>
+                            </div>
 
+                        </div>
+                    </#list>
+
+                <#else>
+
+                    <!-- EMPTY STATE -->
+                    <div class="empty-state">
+                        <p>No trips yet</p>
                     </div>
-                </#list>
+
+                </#if>
 
             </div>
         </div>

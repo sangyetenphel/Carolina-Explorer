@@ -58,11 +58,6 @@ public class TouristViewController {
 
         model.addAttribute("loggedInUser", session.getAttribute("loggedInUser"));
 
-
-        // model.addAttribute("selectedCity", city != null ? city : "");
-        // model.addAttribute("selectedDate", date != null ? date : "");
-        // model.addAttribute("selectedGuests", guests != null ? guests : "");
-
         return "index";
     }
 
@@ -79,14 +74,6 @@ public class TouristViewController {
             @RequestParam(required = false) String category,
             Model model
     ) {
-
-        // List<Tour> tours;
-
-        // if (city != null && !city.isEmpty()) {
-        //     tours = tourService.getToursByCity(city);
-        // } else {
-        //     tours = tourService.getAllTours();
-        // }
 
         List<Tour> tours = tourService.getAllTours();
 
@@ -151,7 +138,7 @@ public class TouristViewController {
 
         Tour tour = tourService.getTourById(id)
                 .orElseThrow(() -> new RuntimeException("Tour not found"));
-        
+
         double avg = reviewService.getAverageRatingForTour(id);
         int count = reviewService.getReviewCountForTour(id);
 

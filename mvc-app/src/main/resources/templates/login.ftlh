@@ -19,12 +19,27 @@
             background-color: #1f3c88;
             border-radius: 25px;
         }
+
+        .success-banner {
+            background: #e6f4ea;
+            color: #1e7e34;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 500;
+        }
     </style>
 </head>
 
 <body>
 
 <#include "navbar.ftlh">
+<#if successMessage??>
+    <div class="success-banner">
+        ${successMessage}
+    </div>
+</#if>
 
 <div class="container py-5">
     <div class="card shadow-lg p-4 mx-auto" style="max-width: 450px;">
