@@ -152,73 +152,66 @@
             <div class="card stat-card shadow-sm">
 
                 <h5 class="mb-4">New Booking Requests</h5>
-                <#list bookings as booking>
+                <#if bookings?has_content>
 
-                <div class="d-flex align-items-start mb-4">
+                    <#list bookings as booking>
 
-                    <!-- PROFILE IMAGE -->
-                    <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
-                        style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+                        <div class="d-flex align-items-start mb-4">
 
-                    <!-- TEXT CONTENT -->
-                    <div class="ms-3">
+                            <!-- PROFILE IMAGE -->
+                            <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
+                                style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
 
-                        <!-- TOUR TITLE -->
-                        <h6 class="mb-1">${booking.tour.title}</h6>
+                            <div class="ms-3">
 
-                        <!-- DATE + TIME -->
-                        <small class="text-muted d-block">
-                            ${booking.tourDate?date("yyyy-MM-dd")?string("EEE, MMM d")}
+                                <h6 class="mb-1">${booking.tour.title}</h6>
 
-                            <#if booking.tour.startTime?has_content>
-                                <#assign hour = booking.tour.startTime?substring(0,2)?number>
-                                <#assign minute = booking.tour.startTime?substring(3,5)>
-                                <#assign ampm = (hour >= 12)?then("pm", "am")>
-                                <#assign displayHour = (hour % 12 == 0)?then(12, hour % 12)>
+                                <small class="text-muted d-block">
+                                    ${booking.tourDate?date("yyyy-MM-dd")?string("EEE, MMM d")}
+                                </small>
 
-                                at ${displayHour}:${minute} ${ampm}
-                            </#if>
-                        </small>
+                                <small class="text-muted d-block mb-2">
+                                    ${booking.groupSize} guests
+                                </small>
 
-                        <!-- GUESTS -->
-                        <small class="text-muted d-block mb-2">
-                            ${booking.groupSize} guests
-                        </small>
+                                <div>
+                                    <form action="/bookings/${booking.bookingId}/accept"
+                                        method="post" style="display:inline;">
+                                        <button type="submit"
+                                                style="border:none; background:none; color:#16a34a;">
+                                            Accept
+                                        </button>
+                                    </form>
 
-                        <!-- ACTIONS -->
-                        <div>
+                                    <span class="mx-1 text-muted">|</span>
 
-                            <!-- ACCEPT -->
-                            <form action="/bookings/${booking.bookingId}/accept"
-                                method="post"
-                                style="display:inline;">
-                                <button type="submit"
-                                        style="border:none; background:none; color:#16a34a; font-weight:500;">
-                                    Accept
-                                </button>
-                            </form>
+                                    <form action="/bookings/${booking.bookingId}/reject"
+                                        method="post" style="display:inline;">
+                                        <button type="submit"
+                                                style="border:none; background:none; color:#dc2626;">
+                                            Reject
+                                        </button>
+                                    </form>
+                                </div>
 
-                            <span class="mx-1 text-muted">|</span>
-
-                            <!-- REJECT -->
-                            <form action="/bookings/${booking.bookingId}/reject"
-                                method="post"
-                                style="display:inline;">
-                                <button type="submit"
-                                        style="border:none; background:none; color:#dc2626; font-weight:500;">
-                                    Reject
-                                </button>
-                            </form>
-
+                            </div>
                         </div>
 
+                        <hr>
+
+                    </#list>
+
+                <#else>
+
+                    <!-- EMPTY STATE -->
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-inbox" style="font-size: 30px;"></i>
+                        <p class="mt-2 mb-0">No new booking requests</p>
+                        <small>You're all caught up 🎉</small>
                     </div>
 
-                </div>
+                </#if>
 
-                <hr>
-
-                </#list>
             </div>
         </div>
 

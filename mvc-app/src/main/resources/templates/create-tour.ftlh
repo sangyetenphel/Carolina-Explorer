@@ -79,7 +79,7 @@
         background: #e6f4ea;
         color: #1e7e34;
         padding: 12px;
-        border-radius: 12px;
+        /* border-radius: 12px; */
         margin-bottom: 15px;
         text-align: center;
         font-weight: 500;

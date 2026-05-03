@@ -98,6 +98,10 @@
             margin-bottom: 15px;
             font-weight: 500;
         }
+
+        .bi {
+            color:#1f3c88;
+        }
     </style>
 </head>
 
@@ -240,7 +244,7 @@
                     </#list>
                 </ul>
 
-                <h5>Itinerary</h5>
+                <h5 class="fw-semibold mt-4">Itinerary</h5>
 
                 <ul style="list-style:none; padding-left:0;">
 
@@ -249,7 +253,7 @@
                     <li style="margin-bottom:15px; display:flex; gap:10px;">
 
                         <!-- PIN ICON -->
-                        <span style="color:#1f3c88;">
+                        <span>
                             <i class="bi bi-geo-alt"></i>
                         </span>
 
