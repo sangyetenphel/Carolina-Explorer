@@ -142,10 +142,6 @@
             gap: 6px;
         }
 
-        /* .stars {
-            color: #f5a623;
-            font-size: 13px;
-        } */
 
         .stars .bi-star-fill {
             color: #f5a623;
@@ -260,54 +256,7 @@
                             <!-- PRICE -->
                             <div class="price">$${tour.price} / person</div>
 
-                            <!-- RATING -->
-                            <!-- <#assign rating = (tour.rating!0)?number>
-                            <#assign fullStars = rating?floor>
-                            <#assign hasHalf = ((rating - fullStars) >= 0.5)>
-
-                            <#if hasHalf>
-                                <#assign emptyStars = 5 - fullStars - 1>
-                            <#else>
-                                <#assign emptyStars = 5 - fullStars>
-                            </#if>
-
-                            <div class="rating">
-
-                                <span class="stars">
-
-                                    <#if fullStars gt 0>
-                                        <#list 1..fullStars as i>
-                                            <i class="bi bi-star-fill"></i>
-                                        </#list>
-                                    </#if>
-
-                                    <#if hasHalf>
-                                        <i class="bi bi-star-half"></i>
-                                    </#if>
-
-                                    <#if emptyStars gt 0>
-                                        <#list 1..emptyStars as i>
-                                            <i class="bi bi-star"></i>
-                                        </#list>
-                                    </#if>
-
-                                </span>
-
-                                <#if tour.reviewCount?has_content && (tour.reviewCount > 0)>
-                                    <span class="rating-value">
-                                        ${rating?string("0.0")}
-                                    </span>
-
-                                    <span class="rating-count">
-                                        (${tour.reviewCount!0})
-                                    </span>
-                                <#else>
-                                    <span class="rating-count">
-                                        No reviews yet
-                                    </span>
-                                </#if>
-                            </div> -->
-
+                            
                             <!-- RATING -->
                             <#assign rating = (tour.rating!0)?number>
                             <#assign fullStars = rating?floor>

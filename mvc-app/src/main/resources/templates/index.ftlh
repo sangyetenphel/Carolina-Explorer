@@ -383,6 +383,8 @@
         .price {
             font-weight: 600;
             color: #1f3c88;
+            /* margin: 0;
+            padding: 0; */
         }
 
         .price span {
@@ -394,11 +396,23 @@
         .rating {
             font-size: 14px;
             color: #fbbf24;
+            /* padding: 0;
+            margin: 0; */
         }
+
+        /* .rating p {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+        } */
 
         .rating span {
             color: black;
         }
+
+        .stars .bi-star-fill { color: #fbbf24; }
+        .stars .bi-star-half { color: #fbbf24; }
+        .stars .bi-star { color: #ddd; }
 
         /* FORCE override bootstrap */
         .modal-content {
@@ -706,9 +720,54 @@
                     <p class="price">$${tour.price} <span>/ person</span></p>
 
                     <!-- RATING -->
+                    <#assign rating = (tour.rating!0)?number>
+                    <#assign fullStars = rating?floor>
+                    <#assign hasHalf = ((rating - fullStars) >= 0.5)>
+
+                    <#if hasHalf>
+                        <#assign emptyStars = 5 - fullStars - 1>
+                    <#else>
+                        <#assign emptyStars = 5 - fullStars>
+                    </#if>
+
                     <div class="rating">
-                        ⭐⭐⭐⭐⭐
-                        <span> ${tour.rating!4.5} <span class="text-muted">(${tour.reviewCount!120})</span></span>
+
+                        <#if tour.reviewCount?has_content && (tour.reviewCount > 0)>
+
+                            <!-- STARS -->
+                            <span class="stars">
+
+                                <#if fullStars gt 0>
+                                    <#list 1..fullStars as i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </#list>
+                                </#if>
+
+                                <#if hasHalf>
+                                    <i class="bi bi-star-half"></i>
+                                </#if>
+
+                                <#if emptyStars gt 0>
+                                    <#list 1..emptyStars as i>
+                                        <i class="bi bi-star"></i>
+                                    </#list>
+                                </#if>
+
+                            </span>
+
+                            <!-- NUMBER -->
+                            <span class="rating-value">
+                                ${rating?string("0.0")}
+                            </span>
+
+                            <span class="rating-count">
+                                (${tour.reviewCount})
+                            </span>
+
+                        <#else>
+                            <p class="text-muted">No reviews yet</p> 
+                        </#if>
+
                     </div>
 
                 </div>
