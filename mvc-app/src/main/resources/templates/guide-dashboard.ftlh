@@ -207,7 +207,7 @@
                     <div class="text-center text-muted py-4">
                         <i class="bi bi-inbox" style="font-size: 30px;"></i>
                         <p class="mt-2 mb-0">No new booking requests</p>
-                        <small>You're all caught up 🎉</small>
+                        <small>You're all caught up!</small>
                     </div>
 
                 </#if>

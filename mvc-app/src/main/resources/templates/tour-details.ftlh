@@ -44,27 +44,12 @@
             padding: 20px;
         }
 
-        /* .d-flex span:first-child {
-            letter-spacing: 1px;
-        } */
-
-        /* .btn-primary {
-            background-color: #1f3c88;
-            border: none;
-            border-radius: 20px;
-        } */
-
         /* RATING */
         .rating {
             display: flex;
             align-items: center;
             gap: 6px;
         }
-
-        /* .stars {
-            color: #f5a623;
-            font-size: 13px;
-        } */
 
         .stars .bi-star-fill {
             color: #f5a623;
@@ -102,6 +87,10 @@
         .bi {
             color:#1f3c88;
         }
+
+        .row-space{
+            --bs-gutter-x: 5rem;
+        }
     </style>
 </head>
 
@@ -118,7 +107,7 @@
 
         <div class="d-flex align-items-center gap-2 mb-3">
 
-            <span class="badge rounded-pill px-3 py-2" 
+            <span class="badge rounded-pill px-3 py-2"
                 style="background:#e0e7ff; color:#1f3c88;">
                 ${tour.category.displayName}
             </span>
@@ -229,7 +218,7 @@
 
         <hr>
 
-        <div class="row">
+        <div class="row row-space">
 
             <!-- LEFT SIDE -->
             <div class="col-md-7">
