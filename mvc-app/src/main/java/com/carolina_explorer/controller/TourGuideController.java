@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/guides")
@@ -43,7 +44,7 @@ public class TourGuideController {
 
     // HANDLE FORM SUBMISSION
     @PostMapping("/signup")
-    public String registerGuide(@ModelAttribute TourGuide guide) {
+    public String registerGuide(@ModelAttribute TourGuide guide, RedirectAttributes redirectAttributes) {
 
         guide.setRole(UserRole.TOUR_GUIDE);
 
@@ -51,7 +52,12 @@ public class TourGuideController {
 
         tourGuideService.createTourGuide(guide);
 
-        return "redirect:/login";
+        // send flag + message
+        redirectAttributes.addFlashAttribute("firstTour", true);
+        redirectAttributes.addFlashAttribute("successMessage",
+            "Account created successfully! Create your first tour.");
+
+        return "redirect:/tours/create";
     }
 
     @GetMapping("/dashboard")
@@ -66,7 +72,7 @@ public class TourGuideController {
         TourGuide guide = tourGuideService.getGuideWithTours(user.getUserId());
 
         model.addAttribute("guide", guide);
-        
+
         double rating = reviewService.getAverageRatingForGuide(user.getUserId());
         model.addAttribute("rating", rating);
 

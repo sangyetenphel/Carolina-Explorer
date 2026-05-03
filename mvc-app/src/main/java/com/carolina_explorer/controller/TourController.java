@@ -27,7 +27,11 @@ public class TourController {
     // SHOW CREATE FORM
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("tour", new Tour());
+
+        if (!model.containsAttribute("tour")) {
+            model.addAttribute("tour", new Tour());
+        }
+
         return "create-tour";
     }
 
@@ -44,11 +48,6 @@ public class TourController {
                 .trim();
 
         tour.setItinerary(formatted);
-
-        // Get actual tour guide
-        // TourGuide guide = tourGuideService.getTourGuideById(
-        //         tour.getTourGuide().getUserId()
-        // ).orElseThrow(() -> new RuntimeException("Guide not found"));
 
 
         // For now grabbing the first tour guide since no login

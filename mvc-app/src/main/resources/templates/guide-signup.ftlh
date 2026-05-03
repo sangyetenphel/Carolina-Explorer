@@ -137,7 +137,7 @@
                 </select>
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label">Years of Experience *</label>
                 <input name="yearsOfExperience" type="number" class="form-control" placeholder="Select an option">
             </div>
@@ -145,7 +145,7 @@
             <div class="mb-3">
                 <label class="form-label">Short Bio *</label>
                 <textarea name="bio" class="form-control" placeholder="Tell travelers about your background and expertise..."></textarea>
-            </div>
+            </div> -->
 
             <!-- AGREEMENTS -->
             <h5>Agreements</h5>

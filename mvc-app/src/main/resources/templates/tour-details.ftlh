@@ -90,7 +90,14 @@
         }
 
 
-
+        .success-banner {
+            background: #e6f4ea;
+            color: #1e7e34;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -204,7 +211,7 @@
         <!-- HOST -->
         <div class="d-flex align-items-center gap-3 mb-4">
 
-            <img 
+            <img
                 src="${tour.tourGuide.profileImageUrl!'/images/default-avatar.png'}"
                 class="rounded-circle"
                 style="width:40px; height:40px; object-fit:cover;">
@@ -278,6 +285,11 @@
             </div>
 
             <!-- RIGHT SIDE (BOOKING CARD) -->
+             <#if successMessage??>
+                <div class="success-banner">
+                    ${successMessage}
+                </div>
+            </#if>
             <div class="col-md-5">
 
                 <div class="booking-card">
@@ -392,7 +404,7 @@
 
                 <!-- USER -->
                 <div class="d-flex align-items-center gap-3 mb-2">
-                   <img 
+                   <img
                         src="${r.booking.tourist.profileImage!'/images/default-avatar.png'}"
                         class="rounded-circle"
                         style="

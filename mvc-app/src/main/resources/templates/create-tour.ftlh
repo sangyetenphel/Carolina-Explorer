@@ -75,6 +75,16 @@
         color: #9ca3af;
     }
 
+    .success-banner {
+        background: #e6f4ea;
+        color: #1e7e34;
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: 500;
+    }
+
     </style>
 </head>
 
@@ -82,11 +92,21 @@
 
 <#include "navbar.ftlh">
 
+<#if successMessage??>
+    <div class="success-banner">
+        ${successMessage}
+    </div>
+</#if>
+
 <div class="container py-5">
 
     <div class="card shadow-lg p-4 mx-auto" style="max-width: 700px;">
         <h6 class="text-center mb-2 heading">
-            Create Your First Tour
+            <#if firstTour?? && firstTour>
+                Create Your First Tour
+            <#else>
+                Create a New Tour
+            </#if>
         </h6>
 
         <hr class="mb-0">
@@ -139,15 +159,15 @@
                 <label class="form-label">Group Size</label>
                 <div class="row">
                     <div class="col">
-                        <input 
-                            name="minGuests" 
-                            class="form-control" 
+                        <input
+                            name="minGuests"
+                            class="form-control"
                             placeholder="Min (e.g. 2)">
                     </div>
                     <div class="col">
-                        <input 
-                            name="maxGuests" 
-                            class="form-control" 
+                        <input
+                            name="maxGuests"
+                            class="form-control"
                             placeholder="Max (e.g. 8)">
                     </div>
                 </div>
@@ -170,9 +190,9 @@
             <div class="mb-3">
                 <label>Full Itinerary</label>
 
-                <textarea 
-                    name="itinerary" 
-                    class="form-control" 
+                <textarea
+                    name="itinerary"
+                    class="form-control"
                     rows="6"
                     placeholder="Example:
 
@@ -204,10 +224,10 @@
             <!-- AVAILABILITY -->
             <h5>Availability</h5>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label">Available Date</label>
                 <input type="date" name="availableDate" class="form-control">
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label>Start Time</label>
@@ -220,9 +240,9 @@
 
                 <div id="image-container">
                     <div class="input-group mb-2">
-                        <input 
-                            type="text" 
-                            name="imageUrls" 
+                        <input
+                            type="text"
+                            name="imageUrls"
                             class="form-control"
                             placeholder="Paste image URL"
                         >
@@ -240,7 +260,6 @@
                     Create Tour
                 </button>
             </div>
-            
         </form>
 
     </div>
