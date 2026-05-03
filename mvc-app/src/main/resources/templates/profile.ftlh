@@ -328,6 +328,66 @@
         color:#1f3c88;
     }
 
+    /* MODAL BACKGROUND */
+    .modal {
+        display: none; /* hidden by default */
+        position: fixed;
+        z-index: 999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        background: rgba(0, 0, 0, 0.4); /* dark overlay */
+
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* MODAL BOX */
+    .modal-content {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        width: 400px;
+        max-width: 90%;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    /* INPUT */
+    .modal-content input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-top: 10px;
+    }
+
+    /* BUTTONS */
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .modal-actions button {
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .modal-actions button:first-child {
+        background: #eee;
+    }
+
+    .modal-actions button:last-child {
+        background: #1f3c88;
+        color: white;
+    }
+
 </style>
 <body>
     <#include "navbar.ftlh">
@@ -517,11 +577,13 @@
 
     <script>
         function openAvatarModal() {
-            document.getElementById("avatarModal").style.display = "block";
+            const modal = document.getElementById("avatarModal");
+            modal.style.display = "flex"; 
         }
 
         function closeAvatarModal() {
-            document.getElementById("avatarModal").style.display = "none";
+            const modal = document.getElementById("avatarModal");
+            modal.style.display = "none";
         }
     </script>
 </body>

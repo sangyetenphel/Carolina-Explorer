@@ -52,8 +52,8 @@ public class TourController {
 
         // fix itinerary
         String formatted = tour.getItinerary()
-                .replaceAll("(?=\\d{1,2}:\\d{2}\\s?(AM|PM))", "\n\n")
-                .trim();
+            .replaceAll("(?<!^)\\s*(\\d{1,2}:\\d{2}\\s?(AM|PM))", "\n\n$1")
+            .trim();
 
         tour.setItinerary(formatted);
 

@@ -126,7 +126,7 @@
                     placeholder="Paste image link (e.g. https://...)">
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label class="form-label">City You Operate In *</label>
                 <select name="city" class="form-select" required>
                     <option value="">Select an option</option>
@@ -135,7 +135,7 @@
                     <option value="RALEIGH">Raleigh</option>
                     <option value="WILMINGTON">Wilmington</option>
                 </select>
-            </div>
+            </div> -->
 
             <!-- <div class="mb-3">
                 <label class="form-label">Years of Experience *</label>
