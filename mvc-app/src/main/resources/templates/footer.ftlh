@@ -6,7 +6,7 @@
             /* margin-top: 50px; */
         }
     </style>
-    
+
     <!-- FOOTER -->
     <div class="footer">
         <p>© 2026 Carolina Explorer</p>

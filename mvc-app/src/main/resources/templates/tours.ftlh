@@ -23,6 +23,7 @@
             margin: auto;
             padding: 50px 20px;
             gap: 40px;
+            min-height: 85vh;
         }
 
         /* TITLE */
