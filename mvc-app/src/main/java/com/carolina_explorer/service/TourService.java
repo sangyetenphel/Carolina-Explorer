@@ -89,6 +89,22 @@ public class TourService {
         }).orElseThrow(() -> new RuntimeException("Tour not found"));
     }
 
+    @Autowired
+    private ReviewService reviewService;
+
+    public List<Tour> attachRatings(List<Tour> tours) {
+
+        for (Tour t : tours) {
+            double avg = reviewService.getAverageRatingForTour(t.getTourId());
+            int count = reviewService.getReviewCountForTour(t.getTourId());
+
+            t.setRating(avg);
+            t.setReviewCount(count);
+        }
+
+        return tours;
+    }
+
     public void deleteTour(Long id) {
         tourRepository.deleteById(id);
     }

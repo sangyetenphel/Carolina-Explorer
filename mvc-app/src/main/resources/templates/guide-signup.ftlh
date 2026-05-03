@@ -119,6 +119,14 @@
             <h5>Guide Details</h5>
 
             <div class="mb-3">
+                <label class="form-label">Profile Image URL</label>
+                <input 
+                    name="profileImageUrl" 
+                    class="form-control" 
+                    placeholder="Paste image link (e.g. https://...)">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">City You Operate In *</label>
                 <select name="city" class="form-select" required>
                     <option value="">Select an option</option>

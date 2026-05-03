@@ -65,7 +65,6 @@ public class TourGuideController {
 
         TourGuide guide = tourGuideService.getGuideWithTours(user.getUserId());
 
-        //  MOCK DATA for now (we connect DB later)
         model.addAttribute("guide", guide);
         
         double rating = reviewService.getAverageRatingForGuide(user.getUserId());

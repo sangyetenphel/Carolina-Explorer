@@ -400,13 +400,6 @@
             color: black;
         }
 
-        .footer {
-            background: white;
-            padding: 30px;
-            text-align: center;
-            /* margin-top: 50px; */
-        }
-
         /* FORCE override bootstrap */
         .modal-content {
             border-radius: 18px !important;
@@ -740,9 +733,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="footer">
-        <p>© 2026 Carolina Explorer</p>
-    </div>
+    <#include "footer.ftlh">
 
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -77,4 +77,22 @@ public class ReviewService {
 
         return total / reviews.size();
     }
+
+    public double getAverageRatingForTour(Long tourId) {
+        List<Review> reviews = reviewRepository.findByBookingTourTourId(tourId);
+
+        if (reviews.isEmpty()) return 0;
+
+        double total = 0;
+
+        for (Review r : reviews) {
+            total += r.getRating();
+        }
+
+        return total / reviews.size();
+    }
+
+    public int getReviewCountForTour(Long tourId) {
+        return reviewRepository.findByBookingTourTourId(tourId).size();
+    }
 }
