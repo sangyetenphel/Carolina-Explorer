@@ -396,15 +396,7 @@
         .rating {
             font-size: 14px;
             color: #fbbf24;
-            /* padding: 0;
-            margin: 0; */
         }
-
-        /* .rating p {
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-        } */
 
         .rating span {
             color: black;
