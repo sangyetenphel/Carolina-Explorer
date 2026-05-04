@@ -456,6 +456,34 @@
         <hr>
 
         <div class="section">
+            <h2>Declined Bookings</h2>
+
+            <#if rejectedBookings?has_content>
+                <#list rejectedBookings as booking>
+
+                    <div class="upcoming-item" style="opacity:0.6;">
+
+                        <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+
+                        <div class="info">
+                            <p class="title">${booking.tour.title}</p>
+                            <span>${booking.tourDate}</span>
+                            <div style="color:red; font-size:12px;">
+                                Declined by host
+                            </div>
+                        </div>
+
+                    </div>
+
+                </#list>
+            <#else>
+                <p class="text-muted">No declined bookings</p>
+            </#if>
+        </div>
+
+        
+
+        <div class="section">
             <div class="section-header">
                 <h2>Where I’ve been</h2>
 
