@@ -11,12 +11,11 @@
 - Customer C: Tourist  
 - Service S: Tour  
 
----
+
 
 # Use Cases
 
-## 1. Provider: US-PROV-00A, US-PROV-001 — Register & Create Tours
-
+#### 1. Provider: US-PROV-00A, US-PROV-001 — Register & Create Tours
 1. Tour Guide P1 registers a provider account.
 2. P1 creates tours S1 (Asheville Brewery Tour) and S2 (Historic Uptown Charlotte Tour) with searchable criteria:
       - C1 = City
@@ -27,13 +26,12 @@
 4. PI exits the app.
    
 
-## 2. Customer: US-CUST-00A — Register Profile  
-
+#### 2. Customer: US-CUST-00A — Register Profile  
 1. Tourist C1 registers a customer account and creates a profile.
 2. C1 exits the app.
 
 
-## 3. Customer: US-CUST-001, US-CUST-002, US-CUST-003 — Browse, Filter, View Itinerary
+#### 3. Customer: US-CUST-001, US-CUST-002, US-CUST-003 — Browse, Filter, View Itinerary
 
 1. Tourist C2 logs in.
 2. C2 browses available tours.
@@ -42,14 +40,14 @@
 5. C2 exits the app.
 
 
-## 4. Customer: US-CUST-004 — Request Booking
+#### 4. Customer: US-CUST-004 — Request Booking
 
 1. Tourist C2 logs back in.
 2. C2 requests booking for S1 and S2.
 3. C2 exits the app.
  
 
-## 5. Provider: US-PROV-002 — Accept/Decline Booking
+#### 5. Provider: US-PROV-002 — Accept/Decline Booking
 
 1. Tour Guide P1 logs in.  
 2. P1 views booking requests.  
@@ -59,7 +57,7 @@
 4. P1 exits the app.
 
 
-## 6. Customer: US-CUST-006 - View & Manage Bookings  
+#### 6. Customer: US-CUST-006 - View & Manage Bookings  
 
 1. Tourist C2 logs in.
 2. C2 views booking status:
@@ -69,14 +67,14 @@
 5. C2 exits the app.
 
 
-## 7. Customer: US-CUST-006 — Cancel Booking  
+#### 7. Customer: US-CUST-006 — Cancel Booking  
 
 1. Tourist C2 logs in.
 2. C2 clicks “Cancel” on an accepted booking.
 3. C2 exits the app.
 
 
-## 8. Customer: US-CUST-005 — Write Review  
+#### 8. Customer: US-CUST-005 — Write Review  
 
 1. Tourist C2 logs in.
 2. C2 completes tour S1.
@@ -84,7 +82,7 @@
 4. C2 exits the app.
 
 
-## 9. Provider: US-PROV-003 — View Dashboard  
+#### 9. Provider: US-PROV-003 — View Dashboard  
 
 1. Tour Guide P1 logs in.
 2. P1 views dashboard including:
@@ -96,7 +94,7 @@
 3. P1 exits the app.
 
 
-## 10. Customer: US-CUST-003 — View Reviews  
+#### 10. Customer: US-CUST-003 — View Reviews  
 
 1. Tourist C1 logs in.
 2. C1 browses tours.
@@ -109,11 +107,11 @@
 
 ---
 
-# Cross-Cutting Test Scenarios
+## Cross-Cutting Test Scenarios
 
-## Performance Requirements
+### Performance Requirements
 
-### Scenario P1: Browse tours response time < 3 seconds
+**Scenario P1: Browse tours response time < 3 seconds**
 - Setup: Server under typical load  
 - Steps:
    1. Load “Browse Tours” page
@@ -125,7 +123,7 @@
 95% of requests ≤ 3 seconds
 
 
-### Scenario P2: Tour details page load < 2 seconds
+**Scenario P2: Tour details page load < 2 seconds**
 - Setup: Server under typical load  
 - Steps:
   1. Select a tour (S1)
@@ -137,9 +135,9 @@
 
 
 
-## Security & Access Control
+### Security & Access Control
 
-### Scenario S1: Role-based access control
+**Scenario S1: Role-based access control**
 - Setup: Tourist attempts to access Tour Guide dashboard
 - Steps:
   1. Tourist logs in  
@@ -150,7 +148,7 @@ Access denied or redirected
 No guide data exposed
 
 
-### Scenario S2: Review integrity
+**Scenario S2: Review integrity**
 - Setup: Tour Guide logs in, Tourist has submitted a review
 - Steps:
   1. Tour Guide views reviews on dashboard  
@@ -162,9 +160,9 @@ Review remains unchanged
 
 
 
-## Usability Requirements
+### Usability Requirements
 
-### Scenario U1: Tourist completes booking in ≤ 5 steps
+**Scenario U1: Tourist completes booking in ≤ 5 steps**
 - Setup: New Tourist account
 - Steps:
   1. Tourist logs in
