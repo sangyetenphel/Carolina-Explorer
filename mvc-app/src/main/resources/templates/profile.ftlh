@@ -27,21 +27,19 @@
     }
 
     .profile-top {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* ONLY 2 columns */
-        gap: 30px;
-        align-items: start;
-        margin-bottom: 50px;
+        display: flex;              /* change from grid → flex */
+        justify-content: center;    /* centers both cards together */
+        gap: 30px;                  /* small clean gap */
+        margin-bottom: 30px;
     }
 
     .profile-card {
         background: white;
         padding: 30px;
         border-radius: 20px;
-        width: 350px;
+        width: 350px;   /* back to original */
         text-align: center;
         box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        margin-bottom: 40px;
     }
 
     .profile-img-wrapper {
@@ -87,7 +85,7 @@
         padding: 25px;
         border-radius: 20px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        width: 100%;
+        width: 500px;
     }
 
     .upcoming-item {
@@ -388,6 +386,13 @@
         color: white;
     }
 
+    button.btn-light {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+}
+
 </style>
 <body>
     <#include "navbar.ftlh">
@@ -426,62 +431,69 @@
             <!-- RIGHT: Upcoming Trips -->
             <div class="upcoming-card">
 
-                <h3>Upcoming Trips (${upcomingCount!0})</h3>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 id="tripTitle">Upcoming Trips (${upcomingCount!0})</h3>
 
-                <#list upcomingBookings![] as booking>
+                    <div>
+                        <button onclick="showUpcoming()" class="btn btn-light btn-sm">‹</button>
+                        <button onclick="showDeclined()" class="btn btn-light btn-sm">›</button>
+                    </div>
+                </div>
 
-                    <div class="upcoming-item">
+                <div id="upcomingSection">
+                    <#list upcomingBookings![] as booking>
 
-                        <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                        <div class="upcoming-item">
 
-                        <div class="info">
-                            <p class="title">${booking.tour.title}</p>
-                            <span>${booking.tourDate}</span>
+                            <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+
+                            <div class="info">
+                                <p class="title">${booking.tour.title}</p>
+                                <span>${booking.tourDate}</span>
+                            </div>
+
+                            <form action="/bookings/cancel/${booking.bookingId}" method="post">
+                                <button class="cancel-btn">Cancel</button>
+                            </form>
+
                         </div>
 
-                        <form action="/booking/cancel/${booking.bookingId}" method="post">
-                            <button class="cancel-btn">Cancel</button>
-                        </form>
+                    <#else>
+                        <p class="empty">No upcoming trips</p>
+                    </#list>
+                </div>
 
-                    </div>
+                <div id="declinedSection" style="display:none;">
 
-                <#else>
-                    <p class="empty">No upcoming trips</p>
-                </#list>
+                    <#if rejectedBookings?has_content>
 
+                        <#list rejectedBookings as booking>
+
+                            <div class="upcoming-item" style="opacity:0.6;">
+
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+
+                                <div class="info">
+                                    <p class="title">${booking.tour.title}</p>
+                                    <span>${booking.tourDate}</span>
+
+                                    <div style="color:#dc2626; font-size:12px;">
+                                        Declined by host
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </#list>
+
+                    <#else>
+                        <p class="text-muted">No declined bookings</p>
+                    </#if>
+                </div>
             </div>
-
         </div>
 
         <hr>
-
-        <div class="section">
-            <h2>Declined Bookings</h2>
-
-            <#if rejectedBookings?has_content>
-                <#list rejectedBookings as booking>
-
-                    <div class="upcoming-item" style="opacity:0.6;">
-
-                        <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
-
-                        <div class="info">
-                            <p class="title">${booking.tour.title}</p>
-                            <span>${booking.tourDate}</span>
-                            <div style="color:red; font-size:12px;">
-                                Declined by host
-                            </div>
-                        </div>
-
-                    </div>
-
-                </#list>
-            <#else>
-                <p class="text-muted">No declined bookings</p>
-            </#if>
-        </div>
-
-        
 
         <div class="section">
             <div class="section-header">
@@ -612,6 +624,20 @@
         function closeAvatarModal() {
             const modal = document.getElementById("avatarModal");
             modal.style.display = "none";
+        }
+    </script>
+
+    <script>
+        function showUpcoming() {
+            document.getElementById("upcomingSection").style.display = "block";
+            document.getElementById("declinedSection").style.display = "none";
+            document.getElementById("tripTitle").innerText = "Upcoming Trips";
+        }
+
+        function showDeclined() {
+            document.getElementById("upcomingSection").style.display = "none";
+            document.getElementById("declinedSection").style.display = "block";
+            document.getElementById("tripTitle").innerText = "Declined Bookings";
         }
     </script>
 </body>

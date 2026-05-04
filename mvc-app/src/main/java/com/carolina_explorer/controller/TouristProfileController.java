@@ -65,7 +65,7 @@ public class TouristProfileController {
                 .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
                 .toList();
 
-        // ❌ Rejected bookings (NEW SECTION)
+        //  Rejected bookings
         List<Booking> rejectedBookings = bookings.stream()
                 .filter(b -> b.getStatus() == BookingStatus.REJECTED)
                 .toList();
