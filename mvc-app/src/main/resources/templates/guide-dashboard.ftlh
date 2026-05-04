@@ -83,188 +83,264 @@
             opacity: 0.8;
             cursor: pointer;
         }
+
+        button.btn-light {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+        }
     </style>
 </head>
 
 <body>
 
-<#include "navbar.ftlh">
-    <#if RequestParameters.accepted??>
-        <div class="alert alert-success">
-            Booking accepted successfully!
-        </div>
-    </#if>
+    <#include "navbar.ftlh">
+        <#if RequestParameters.accepted??>
+            <div class="alert alert-success">
+                Booking accepted successfully!
+            </div>
+        </#if>
 
-<div class="container py-5">
+    <div class="container py-5">
 
-    <!-- HEADER -->
-    <h3 class="mb-4">
-        Welcome Back, ${guide.firstName}!
-    </h3>
+        <!-- HEADER -->
+        <h3 class="mb-4">
+            Welcome Back, ${guide.firstName}!
+        </h3>
 
-    <!-- TOP SECTION -->
-    <div class="row g-4">
+        <!-- TOP SECTION -->
+        <div class="row g-4">
 
-        <!-- LEFT STATS -->
-        <div class="col-md-6">
-            <div class="card stat-card shadow-sm">
+            <!-- LEFT STATS -->
+            <div class="col-md-6">
+                <div class="card stat-card shadow-sm">
 
-                <h5 class="mb-4">At a Glance</h5>
+                    <h5 class="mb-4">At a Glance</h5>
 
-                <div class="stat-item mb-3">
-                    <div class="stat-left">
-                        <div class="stat-icon">
-                            <i class="bi bi-currency-dollar"></i>
+                    <div class="stat-item mb-3">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <span>Earnings</span>
                         </div>
-                        <span>Earnings</span>
+                        <strong>$${earnings?string["#,##0.00"]}</strong>
                     </div>
-                    <strong>$${earnings?string["#,##0.00"]}</strong>
-                </div>
 
-                <hr>
+                    <hr>
 
-                <div class="stat-item mb-3">
-                    <div class="stat-left">
-                        <div class="stat-icon">
-                            <i class="bi bi-clock"></i>
+                    <div class="stat-item mb-3">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <span>Upcoming Tours</span>
                         </div>
-                        <span>Upcoming Tours</span>
+                        <strong>${(upcomingBookings![])?size}</strong>
                     </div>
-                    <strong>${(upcomingBookings![])?size}</strong>
-                </div>
 
-                <hr>
+                    <hr>
 
-                <div class="stat-item">
-                    <div class="stat-left">
-                        <div class="stat-icon">
-                            <i class="bi bi-star"></i>
+                    <div class="stat-item">
+                        <div class="stat-left">
+                            <div class="stat-icon">
+                                <i class="bi bi-star"></i>
+                            </div>
+                            <span>Reviews</span>
                         </div>
-                        <span>Reviews</span>
+                        <strong>${rating?string["0.0"]}</strong>
                     </div>
-                    <strong>${rating?string["0.0"]}</strong>
                 </div>
             </div>
+
+            <!-- BOOKING REQUESTS -->
+            <div class="col-md-6">
+                <div class="card stat-card shadow-sm">
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 id="bookingTitle">New Booking Requests</h5>
+
+                        <div>
+                            <button onclick="showRequests()" class="btn btn-light btn-sm">‹</button>
+                            <button onclick="showCancelled()" class="btn btn-light btn-sm">›</button>
+                        </div>
+                    </div>
+
+                    <div id="requestsSection">
+                        <#if bookings?has_content>
+
+                            <#list bookings as booking>
+
+                                <div class="d-flex align-items-start mb-4">
+
+                                    <!-- PROFILE IMAGE -->
+                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
+                                        style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+
+                                    <div class="ms-3">
+
+                                        <h6 class="mb-1">${booking.tour.title}</h6>
+
+                                        <small class="text-muted d-block">
+                                            ${booking.tourDate?date("yyyy-MM-dd")?string("EEE, MMM d")}
+                                        </small>
+
+                                        <small class="text-muted d-block mb-2">
+                                            ${booking.groupSize} guests
+                                        </small>
+
+                                        <div>
+                                            <form action="/bookings/${booking.bookingId}/accept"
+                                                method="post" style="display:inline;">
+                                                <button type="submit"
+                                                        style="border:none; background:none; color:#16a34a;">
+                                                    Accept
+                                                </button>
+                                            </form>
+
+                                            <span class="mx-1 text-muted">|</span>
+
+                                            <form action="/bookings/${booking.bookingId}/reject"
+                                                method="post" style="display:inline;">
+                                                <button type="submit"
+                                                        style="border:none; background:none; color:#dc2626;">
+                                                    Reject
+                                                </button>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                            </#list>
+
+                        <#else>
+
+                            <!-- EMPTY STATE -->
+                            <div class="text-center text-muted py-4">
+                                <i class="bi bi-inbox" style="font-size: 30px;"></i>
+                                <p class="mt-2 mb-0">No new booking requests</p>
+                                <small>You're all caught up!</small>
+                            </div>
+
+                        </#if>
+                    </div>
+
+                    <div id="cancelledSection" style="display:none;">
+
+                        <#if cancelledBookings?has_content>
+
+                            <#list cancelledBookings as booking>
+
+                                <div class="d-flex align-items-start mb-4" style="opacity:0.6;">
+
+                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
+                                        style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+
+                                    <div class="ms-3">
+
+                                        <h6 class="mb-1">${booking.tour.title}</h6>
+
+                                        <small class="text-muted d-block">
+                                            ${booking.tourDate?date("yyyy-MM-dd")?string("EEE, MMM d")}
+                                        </small>
+
+                                        <small class="text-muted d-block mb-2">
+                                            ${booking.groupSize} guests
+                                        </small>
+
+                                        <div style="color:#dc2626; font-size:12px;">
+                                            Cancelled by tourist
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <hr>
+
+                            </#list>
+
+                        <#else>
+
+                            <div class="text-center text-muted py-4">
+                                <i class="bi bi-x-circle" style="font-size: 30px;"></i>
+                                <p class="mt-2 mb-0">No cancelled bookings</p>
+                            </div>
+
+                        </#if>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- BOOKING REQUESTS -->
-        <div class="col-md-6">
-            <div class="card stat-card shadow-sm">
+        <!-- UPCOMING TOURS -->
+        <div class="mt-5">
 
-                <h5 class="mb-4">New Booking Requests</h5>
-                <#if bookings?has_content>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Upcoming Tours</h4>
+                <!-- <button class="btn btn-outline-dark">Edit</button> -->
+            </div>
 
-                    <#list bookings as booking>
+            <#if (upcomingBookings![])?size gt 0>
+                <#list (upcomingBookings![]) as booking>
+                    <div class="card p-3 mb-3 shadow-sm tour-card">
 
-                        <div class="d-flex align-items-start mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
 
-                            <!-- PROFILE IMAGE -->
-                            <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
-                                style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
+                            <div class="d-flex gap-3">
 
-                            <div class="ms-3">
-
-                                <h6 class="mb-1">${booking.tour.title}</h6>
-
-                                <small class="text-muted d-block">
-                                    ${booking.tourDate?date("yyyy-MM-dd")?string("EEE, MMM d")}
-                                </small>
-
-                                <small class="text-muted d-block mb-2">
-                                    ${booking.groupSize} guests
-                                </small>
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
 
                                 <div>
-                                    <form action="/bookings/${booking.bookingId}/accept"
-                                        method="post" style="display:inline;">
-                                        <button type="submit"
-                                                style="border:none; background:none; color:#16a34a;">
-                                            Accept
-                                        </button>
-                                    </form>
+                                    <!-- <span class="badge badge-upcoming mb-2">Upcoming</span> -->
 
-                                    <span class="mx-1 text-muted">|</span>
+                                    <h6>${booking.tour.title}</h6>
 
-                                    <form action="/bookings/${booking.bookingId}/reject"
-                                        method="post" style="display:inline;">
-                                        <button type="submit"
-                                                style="border:none; background:none; color:#dc2626;">
-                                            Reject
-                                        </button>
-                                    </form>
+                                    <small class="text-muted">${booking.tour.city}</small><br>
+
+                                    <small>${booking.groupSize} guests</small>
                                 </div>
 
                             </div>
-                        </div>
 
-                        <hr>
+                            <div class="text-end">
+                                <h5>$${(booking.tour.price * booking.groupSize)?string["#,##0.00"]}</h5>
 
-                    </#list>
-
-                <#else>
-
-                    <!-- EMPTY STATE -->
-                    <div class="text-center text-muted py-4">
-                        <i class="bi bi-inbox" style="font-size: 30px;"></i>
-                        <p class="mt-2 mb-0">No new booking requests</p>
-                        <small>You're all caught up!</small>
-                    </div>
-
-                </#if>
-
-            </div>
-        </div>
-
-    </div>
-
-    <!-- UPCOMING TOURS -->
-    <div class="mt-5">
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4>Upcoming Tours</h4>
-            <!-- <button class="btn btn-outline-dark">Edit</button> -->
-        </div>
-
-        <#if (upcomingBookings![])?size gt 0>
-            <#list (upcomingBookings![]) as booking>
-                <div class="card p-3 mb-3 shadow-sm tour-card">
-
-                    <div class="d-flex justify-content-between align-items-center">
-
-                        <div class="d-flex gap-3">
-
-                            <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
-
-                            <div>
-                                <!-- <span class="badge badge-upcoming mb-2">Upcoming</span> -->
-
-                                <h6>${booking.tour.title}</h6>
-
-                                <small class="text-muted">${booking.tour.city}</small><br>
-
-                                <small>${booking.groupSize} guests</small>
+                                <!-- <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                                <button class="btn btn-sm btn-dark-blue">Manage</button> -->
                             </div>
 
                         </div>
 
-                        <div class="text-end">
-                            <h5>$${(booking.tour.price * booking.groupSize)?string["#,##0.00"]}</h5>
-
-                            <!-- <button class="btn btn-sm btn-outline-secondary">Edit</button>
-                            <button class="btn btn-sm btn-dark-blue">Manage</button> -->
-                        </div>
-
                     </div>
+                </#list>
+            <#else>
+                <p>No upcoming tours yet</p>
+            </#if>
 
-                </div>
-            </#list>
-        <#else>
-            <p>No upcoming tours yet</p>
-        </#if>
+        </div>
 
     </div>
 
-</div>
+    <script>
+    function showRequests() {
+        document.getElementById("requestsSection").style.display = "block";
+        document.getElementById("cancelledSection").style.display = "none";
+        document.getElementById("bookingTitle").innerText = "New Booking Requests";
+    }
+
+    function showCancelled() {
+        document.getElementById("requestsSection").style.display = "none";
+        document.getElementById("cancelledSection").style.display = "block";
+        document.getElementById("bookingTitle").innerText = "Cancelled Bookings";
+    }
+    </script>
 
 </body>
 </html>

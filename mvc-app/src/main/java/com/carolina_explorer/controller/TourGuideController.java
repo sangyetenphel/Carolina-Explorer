@@ -98,6 +98,11 @@ public class TourGuideController {
             ).orElse(new ArrayList<>())
         );
 
+        model.addAttribute(
+            "cancelledBookings",
+            bookingService.getCancelledBookingsForGuide(user.getUserId())
+        );
+
         return "guide-dashboard";
     }
 }

@@ -94,4 +94,19 @@ public class BookingService {
 
         return total;
     }
+
+        public void cancelBooking(Long id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow();
+
+        booking.setStatus(BookingStatus.CANCELLED);
+        bookingRepository.save(booking);
+    }
+
+    public List<Booking> getCancelledBookingsForGuide(Long guideId) {
+        return bookingRepository.findByTour_TourGuide_UserIdAndStatus(
+            guideId,
+            BookingStatus.CANCELLED
+        );
+    }
 }

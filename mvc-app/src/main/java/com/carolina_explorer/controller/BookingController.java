@@ -80,4 +80,13 @@ public class BookingController {
         bookingService.rejectBooking(id);
         return "redirect:/guides/dashboard";
     }
+
+    @PostMapping("/cancel/{id}")
+    public String cancelBooking(@PathVariable Long id) {
+
+        bookingService.cancelBooking(id);
+
+        return "redirect:/profile"; // go back to tourist profile
+    }
+    
 }
