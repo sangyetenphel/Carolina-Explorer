@@ -42,8 +42,8 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Enumerated(EnumType.STRING)
-    private GroupType groupType;
+    // @Enumerated(EnumType.STRING)
+    // private GroupType groupType;
 
     private Integer durationHours;
 
@@ -65,7 +65,10 @@ public class Tour {
 
     private LocalTime startTime;
 
+    @Transient
     private Double rating;
+
+    @Transient
     private Integer reviewCount;
 
     // IMAGES
