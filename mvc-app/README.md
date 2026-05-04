@@ -101,7 +101,7 @@ The Maven Wrapper is a handy tool that ensures everyone working on the project u
 
    ```bash
    git clone <repository-url>
-   cd sp26-crud-api-demo
+   cd mvc-app
    ```
 
 2. **Install Dependencies**
@@ -223,7 +223,7 @@ The application will start on **http://localhost:8080**
 You should see output like:
 
 ```
-Started CrudApiApplication in 4.532 seconds
+Started Application in 2.926 seconds
 ```
 
 ### Using Java (After Building)
@@ -231,7 +231,7 @@ Started CrudApiApplication in 4.532 seconds
 Alternatively, after building the project, you can run the compiled JAR file:
 
 ```bash
-java -jar target/crud-api-0.0.1-SNAPSHOT.jar
+java -jar target/carolina_explorer-0.0.1-SNAPSHOT.jar
 ```
 
 ### Using VS Code GUI
@@ -252,7 +252,7 @@ java -jar target/crud-api-0.0.1-SNAPSHOT.jar
    - Go to **File → Project Structure → Project**
    - Set the Project SDK to Java 25
 3. **Run the Application**:
-   - Navigate to `mvc-app > src > main > java > com > carolina > Application.java` in the Project Explorer
+   - Navigate to `mvc-app > src > main > java > com > carolina_explorer > Application.java` in the Project Explorer
    - Right-click on `Application.java`
    - Select **"Run 'Application.main()'"** or click the ▶️ **Run** button next to the class name
 4. **View Output**: The Run window at the bottom will show Spring Boot startup messages and confirm the application is running
@@ -328,15 +328,14 @@ This project follows the MVC architectural pattern with layered architecture:
                  │
 ┌────────────────▼────────────────────┐
 │    View Layer                       │
-│  (FreeMarker Templates)             │
+│    (FreeMarker Templates)           │
 │                                     │
 │  - HTML rendering for web UI        │
 └────────────────┬────────────────────┘
                  │
 ┌────────────────▼────────────────────┐
-│    Database                         │
-│                                     │
-│  (PostgreSQL)                       │
+│    Database                         │                                  
+│    (PostgreSQL)                     │
 └─────────────────────────────────────┘
 ```
 
