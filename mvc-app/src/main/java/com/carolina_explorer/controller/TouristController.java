@@ -35,7 +35,6 @@ public class TouristController {
             @RequestParam String email,
             @RequestParam String password,
             @RequestParam String confirmPassword,
-            @RequestParam LocalDate dateOfBirth,
             RedirectAttributes redirectAttributes
     ) {
 

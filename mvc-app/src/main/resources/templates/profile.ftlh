@@ -441,8 +441,14 @@
                     </div>
 
                     <div>
-                        <h3>${tourist.reviewCount!0}</h3>
-                        <p>Reviews</p>
+                        <h3>${reviewCount!0}</h3>
+                        <p>
+                            <#if (reviewCount!0) == 1>
+                                Review
+                            <#else>
+                                Reviews
+                            </#if>
+                        </p>
                     </div>
                 </div>
             </div>
