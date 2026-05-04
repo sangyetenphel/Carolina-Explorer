@@ -119,8 +119,7 @@
    3. Apply filters (price, group size, category)
    4. Repeat 10 times
 
-**Expected Outcome:**  
-95% of requests ≤ 3 seconds
+**Expected Outcome:** 95% of requests ≤ 3 seconds
 
 
 **Scenario P2: Tour details page load < 2 seconds**
@@ -130,8 +129,7 @@
   2. Open tour details page (itinerary + reviews)
   3. Repeat 10 times 
 
-**Expected Outcome:**  
-95% of requests ≤ 2 seconds
+**Expected Outcome:** 95% of requests ≤ 2 seconds
 
 
 
@@ -143,9 +141,7 @@
   1. Tourist logs in  
   2. Attempts to navigates to `/guides/dashboard`  
 
-**Expected Outcome:**
-Access denied or redirected  
-No guide data exposed
+**Expected Outcome:** Access denied or redirected, No guide data exposed
 
 
 **Scenario S2: Review integrity**
@@ -154,9 +150,7 @@ No guide data exposed
   1. Tour Guide views reviews on dashboard  
   2. Attempts to edit/delete  
 
-**Expected Outcome:**
-Edit/delete options are not available
-Review remains unchanged
+**Expected Outcome:** Edit/delete options are not available, Review remains unchanged
 
 
 
@@ -171,9 +165,7 @@ Review remains unchanged
   4. Views itinerary
   5. Submits booking request
 
-**Expected Outcome:**  
-Booking completed in ≤ 5 steps
-Process is clear and intuitive
+**Expected Outcome:** Booking completed in ≤ 5 steps, Process is clear and intuitive
 
 
 ---
