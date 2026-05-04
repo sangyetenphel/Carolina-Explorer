@@ -51,7 +51,7 @@ public class TouristController {
         tourist.setPasswordHash(passwordEncoder.encode(password));
         tourist.setRole(UserRole.TOURIST);
 
-        tourist.setDateOfBirth(dateOfBirth);
+        // tourist.setDateOfBirth(dateOfBirth);
 
         touristService.createTourist(tourist);
 
