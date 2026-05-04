@@ -28,7 +28,7 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
-    private LocalDate dateOfBirth;
+    // private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;

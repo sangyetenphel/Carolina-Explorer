@@ -43,9 +43,9 @@
                 <input name="lastName" class="form-control" placeholder="Last name" required>
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <input name="dateOfBirth" type="date" class="form-control" required>
-            </div>
+            </div> -->
 
             <h6>Contact Information</h6>
 
