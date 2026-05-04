@@ -44,15 +44,19 @@ public class TourGuideController {
 
     // HANDLE FORM SUBMISSION
     @PostMapping("/signup")
-    public String registerGuide(@ModelAttribute TourGuide guide, RedirectAttributes redirectAttributes) {
+    public String registerGuide(
+            @ModelAttribute TourGuide guide,
+            HttpSession session,
+            RedirectAttributes redirectAttributes
+    ) {
 
         guide.setRole(UserRole.TOUR_GUIDE);
-
         guide.setPasswordHash(passwordEncoder.encode(guide.getPasswordHash()));
 
-        tourGuideService.createTourGuide(guide);
+        TourGuide savedGuide = tourGuideService.createTourGuide(guide);
 
-        // send flag + message
+        session.setAttribute("loggedInUser", savedGuide);
+
         redirectAttributes.addFlashAttribute("firstTour", true);
         redirectAttributes.addFlashAttribute("successMessage",
             "Account created successfully! Create your first tour.");

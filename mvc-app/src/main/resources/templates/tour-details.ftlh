@@ -217,6 +217,11 @@
         </div>
 
         <hr>
+        <#if successMessage??>
+            <div class="success-banner">
+                ${successMessage}
+            </div>
+        </#if>
 
         <div class="row row-space">
 
@@ -278,11 +283,7 @@
             </div>
 
             <!-- RIGHT SIDE (BOOKING CARD) -->
-             <#if successMessage??>
-                <div class="success-banner">
-                    ${successMessage}
-                </div>
-            </#if>
+
             <div class="col-md-5">
 
                 <div class="booking-card">

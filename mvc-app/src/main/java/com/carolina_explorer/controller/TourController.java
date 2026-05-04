@@ -3,6 +3,9 @@ package com.carolina_explorer.controller;
 import com.carolina_explorer.entity.Tour;
 import com.carolina_explorer.entity.TourGuide;
 import com.carolina_explorer.entity.TourImage;
+import com.carolina_explorer.entity.User;
+import com.carolina_explorer.entity.UserRole;
+import com.carolina_explorer.service.TourGuideService;
 import com.carolina_explorer.service.TourService;
 
 import jakarta.servlet.http.HttpSession;
@@ -15,12 +18,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @Controller
 @RequestMapping("/tours")
 public class TourController {
 
     @Autowired
     private TourService tourService;
+
+    @Autowired
+    private TourGuideService tourGuideService;
 
     // SHOW CREATE FORM
         @GetMapping("/create")
@@ -42,13 +50,14 @@ public class TourController {
     ) {
 
         // check type instead of direct cast
-        Object user = session.getAttribute("loggedInUser");
+        User user = (User) session.getAttribute("loggedInUser");
 
-        if (!(user instanceof TourGuide)) {
+        if (user == null || user.getRole() != UserRole.TOUR_GUIDE) {
             return "redirect:/login";
         }
 
-        TourGuide guide = (TourGuide) user;
+        // always fetch full guide from DB
+        TourGuide guide = tourGuideService.getGuideWithTours(user.getUserId());
 
         // fix itinerary
         String formatted = tour.getItinerary()
