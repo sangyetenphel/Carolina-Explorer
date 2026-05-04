@@ -9,6 +9,8 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -91,6 +93,31 @@
         .row-space{
             --bs-gutter-x: 5rem;
         }
+
+
+        
+        .star-rating {
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* default = gray outline */
+        .star-rating .bi {
+            color: #d1d5db;
+            transition: color 0.2s, transform 0.15s;
+        }
+
+        /* filled stars */
+        .star-rating .active,
+        .star-rating .hover {
+            color: #fbbf24;
+        }
+
+        /* hover animation */
+        .star-rating .bi:hover {
+            transform: scale(1.2);
+        }
+      
     </style>
 </head>
 
@@ -289,7 +316,7 @@
                 <div class="booking-card">
 
                     <h5>${tour.title}</h5>
-                    <h6>$${tour.price} per person</h6>
+                    <h6 class="mb-3">$${tour.price} per person</h6>
 
                     <#if reviewMode?? && reviewMode>
 
@@ -301,14 +328,19 @@
 
                             <div class="mb-3">
                                 <label>Rating</label>
-                                <select name="rating" class="form-control" required>
-                                    <option value="">Select</option>
-                                    <option value="5">⭐ 5</option>
-                                    <option value="4">⭐ 4</option>
-                                    <option value="3">⭐ 3</option>
-                                    <option value="2">⭐ 2</option>
-                                    <option value="1">⭐ 1</option>
-                                </select>
+
+                                <div class="star-rating" id="starRating">
+
+                                    <i class="bi bi-star" data-value="1"></i>
+                                    <i class="bi bi-star" data-value="2"></i>
+                                    <i class="bi bi-star" data-value="3"></i>
+                                    <i class="bi bi-star" data-value="4"></i>
+                                    <i class="bi bi-star" data-value="5"></i>
+
+                                </div>
+
+                                <!-- hidden input that gets submitted -->
+                                <input type="hidden" name="rating" id="ratingInput" required>
                             </div>
 
                             <div class="mb-3">
@@ -440,5 +472,60 @@
 
     <!-- FOOTER -->
     <#include "footer.ftlh">
+
+    <script>
+        const stars = document.querySelectorAll("#starRating i");
+        const input = document.getElementById("ratingInput");
+
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+
+            //  HOVER
+            star.addEventListener("mouseover", () => {
+                const value = star.getAttribute("data-value");
+
+                stars.forEach(s => {
+                    s.classList.remove("bi-star-fill", "hover");
+                    s.classList.add("bi-star");
+
+                    if (s.getAttribute("data-value") <= value) {
+                        s.classList.remove("bi-star");
+                        s.classList.add("bi-star-fill", "hover");
+                    }
+                });
+            });
+
+            //  RESET HOVER
+            star.addEventListener("mouseout", () => {
+                stars.forEach(s => {
+                    s.classList.remove("bi-star-fill", "hover");
+                    s.classList.add("bi-star");
+                });
+
+                // restore selected stars
+                for (let i = 0; i < selectedRating; i++) {
+                    stars[i].classList.remove("bi-star");
+                    stars[i].classList.add("bi-star-fill", "active");
+                }
+            });
+
+            //  CLICK
+            star.addEventListener("click", () => {
+                selectedRating = star.getAttribute("data-value");
+                input.value = selectedRating;
+
+                stars.forEach(s => {
+                    s.classList.remove("bi-star-fill", "active");
+                    s.classList.add("bi-star");
+                });
+
+                for (let i = 0; i < selectedRating; i++) {
+                    stars[i].classList.remove("bi-star");
+                    stars[i].classList.add("bi-star-fill", "active");
+                }
+            });
+        });
+</script>
 </body>
 </html>
