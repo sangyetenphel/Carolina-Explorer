@@ -15,160 +15,97 @@
 
 # Use Cases
 
-## 1. Provider: US-PROV-00A — Register & manage profile, US-PROV-001 — Create and manage tours
+## 1. Provider: US-PROV-00A, US-PROV-001 — Register & Create Tours
 
-1. Tour Guide P1 logs in for the first time and creates a provider account.
+1. Tour Guide P1 registers a provider account.
+2. P1 creates tours S1 (Asheville Brewery Tour) and S2 (Historic Uptown Charlotte Tour) with searchable criteria:
+      - C1 = City
+      - C2 = Date
+      - C3 = Number of Guests
+      - C4 = Price
+      - C5 = Tour Category
+4. PI exits the app.
+   
 
-3. G1 exits.
+## 2. Customer: US-CUST-00A — Register Profile  
 
-## 2. Tourist — Register & Browse Tours  
-(US-TOURIST-001, US-TOURIST-003)
+1. Tourist C1 registers a customer account and creates a profile.
+2. C1 exits the app.
 
-1. Tourist T1 logs in and creates profile  
-2. T1 browses all tours  
-3. T1 filters by:
-   - city  
-   - price  
-   - group size  
 
-**Expected Outcome:**
-- Filtered results display correctly  
-- Tours show rating + review count dynamically  
+## 3. Customer: US-CUST-001, US-CUST-002, US-CUST-003 — Browse, Filter, View Itinerary
 
----
+1. Tourist C2 logs in.
+2. C2 browses available tours.
+3. C2 applies filters (price, group size, type).
+4. C2 selects S1 and views itinerary details.
+5. C2 exits the app.
 
-## 3. Tourist — Book Tour (Pending State)  
-(US-TOURIST-005)
 
-1. Tourist T2 logs in  
-2. T2 selects tour S1  
-3. T2 submits booking B1  
+## 4. Customer: US-CUST-004 — Request Booking
 
-**Expected Outcome:**
-- Booking status = `PENDING`  
-- Booking appears:
-  - Tourist → Pending Requests  
-  - Guide → New Booking Requests  
+1. Tourist C2 logs back in.
+2. C2 requests booking for S1 and S2.
+3. C2 exits the app.
+ 
 
----
+## 5. Provider: US-PROV-002 — Accept/Decline Booking
 
-## 4. Guide — Accept / Reject Booking  
-(US-GUIDE-003)
+1. Tour Guide P1 logs in.  
+2. P1 views booking requests.  
+3. P1:
+   - accepts the booking request for S1/S2 made by C2  
+   - rejects the booking request for S1/S2 made by C2
+4. P1 exits the app.
 
-1. Guide G1 logs in  
-2. G1 views pending bookings  
-3. G1:
-   - accepts B1  
-   - rejects B2  
 
-**Expected Outcome:**
-- Accepted → moves to Upcoming Tours  
-- Rejected → appears in Tourist → Declined section  
+## 6. Customer: US-CUST-006 - View & Manage Bookings  
 
----
+1. Tourist C2 logs in.
+2. C2 views booking status:
+      - Pending
+      - Accepted
+      - Declined
+5. C2 exits the app.
 
-## 5. Tourist — View Trip Sections (Arrow Navigation UI)  
-(US-TOURIST-004)
 
-1. Tourist logs in  
-2. Uses arrow navigation to cycle:
-   - Upcoming (ACCEPTED)  
-   - Pending  
-   - Declined  
+## 7. Customer: US-CUST-006 — Cancel Booking  
 
-**Expected Outcome:**
-- Only one section visible at a time  
-- Correct data shown based on booking status  
-- Title updates dynamically  
+1. Tourist C2 logs in.
+2. C2 clicks “Cancel” on an accepted booking.
+3. C2 exits the app.
 
----
 
-## 6. Tourist — Cancel Booking  
-(US-TOURIST-006)
+## 8. Customer: US-CUST-005 — Write Review  
 
-1. Tourist clicks “Cancel” on an upcoming booking  
-2. System updates booking  
+1. Tourist C2 logs in.
+2. C2 completes tour S1.
+3. C2 submits a rating and written review.
+4. C2 exits the app.
 
-**Expected Outcome:**
-- Booking status = `CANCELLED`  
-- Removed from:
-  - Tourist upcoming list  
-  - Guide upcoming tours  
-- Appears in Guide → Cancelled bookings  
 
----
+## 9. Provider: US-PROV-003 — View Dashboard  
 
-## 7. Guide — View Dashboard  
-(US-GUIDE-004)
+1. Tour Guide P1 logs in.
+2. P1 views dashboard including:
+      - Booking requests
+      - Upcoming tours
+      - Cancelled bookings
+      - Earnings
+      - Reviews
+3. P1 exits the app.
 
-1. Guide logs in  
-2. Views:
-   - Earnings  
-   - Upcoming tours  
-   - Booking requests  
-   - Cancelled bookings  
 
-**Expected Outcome:**
-- Earnings calculated from ACCEPTED bookings  
-- Past tours NOT shown in upcoming  
-- Dashboard sections toggle correctly  
+## 10. Customer: US-CUST-003 — View Reviews  
 
----
+1. Tourist C1 logs in.
+2. C1 browses tours.
+3. C1 selects S1.
+4. C1 views:
+      - Average rating
+      - Reviews
+5. C1 exits the app.
 
-## 8. Tourist — Write Review  
-(US-TOURIST-007)
-
-1. Tourist completes a tour  
-2. Clicks “Leave a review”  
-3. Submits rating + comment  
-
-**Expected Outcome:**
-- Review saved  
-- Review appears in:
-  - Tour details page  
-  - Tourist profile  
-
----
-
-## 9. Prevent Duplicate Reviews  
-(US-TOURIST-007-VALIDATION)
-
-1. Tourist submits a review  
-2. Attempts to submit again  
-
-**Expected Outcome:**
-- System blocks duplicate  
-- UI shows:
-  - ✓ Reviewed badge  
-  - No review button  
-
----
-
-## 10. Guide — View Completed Tours  
-(US-GUIDE-005)
-
-1. Guide logs in  
-2. System separates bookings:
-   - Upcoming → future dates  
-   - Completed → past dates  
-
-**Expected Outcome:**
-- Past tours NOT shown in upcoming  
-- Completed section displays correctly  
-
----
-
-## 11. Ratings & Reviews Display  
-(US-TOURIST-008)
-
-1. Tourist views a tour  
-2. System calculates:
-   - average rating  
-   - review count  
-
-**Expected Outcome:**
-- Ratings displayed with stars  
-- Calculated dynamically (not stored in database)  
 
 ---
 
@@ -176,113 +113,69 @@
 
 ## Performance Requirements
 
-### Scenario P1: Browse tours response time < 1.5 seconds
+### Scenario P1: Browse tours response time < 3 seconds
 - Setup: Server under typical load  
 - Steps:
-  1. Load tours page with 50+ tours  
-  2. Repeat 10 times  
+   1. Load “Browse Tours” page
+   2. Display tours across multiple cities (5+ tours)
+   3. Apply filters (price, group size, category)
+   4. Repeat 10 times
 
 **Expected Outcome:**  
-95% of requests ≤ 1.5 seconds  
+95% of requests ≤ 3 seconds
 
----
 
-### Scenario P2: Tour detail page load < 1.0 second
+### Scenario P2: Tour details page load < 2 seconds
 - Setup: Server under typical load  
 - Steps:
-  1. Open tour detail page  
-  2. Repeat 10 times  
+  1. Select a tour (S1)
+  2. Open tour details page (itinerary + reviews)
+  3. Repeat 10 times 
 
 **Expected Outcome:**  
-99% of requests ≤ 1.0 second  
+95% of requests ≤ 2 seconds
 
----
+
 
 ## Security & Access Control
 
-### Scenario S1: Tourist cannot access guide dashboard
+### Scenario S1: Role-based access control
+- Setup: Tourist attempts to access Tour Guide dashboard
 - Steps:
   1. Tourist logs in  
-  2. Navigates to `/guides/dashboard`  
+  2. Attempts to navigates to `/guides/dashboard`  
 
 **Expected Outcome:**
-- Access denied or redirected  
-- No guide data exposed  
+Access denied or redirected  
+No guide data exposed
 
----
 
 ### Scenario S2: Review integrity
+- Setup: Tour Guide logs in, Tourist has submitted a review
 - Steps:
-  1. Guide views a review  
+  1. Tour Guide views reviews on dashboard  
   2. Attempts to edit/delete  
 
 **Expected Outcome:**
-- Action is blocked  
-- Only review owner can modify  
+Edit/delete options are not available
+Review remains unchanged
 
----
 
-## Data Integrity
-
-### Scenario D1: Booking status validation
-- Steps:
-  1. Attempt invalid status update  
-
-**Expected Outcome:**
-- Database rejects invalid values  
-- System remains consistent  
-
----
-
-### Scenario D2: Prevent duplicate reviews
-- Steps:
-  1. Submit review twice  
-
-**Expected Outcome:**
-- Second attempt blocked  
-- Error handled gracefully  
-
----
 
 ## Usability Requirements
 
-### Scenario U1: Booking flow ≤ 3 minutes
+### Scenario U1: Tourist completes booking in ≤ 5 steps
+- Setup: New Tourist account
 - Steps:
-  1. User browses tours  
-  2. Books a tour  
+  1. Tourist logs in
+  2. Browses tours
+  3. Selects a tour
+  4. Views itinerary
+  5. Submits booking request
 
 **Expected Outcome:**  
-≤ 3 minutes  
+Booking completed in ≤ 5 steps
+Process is clear and intuitive
 
----
-
-### Scenario U2: Guide creates tour ≤ 5 minutes
-- Steps:
-  1. Guide logs in  
-  2. Creates a tour  
-
-**Expected Outcome:**  
-≤ 5 minutes  
-
----
-
-### Scenario U3: Dashboard navigation clarity
-- Steps:
-  1. User switches sections with arrows  
-
-**Expected Outcome:**
-- Smooth transitions  
-- No confusion between sections  
-
----
-
-# Key System Features Implemented
-
-- Full booking lifecycle (pending → accepted → cancelled → completed)  
-- Dynamic rating system (not stored in DB)  
-- Duplicate review prevention  
-- Role-based dashboards  
-- Arrow-based UI navigation for sections  
-- Clean database design (removed unused fields)  
 
 ---
