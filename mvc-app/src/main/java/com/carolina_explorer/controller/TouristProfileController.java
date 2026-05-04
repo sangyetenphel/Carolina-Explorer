@@ -85,6 +85,12 @@ public class TouristProfileController {
                 .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
                 .count();
 
+        List<Long> reviewedBookingIds = reviews.stream()
+        .map(r -> r.getBooking().getBookingId())
+        .toList();
+
+        model.addAttribute("reviewedBookingIds", reviewedBookingIds);
+
         model.addAttribute("tripCount", completedCount);
 
         model.addAttribute("pendingBookings", pendingBookings);

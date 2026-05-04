@@ -245,7 +245,7 @@
     /* Card */
     .review-card {
         min-width: 300px;
-        max-width: 300px;
+        max-width: 350px;
         background: white;
         border-radius: 20px;
         padding: 20px;
@@ -398,6 +398,20 @@
         height: 32px;
         padding: 0;
     }
+
+    /* RATING */
+    .rating {
+        font-size: 14px;
+        color: #fbbf24;
+    }
+
+    .rating span {
+        color: black;
+    }
+
+    .stars .bi-star-fill { color: #fbbf24; }
+    .stars .bi-star-half { color: #fbbf24; }
+    .stars .bi-star { color: #ddd; }
 
 </style>
 <body>
@@ -552,15 +566,31 @@
 
                             <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
 
-                            <h4>${booking.tour.city}</h4>
-                            <p>${booking.tour.city}, North Carolina</p>
+                            <h4>${booking.tour.title}</h4>
+                            <!-- <p>${booking.tour.city}, North Carolina</p> -->
                             <span>${booking.tourDate}</span>
 
                             <div class="trip-footer">
-                                <a href="/tours/${booking.tour.tourId}?review=true&bookingId=${booking.bookingId}"
-                                class="write-review-btn">
-                                    Leave a review
-                                </a>
+                                <#if reviewedBookingIds?seq_contains(booking.bookingId)>
+                                    <span style="
+                                        background: #dcfce7;
+                                        color: #166534;
+                                        padding:6px 12px;
+                                        border-radius:8px;
+                                        font-size:12px;
+                                        font-weight:500;
+                                    ">
+                                        Reviewed
+                                    </span>
+
+                                <#else>
+
+                                    <a href="/tours/${booking.tour.tourId}?review=true&bookingId=${booking.bookingId}"
+                                    class="write-review-btn">
+                                        Leave a review
+                                    </a>
+
+                                </#if>
                             </div>
 
                         </div>
@@ -599,9 +629,9 @@
                                         ${review.booking.tour.title}
                                     </h4>
 
-                                    <p class="review-location">
+                                    <!-- <p class="review-location">
                                         ${review.booking.tour.city}, North Carolina
-                                    </p>
+                                    </p> -->
 
                                     <p class="review-host">
                                         Hosted by ${review.booking.tour.tourGuide.firstName}
@@ -610,8 +640,41 @@
                                 </div>
                             </div>
 
-                            <div class="review-stars">
+                            <!-- <div class="review-stars">
                                 <#list 1..review.rating as i>⭐</#list>
+                            </div> -->
+
+                            <div class="review-stars">
+                                <#assign rating = (review.rating!0)?number>
+                                <#assign fullStars = rating?floor>
+                                <#assign hasHalf = ((rating - fullStars) >= 0.5)>
+
+                                <#if hasHalf>
+                                    <#assign emptyStars = 5 - fullStars - 1>
+                                <#else>
+                                    <#assign emptyStars = 5 - fullStars>
+                                </#if>
+
+                                <span class="stars">
+
+                                    <#if fullStars gt 0>
+                                        <#list 1..fullStars as i>
+                                            <i class="bi bi-star-fill"></i>
+                                        </#list>
+                                    </#if>
+
+                                    <#if hasHalf>
+                                        <i class="bi bi-star-half"></i>
+                                    </#if>
+
+                                    <#if emptyStars gt 0>
+                                        <#list 1..emptyStars as i>
+                                            <i class="bi bi-star"></i>
+                                        </#list>
+                                    </#if>
+
+                                </span>
+
                             </div>
 
                             <p class="review-date">
