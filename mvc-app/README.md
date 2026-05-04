@@ -1,6 +1,7 @@
-# Student CRUD MVC Application - Spring Boot Demo
+# Carolina Explorer - CRUD MVC Application
 
-A comprehensive MVC application for managing student records, built with Spring Boot, Spring Data JPA, and PostgreSQL. This project demonstrates fundamental concepts for building both REST APIs and web interfaces with Spring Boot.
+A full-stack **Spring Boot MVC application** for booking and managing guided tours across North Carolina.  
+This project demonstrates real-world implementation of **MVC architecture, booking systems, and user role-based dashboards**.
 
 ## Table of Contents
 
@@ -9,16 +10,15 @@ A comprehensive MVC application for managing student records, built with Spring 
 - [Installation & Setup](#installation--setup)
 - [Running the Application](#running-the-application)
 - [Project Architecture](#project-architecture)
-- [API Endpoints](#api-endpoints)
 - [Web UI Routes](#web-ui-routes)
 - [Key Spring Boot Concepts](#key-spring-boot-concepts)
-- [Database Schema](#database-schema)
+- [UML Class Diagram](#uml-class-diagram)
 
 ---
 
 ## What is This Project?
 
-This is a **CRUD MVC Application** (Create, Read, Update, Delete) that manages student records. It demonstrates:
+This is a **CRUD MVC Application** (Create, Read, Update, Delete) that manages tour booking platform. It demonstrates:
 
 - How to build a REST API with Spring Boot
 - How to build a web interface using Spring MVC
@@ -30,10 +30,10 @@ This is a **CRUD MVC Application** (Create, Read, Update, Delete) that manages s
 
 **CRUD** stands for:
 
-- **C**reate - Add new student records
-- **R**ead - Retrieve student records
-- **U**pdate - Modify existing student records
-- **D**elete - Remove student records
+- **C**reate - Add new users/tours 
+- **R**ead - Retrieve user/tour information
+- **U**pdate - Modify existing user profile
+- **D**elete - Remove user/tour records
 
 The application provides both a **REST API** for programmatic access and a **web interface** for user interaction.
 
@@ -240,8 +240,8 @@ java -jar target/crud-api-0.0.1-SNAPSHOT.jar
 2. **Install Extension**: Install the "Extension Pack for Java" (by Microsoft) if not already installed
 3. **Run the Application**:
    - Go to the Explorer view (left sidebar)
-   - Navigate to `src > main > java > com > csc340 > crud_api > CrudApiApplication.java`
-   - Right-click on `CrudApiApplication.java`
+   - Navigate to `mvc-app > src > main > java > com > carolina_explorer > Application.java`
+   - Right-click on `Application.java`
    - Select **"Run Java"** or click the ▶️ **Run** button that appears above the class definition
 4. **View Output**: The terminal will show the Spring Boot startup messages and confirm the application is running
 
@@ -252,13 +252,13 @@ java -jar target/crud-api-0.0.1-SNAPSHOT.jar
    - Go to **File → Project Structure → Project**
    - Set the Project SDK to Java 25
 3. **Run the Application**:
-   - Navigate to `src > main > java > com > csc340 > crud_api > CrudApiApplication.java` in the Project Explorer
-   - Right-click on `CrudApiApplication.java`
-   - Select **"Run 'CrudApiApplication.main()'"** or click the ▶️ **Run** button next to the class name
+   - Navigate to `mvc-app > src > main > java > com > carolina > Application.java` in the Project Explorer
+   - Right-click on `Application.java`
+   - Select **"Run 'Application.main()'"** or click the ▶️ **Run** button next to the class name
 4. **View Output**: The Run window at the bottom will show Spring Boot startup messages and confirm the application is running
 
 **Alternative: Using the Run Menu**:
-- Go to **Run → Run...** and select `CrudApiApplication` from the list
+- Go to **Run → Run...** and select `Application` from the list
 - Or use the keyboard shortcut: **Shift+F10** (Windows) or **Ctrl+R** (Mac)
 
 ### Stopping the Application
@@ -272,20 +272,21 @@ Press `Ctrl+C` in your terminal to stop the running application. If using IDE GU
 ### Folder Structure
 
 ```
-src/main/java/com/csc340/crud_api/
-├── CrudApiApplication.java          # Entry point of the application
-├── StudentApiController.java         # REST API controller for JSON responses
-├── StudentUiController.java          # Web UI controller for HTML views
-├── StudentService.java               # Business logic layer
-├── StudentRepository.java            # Database access layer
-└── Student.java                      # Entity/Model class
+mvc-app/src/main/java/com/carolina_explorer/crud_api/
+├── Application.java           # Entry point of the application
+├── Controller.java            # Web UI controller for HTML views
+├── Service.java               # Business logic layer
+├── Repository.java            # Database access layer
+└── Entity.java                # Entity/Model class
 
-src/main/resources/
+mvc-app/src/main/resources/
 ├── application.properties             # Configuration file
-└── templates/                        # FreeMarker HTML templates
-    ├── student-details.ftlh
-    ├── student-form.ftlh
-    └── students-list.ftlh
+└── static/images                      # Images folder
+└── templates/                         # FreeMarker HTML templates
+    ├── signup.ftlh
+    ├── login.ftlh
+    └── tours.ftlh
+    └── ...
 ```
 
 ### Architectural Pattern: **MVC (Model-View-Controller)**
@@ -299,8 +300,7 @@ This project follows the MVC architectural pattern with layered architecture:
                  │
 ┌────────────────▼────────────────────┐
 │    Controller Layer                 │
-│  (StudentApiController &            │
-│   StudentUiController)              │
+│                                     │
 │  - Handles HTTP requests            │
 │  - API: Returns JSON responses      │
 │  - UI: Returns view names & models  │
@@ -308,32 +308,34 @@ This project follows the MVC architectural pattern with layered architecture:
                  │
 ┌────────────────▼────────────────────┐
 │    Service Layer                    │
-│  (StudentService)                   │
+│                                     │
 │  - Contains business logic          │
 │  - Processes data from repositories │
 └────────────────┬────────────────────┘
                  │
 ┌────────────────▼────────────────────┐
 │    Repository Layer                 │
-│  (StudentRepository)                │
+│                                     │
 │  - Communicates with database       │
 │  - Performs CRUD operations         │
 └────────────────┬────────────────────┘
                  │
 ┌────────────────▼────────────────────┐
 │    Model Layer                      │
-│  (Student Entity)                   │
+│                                     │
 │  - Data representation              │
 └────────────────┬────────────────────┘
                  │
 ┌────────────────▼────────────────────┐
 │    View Layer                       │
 │  (FreeMarker Templates)             │
+│                                     │
 │  - HTML rendering for web UI        │
 └────────────────┬────────────────────┘
                  │
 ┌────────────────▼────────────────────┐
 │    Database                         │
+│                                     │
 │  (PostgreSQL)                       │
 └─────────────────────────────────────┘
 ```
@@ -347,462 +349,107 @@ This project follows the MVC architectural pattern with layered architecture:
 
 ---
 
-## API Endpoints
-
-All endpoints use the base URL: `http://localhost:8080/api/students`
-
-### 1. Get All Students
-
-```http
-GET /api/students/
-```
-
-**Description**: Retrieve a list of all students in the database.
-
-**Parameters**: None
-
-**Response**:
-
-- **Status Code**: `200 OK`
-- **Body**: Array of Student objects
-
-#### Example Request
-
-```bash
-curl http://localhost:8080/api/students/
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-[
-  {
-    "studentId": 1,
-    "name": "Alice Johnson",
-    "email": "alice@university.edu",
-    "major": "Computer Science",
-    "gpa": 3.8
-  },
-  {
-    "studentId": 2,
-    "name": "Bob Smith",
-    "email": "bob@university.edu",
-    "major": "Mathematics",
-    "gpa": 3.5
-  }
-]
-```
-
----
-
-### 2. Get Student by ID
-
-```http
-GET /api/students/{id}
-```
-
-**Description**: Retrieve a single student by their ID.
-
-**Path Parameters**:
-
-- `id` (Long, required): The unique identifier of the student
-
-**Response**:
-
-- **Status Code**: `200 OK` (if found) or `404 Not Found` (if not found)
-- **Body**: Student object
-
-#### Example Request
-
-```bash
-curl http://localhost:8080/api/students/1
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-{
-  "studentId": 1,
-  "name": "Alice Johnson",
-  "email": "alice@university.edu",
-  "major": "Computer Science",
-  "gpa": 3.8
-}
-```
-
-#### Example Response if not found (Status: 404 Not Found)
-
-```
-(Empty body)
-```
-
----
-
-### 3. Create a New Student
-
-```http
-POST /api/students/
-```
-
-**Description**: Create a new student record in the database.
-
-**Request Body**: Student object with the following fields:
-
-- `name` (String, required): Student's full name
-- `email` (String, required, unique): Student's email address
-- `major` (String, optional): Student's major
-- `gpa` (Double, optional): Student's GPA
-
-**Response**:
-
-- **Status Code**: `200 OK` (if created successfully)
-- **Body**: Created Student object with assigned `studentId`
-
-#### Example Request
-
-```bash
-curl -X POST http://localhost:8080/api/students/ \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Charlie Brown",
-    "email": "charlie@university.edu",
-    "major": "Physics",
-    "gpa": 3.7
-  }'
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-{
-  "studentId": 3,
-  "name": "Charlie Brown",
-  "email": "charlie@university.edu",
-  "major": "Physics",
-  "gpa": 3.7
-}
-```
-
----
-
-### 4. Get Students by Major
-
-```http
-GET /api/students/major/{major}
-```
-
-**Description**: Retrieve all students with a specific major.
-
-**Path Parameters**:
-
-- `major` (String, required): The major to filter by (e.g., "Computer Science")
-
-**Response**:
-
-- **Status Code**: `200 OK`
-- **Body**: Array of Student objects
-
----
-
-### 5. Get Honors Students
-
-```http
-GET /api/students/honors/{gpa}
-```
-
-**Description**: Retrieve students with a GPA greater than or equal to the specified value.
-
-**Path Parameters**:
-
-- `gpa` (Double, required): Minimum GPA for honors (e.g., 3.5)
-
-**Response**:
-
-- **Status Code**: `200 OK`
-- **Body**: Array of Student objects meeting the GPA requirement
-
-#### Example Request
-
-```bash
-curl http://localhost:8080/api/students/honors/3.7
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-[
-  {
-    "studentId": 1,
-    "name": "Alice Johnson",
-    "email": "alice@university.edu",
-    "major": "Computer Science",
-    "gpa": 3.8
-  },
-  {
-    "studentId": 3,
-    "name": "Charlie Brown",
-    "email": "charlie@university.edu",
-    "major": "Physics",
-    "gpa": 3.7
-  }
-]
-```
-
----
-
-### 6. Search Students by Name
-
-```http
-GET /api/students/search?name={name}
-```
-
-**Description**: Search for students by name (partial match supported) or retrieve all students if no name is provided.
-
-**Query Parameters**:
-
-- `name` (String, optional): The name or part of the name to search for
-
-**Response**:
-
-- **Status Code**: `200 OK`
-- **Body**: Array of matched Student objects
-
-#### Example Request
-
-```bash
-curl "http://localhost:8080/api/students/search?name=Alice"
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-[
-  {
-    "studentId": 1,
-    "name": "Alice Johnson",
-    "email": "alice@university.edu",
-    "major": "Computer Science",
-    "gpa": 3.8
-  }
-]
-```
-
----
-
-### 7. Get Student by Email
-
-```http
-GET /api/students/email/{email}
-```
-
-**Description**: Retrieve a student by their email address.
-
-**Path Parameters**:
-
-- `email` (String, required): The student's email address
-
-**Response**:
-
-- **Status Code**: `200 OK` (if found) or `404 Not Found` (if not found)
-- **Body**: Student object
-
----
-
-### 8. Update a Student
-
-```http
-PUT /api/students/{id}
-```
-
-**Description**: Update an existing student's information.
-
-**Path Parameters**:
-
-- `id` (Long, required): The ID of the student to update
-
-**Request Body**: Student object with fields to update:
-
-- `name` (String): Updated name
-- `email` (String): Updated email
-- `major` (String): Updated major
-- `gpa` (Double): Updated GPA
-
-**Response**:
-
-- **Status Code**: `200 OK` (if updated successfully) or `404 Not Found` (if student not found)
-- **Body**: Updated Student object
-
-#### Example Request
-
-```bash
-curl -X PUT http://localhost:8080/api/students/1 \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Alice Johnson",
-    "email": "alice.johnson@university.edu",
-    "major": "Computer Science",
-    "gpa": 3.9
-  }'
-```
-
-#### Example Response (Status: 200 OK)
-
-```json
-{
-  "studentId": 1,
-  "name": "Alice Johnson",
-  "email": "alice.johnson@university.edu",
-  "major": "Computer Science",
-  "gpa": 3.9
-}
-```
-
----
-
-### 9. Delete a Student
-
-```http
-DELETE /api/students/{id}
-```
-
-**Description**: Delete an existing student record from the database.
-
-**Path Parameters**:
-
-- `id` (Long, required): The ID of the student to delete
-
-**Response**:
-
-- **Status Code**: `204 No Content` (successful deletion)
-- **Body**: Empty
-
-#### Example Request
-
-```bash
-curl -X DELETE http://localhost:8080/api/students/1
-```
-
-#### Example Response (Status: 204 No Content)
-
-```
-(Empty body)
-```
-
----
-
 ## Web UI Routes
 
 The application also provides a web interface for user interaction. All web routes use the base URL: `http://localhost:8080/students`
 
-### 1. View All Students
+### 1. View All tours
 
 ```http
-GET /students/
+GET /tours/
 ```
 
-**Description**: Display a list of all students in a web page.
+**Description**: Display a list of all tours in a web page.
 
-**Response**: HTML page showing the students list.
+**Response**: HTML page showing the tour list.
 
-### 2. View Student Details
+### 2. View tour Details
 
 ```http
-GET /students/{id}
+GET /tours/{id}
 ```
 
-**Description**: Display detailed information for a specific student.
+**Description**: Display detailed information for a specific tour.
 
 **Path Parameters**:
 
-- `id` (Long, required): The unique identifier of the student
+- `id` (Long, required): The unique identifier of the tour
 
-**Response**: HTML page with student details or error page if not found.
+**Response**: HTML page with tour details or error page if not found.
 
-### 3. Add New Student Form
-
-```http
-GET /students/add
-```
-
-**Description**: Display a form to add a new student.
-
-**Response**: HTML form for creating a new student.
-
-### 4. Create Student
+### 3. Add New tour
 
 ```http
-POST /students/
+GET /tours/create
 ```
 
-**Description**: Process the form submission to create a new student.
+**Description**: Display a form to add a new tour given looged in as a tour guide.
 
-**Form Data**:
+**Response**: HTML form for creating a new tour.
 
-- `name` (String, required): Student's full name
-- `email` (String, required, unique): Student's email address
-- `major` (String, optional): Student's major
-- `gpa` (Double, optional): Student's GPA
-- `picture` (File, optional): Profile picture
-
-**Response**: Redirect to the new student's details page.
-
-### 5. Update Student
+### 4. Create tour
 
 ```http
-POST /students/update/{id}
+POST /tours/create
 ```
 
-**Description**: Process the form submission to update an existing student.
+**Description**: Process the form submission to create a new tour.
 
-**Path Parameters**:
+**Response**: Redirect to the new tours's home page.
 
-- `id` (Long, required): The ID of the student to update
+### 5. Update Tourist Profile Picture
 
-**Form Data**: Same as create student.
+```http
+POST /profile
+```
+
+**Description**: Upload an image URL to update the profile.
+
+**Form Data**: Image URL.
 
 **Response**: Redirect to the updated student's details page.
 
-### 6. Delete Student
+### 6. Accept / Reject Booking
 
 ```http
-GET /students/delete/{id}
+GET /guides/dashboard
 ```
 
-**Description**: Delete a student and redirect to the students list.
+**Description**: Accept/reject a booking and redirect to the guide dashboard.
 
-**Path Parameters**:
 
-- `id` (Long, required): The ID of the student to delete
+**Response**: Redirect to the guide dashboard.
 
-**Response**: Redirect to the students list page.
-
-### 7. Search Students
+### 7. Search tours
 
 ```http
-GET /students/search?name={name}
+GET /tours?city={city}
 ```
 
-**Description**: Search for students by name and display results.
+**Description**: Search for tours by city and display results.
 
 **Query Parameters**:
 
-- `name` (String, optional): The name to search for
+- `date` (String, optional): The date users wants to book a tour
+- `guests` (String, optional): The number of guests
 
+  
 **Response**: HTML page with search results.
 
-### 8. Filter by Major
+### 8. Filter by Category
 
 ```http
-GET /students/major/{major}
+GET /tours?category={category}
 ```
 
-**Description**: Display students filtered by major.
+**Description**: Display students filtered by category.
 
-**Path Parameters**:
+**Query Parameters**:
 
-- `major` (String, required): The major to filter by
+- `minPrice` (String, optional): The min amount for the tour price
+- `maxPrice` (String, optional): The max amount for the tour price
 
-**Response**: HTML page with filtered students list.
+**Response**: HTML page with filtered tour list.
 
 ---
 
@@ -825,26 +472,6 @@ Spring MVC is a web framework that follows the MVC architectural pattern:
 - **View**: The presentation layer (FreeMarker templates that render HTML)
 - **Controller**: Handles user requests, processes them, and returns appropriate responses
 
-```java
-@Controller  // For web views
-@RequestMapping("/students")
-public class StudentUiController {
-  @GetMapping("/")
-  public String getAllStudents(Model model) {
-    model.addAttribute("studentsList", studentService.getAllStudents());
-    return "students-list";  // Returns view name
-  }
-}
-
-@RestController  // For API responses
-@RequestMapping("/api/students")
-public class StudentApiController {
-  @GetMapping("/")
-  public ResponseEntity<List<Student>> getAllStudents() {
-    return ResponseEntity.ok(studentService.getAllStudents());
-  }
-}
-```
 
 ### @Controller vs @RestController
 
@@ -857,10 +484,10 @@ FreeMarker is a server-side template engine for web applications:
 
 ```html
 <table>
-  <#list studentsList as student>
+  <#list tourList as tour>
   <tr>
-    <td>${student.name}</td>
-    <td>${student.email}</td>
+    <td>${tour.title}</td>
+    <td>${tour.city}</td>
   </tr>
   </#list>
 </table>
@@ -874,12 +501,12 @@ FreeMarker is a server-side template engine for web applications:
 
 ```java
 @Controller
-@RequestMapping("/students")  // Web UI controller
-public class StudentUiController { }
+@RequestMapping("/tours")  // Web UI controller
+public class TourController { }
 
 @RestController
-@RequestMapping("/api/students")  // API controller
-public class StudentApiController { }
+@RequestMapping("/api/tours")  // API controller
+public class TourApiController { }
 ```
 
 - `@Controller`: Handles web requests, returns view names for HTML rendering
@@ -897,11 +524,11 @@ public class StudentApiController { }
 
 ```java
 @Service
-public class StudentService {
-  private final StudentRepository studentRepository;
+public class TourService {
+  private final TourRepository tourRepository;
 
-  public StudentService(StudentRepository studentRepository) {
-    this.studentRepository = studentRepository;
+  public TourService(TourRepository tourRepository) {
+    this.tourRepository = tourRepository;
   }
 }
 ```
@@ -912,40 +539,40 @@ public class StudentService {
 ### Spring Data JPA Repository
 
 ```java
-public interface StudentRepository extends JpaRepository<Student, Long> {
-  List<Student> findByMajor(String major);
-  Student findByEmail(String email);
+public interface TourRepository extends JpaRepository<Tour, Long> {
+  List<Tour> findByCity(String city);
+  Tour findByTitle(String title);
 }
 ```
 
-- `JpaRepository<Student, Long>`: Provides CRUD methods automatically
+- `JpaRepository<Tour, Long>`: Provides CRUD methods automatically
 - Spring automatically generates implementations for custom finder methods
-- `findByMajor` generates a query like: `SELECT * FROM students WHERE major = ?`
+- `findByCity` generates a query like: `SELECT * FROM tours WHERE city = ?`
 
 ### @Entity and JPA Annotations
 
 ```java
 @Entity
-@Table(name = "students")
-public class Student {
+@Table(name = "tours")
+public class Tours {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long studentId;
+  public Long tourId;
 }
 ```
 
 - `@Entity`: Marks this class as a database table
-- `@Table(name = "students")`: Specifies the table name
+- `@Table(name = "tours")`: Specifies the table name
 - `@Id`: Marks the primary key field
 - `@GeneratedValue`: Auto-generates IDs (database handles increment)
 
 ### ResponseEntity
 
 ```java
-public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
-  Student student = studentService.getStudentById(id);
-  if (student != null) {
-    return ResponseEntity.ok(student);  // Status 200
+public ResponseEntity<Tour> getTourById(@PathVariable Long id) {
+  Tour tour = tourService.getTourById(id);
+  if (tour != null) {
+    return ResponseEntity.ok(tour);  // Status 200
   } else {
     return ResponseEntity.notFound().build();  // Status 404
   }
@@ -960,63 +587,29 @@ public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
 
 ---
 
-## Database Schema
+## UML Class Diagram
+![UML Class Diagram](../docs/uml-class.png)
 
-The application uses a single table to store student data:
 
-### STUDENTS Table
-
-| Column       | Type             | Constraints      | Description                         |
-| ------------ | ---------------- | ---------------- | ----------------------------------- |
-| `student_id` | SERIAL           | PRIMARY KEY      | Auto-incrementing unique identifier |
-| `name`       | VARCHAR(255)     | NOT NULL         | Student's full name                 |
-| `email`      | VARCHAR(255)     | NOT NULL, UNIQUE | Student's email (must be unique)    |
-| `major`      | VARCHAR(255)     | Can be NULL      | Student's major (optional)          |
-| `gpa`        | DOUBLE PRECISION | Can be NULL      | Student's GPA (optional)            |
-
-### SQL (for reference)
-
-```sql
-CREATE TABLE students (
-  student_id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  major VARCHAR(255),
-  gpa DOUBLE PRECISION
-);
-```
-
-**Note**: This schema is automatically created by Hibernate based on the entity class when `spring.jpa.hibernate.ddl-auto=update` is set in `application.properties`.
+**Note**: The schema is automatically created by Hibernate based on the entity class when `spring.jpa.hibernate.ddl-auto=update` is set in `application.properties`.
 
 ---
 
-## Testing the API and Web UI
-
-### Testing the REST API
-
-#### Using Postman/Echo API/Bruno (GUI)
-
-1. Create a new request
-2. Select HTTP method (GET, POST, PUT, DELETE)
-3. Enter URL (e.g., http://localhost:8080/api/students/)
-4. If POST/PUT, go to "Body" tab → select "raw" and "JSON"
-5. Enter JSON data and click "Send"
+## Testing the Web UI
 
 ### Testing the Web Interface
 
 #### Using a Web Browser
 
 1. Open your web browser
-2. Navigate to `http://localhost:8080/students/`
+2. Navigate to `http://localhost:8080/tours/`
 3. Use the web interface to:
-   - View all students
-   - Add new students
-   - Update existing students
-   - Delete students
-   - Search by name
-   - Filter by major
+   - View all tours
+   - Search by city
+   - Filter by price
 
-The web interface provides a user-friendly way to interact with the student data without needing API tools.
+
+The web interface provides a user-friendly way to interact with the tour data without needing API tools.
 
 ---
 
@@ -1046,7 +639,7 @@ Then access the API at `http://localhost:8081/api/students/`
 
 - Verify the endpoint URL is correct
 - Make sure the application is running (use `mvnw.cmd spring-boot:run` on Windows or `./mvnw spring-boot:run` on Mac/Linux)
-- Check the base path is `/api/students`
+- Check the base path is `/api/tours`
 
 ### Issue: JSON parsing errors in POST/PUT requests
 
