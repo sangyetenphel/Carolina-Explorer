@@ -15,12 +15,13 @@
 
 ## App Functions
 1. Customer (Tourists):
-    1. Create/modify customer profile - Tourists can create an account, log in, and update their personal profile information.
-    2. View available services - Tourists can browse and filter available tours based on location, availability, budget, and tour type.
-    3. Subscribe to available services - Tourists can request and confirm tour bookings with selected tour guides.
-    4. Write reviews for subscribed services - Tourists can leave ratings and written reviews for tours they have completed.
+    1. Create/Modify Customer Profile - Tourists can create an account, log in, and update their personal profile information.
+    2. View Available Services - Tourists can browse and filter available tours based on location, availability, budget, and tour type.
+    3. Request to Available Services - Tourists can request tour bookings with selected tour guides.
+    4. Manage Bookings – Tourists can view all booking statuses, including pending requests, accepted bookings, and declined requests, and can cancel bookings even after they have been accepted.
+    5. Write Reviews for Services – Tourists can leave ratings and written reviews, as well as view their past reviews for completed tours.
 2. Provider (Tour Guides):
-    1. Create/modify/remove provider profile - Tour guides can create and manage their profile, including bio, service area, availability, and pricing.
-    2. Create services - Tour guides can create tour listings with descriptions, locations, and schedules.
-    3. View customer statistics -  Tour guides can view booking requests, confirmed tours, and costumer ratings.
-    4. Reply to reviews - Tour guides can respond to costumer reviews to engage with tourists. 
+    1. Create Profile - Tour guides can create their profile.
+    2. Create Services - Tour guides can create tour listings with descriptions, locations, and schedules.
+    3. Manage Bookings – Tour guides can view booking requests and choose to accept or reject requests made by tourists.
+    4. View Customer Statistics -  Tour guides can view booking requests, confirmed tours, cancellations made by tourists, past tours, total earnings, and customer ratings.
