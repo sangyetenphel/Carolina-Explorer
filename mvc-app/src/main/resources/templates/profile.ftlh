@@ -162,7 +162,7 @@
     /* CARD */
     .trip-card {
         min-width: 260px;
-        max-width: 260px;
+        max-width: 300px;
         background: white;
         border-radius: 20px;
         padding: 15px;
