@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.carolina_explorer.entity.Booking;
+import com.carolina_explorer.entity.BookingStatus;
 import com.carolina_explorer.entity.Review;
 import com.carolina_explorer.entity.Tourist;
 import com.carolina_explorer.service.BookingService;
@@ -51,14 +52,22 @@ public class TouristProfileController {
 
         LocalDate today = LocalDate.now();
 
-        // Upcoming trips
+        // Upcoming trips (ONLY valid ones)
         List<Booking> upcomingBookings = bookings.stream()
+                .filter(b -> b.getStatus() == BookingStatus.ACCEPTED 
+                        || b.getStatus() == BookingStatus.PENDING)
                 .filter(b -> b.getTourDate() != null && !b.getTourDate().isBefore(today))
                 .toList();
 
-        // Past trips (Where I've been)
+        // Past trips (ONLY accepted)
         List<Booking> pastBookings = bookings.stream()
+                .filter(b -> b.getStatus() == BookingStatus.ACCEPTED)
                 .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
+                .toList();
+
+        // ❌ Rejected bookings (NEW SECTION)
+        List<Booking> rejectedBookings = bookings.stream()
+                .filter(b -> b.getStatus() == BookingStatus.REJECTED)
                 .toList();
 
         // Reviews
@@ -71,6 +80,7 @@ public class TouristProfileController {
 
         model.addAttribute("upcomingBookings", upcomingBookings);
         model.addAttribute("pastBookings", pastBookings);
+        model.addAttribute("rejectedBookings", rejectedBookings);
 
         model.addAttribute("upcomingCount", upcomingBookings.size());
 
