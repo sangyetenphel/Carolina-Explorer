@@ -4,8 +4,8 @@
 **Project Name:** Carolina Explorer \
 **Team:** Ayusha Thapa (Provider) | Sangye Tengkhar (Customer) \
 **Course:** CSC 340-01\
-**Version:** 1.0\
-**Date:** 2026-02-13
+**Version:** 2.0\
+**Date:** 2026-05-04
 
 ---
 
@@ -19,7 +19,7 @@
 - **Itinerary:** A structured list of activities and details included in a tour.
 
 **Primary Users / Roles.**
-- **Customer (Tourist)** — Find and book tours that match location, schedule, and group size.
+- **Customer (Tourist)** — Find and book tours that match location, schedule, cost and group size.
 - **Provider (Tour Guide)** — Create tours and manage booking requests.
 
 **Scope**
@@ -110,13 +110,13 @@ Scenario: Customer logs in
 
 - **US‑CUST‑004 — Request Booking**
 
-  _Story:_ **As a `tourist`, I want `to request or book a tour date and time`, so that `that I can secure my spot.`**
+  _Story:_ **As a `tourist`, I want `to request or book a tour`, so that `that I can secure my spot.`**
 
   _Acceptance:_
   ```gherkin
   Scenario: Submit booking request
     Given I am viewing a tour
-    When  I select a date and time and submit a request
+    When  I select a date and submit a request
     Then  the provider should receive the booking request
   ```
 
@@ -147,7 +147,7 @@ Scenario: Customer logs in
 ### 2.2 Provider Stories
 - **US-PROV-00A — Provider Registration**
 
-  _Story:_ **As a `tour guide`, I want `to create a provider account`, so that `I can offer and manage tours.`**
+  _Story:_ **As a `tour guide`, I want `to create a provider account`, so that `I can create tours.`**
 
   _Acceptance:_
   ```gherkin
