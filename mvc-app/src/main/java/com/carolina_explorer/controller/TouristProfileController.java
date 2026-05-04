@@ -52,12 +52,16 @@ public class TouristProfileController {
 
         LocalDate today = LocalDate.now();
 
-        // Upcoming trips (ONLY valid ones)
+        // UPCOMING → ONLY accepted + future
         List<Booking> upcomingBookings = bookings.stream()
-                .filter(b -> b.getStatus() == BookingStatus.ACCEPTED 
-                        || b.getStatus() == BookingStatus.PENDING)
-                .filter(b -> b.getTourDate() != null && !b.getTourDate().isBefore(today))
-                .toList();
+            .filter(b -> b.getStatus() == BookingStatus.ACCEPTED)
+            .filter(b -> b.getTourDate() != null && !b.getTourDate().isBefore(today))
+            .toList();
+
+        // PENDING → waiting approval
+        List<Booking> pendingBookings = bookings.stream()
+            .filter(b -> b.getStatus() == BookingStatus.PENDING)
+            .toList();
 
         // Past trips (ONLY accepted)
         List<Booking> pastBookings = bookings.stream()
@@ -76,13 +80,21 @@ public class TouristProfileController {
         // Send to frontend
         model.addAttribute("tourist", fullTourist);
         model.addAttribute("bookings", bookings);
-        model.addAttribute("tripCount", bookings.size());
+        long completedCount = bookings.stream()
+                .filter(b -> b.getStatus() == BookingStatus.ACCEPTED)
+                .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
+                .count();
 
+        model.addAttribute("tripCount", completedCount);
+
+        model.addAttribute("pendingBookings", pendingBookings);
         model.addAttribute("upcomingBookings", upcomingBookings);
         model.addAttribute("pastBookings", pastBookings);
         model.addAttribute("rejectedBookings", rejectedBookings);
 
         model.addAttribute("upcomingCount", upcomingBookings.size());
+        model.addAttribute("pendingCount", pendingBookings.size());
+        model.addAttribute("rejectedCount", rejectedBookings.size());
 
         model.addAttribute("reviews", reviews);
         model.addAttribute("reviewCount", reviews.size());

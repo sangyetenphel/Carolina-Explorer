@@ -1,5 +1,6 @@
 package com.carolina_explorer.controller;
 
+import com.carolina_explorer.entity.Booking;
 import com.carolina_explorer.entity.TourGuide;
 import com.carolina_explorer.entity.User;
 import com.carolina_explorer.entity.UserRole;
@@ -9,8 +10,8 @@ import com.carolina_explorer.service.ReviewService;
 
 import jakarta.servlet.http.HttpSession;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -91,12 +92,21 @@ public class TourGuideController {
 
         model.addAttribute("bookings", bookingService.getPendingBookingsForGuide(user.getUserId()));
 
-        model.addAttribute(
-            "upcomingBookings",
-            Optional.ofNullable(
-                bookingService.getAcceptedBookingsForGuide(user.getUserId())
-            ).orElse(new ArrayList<>())
-        );
+        List<Booking> accepted =
+            bookingService.getAcceptedBookingsForGuide(user.getUserId());
+
+        LocalDate today = LocalDate.now();
+
+        List<Booking> upcoming = accepted.stream()
+            .filter(b -> b.getTourDate() != null && !b.getTourDate().isBefore(today))
+            .toList();
+
+        List<Booking> completed = accepted.stream()
+            .filter(b -> b.getTourDate() != null && b.getTourDate().isBefore(today))
+            .toList();
+
+        model.addAttribute("upcomingBookings", upcoming);
+        model.addAttribute("completedBookings", completed);
 
         model.addAttribute(
             "cancelledBookings",
