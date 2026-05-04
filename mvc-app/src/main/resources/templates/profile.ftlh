@@ -238,13 +238,19 @@
 
     .reviews-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 30px;
     }
 
     /* Card */
     .review-card {
-        padding: 10px 0;
+        min-width: 300px;
+        max-width: 300px;
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        flex-shrink: 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.08);
     }
 
     /* HEADER ROW */
@@ -387,11 +393,11 @@
     }
 
     button.btn-light {
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-}
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+    }
 
 </style>
 <body>
@@ -435,8 +441,10 @@
                     <h3 id="tripTitle">Upcoming Trips (${upcomingCount!0})</h3>
 
                     <div>
-                        <button onclick="showUpcoming()" class="btn btn-light btn-sm">‹</button>
-                        <button onclick="showDeclined()" class="btn btn-light btn-sm">›</button>
+                       <div>
+                        <button onclick="prevView()" class="btn btn-light btn-sm">‹</button>
+                        <button onclick="nextView()" class="btn btn-light btn-sm">›</button>
+                    </div>
                     </div>
                 </div>
 
@@ -461,6 +469,35 @@
                     <#else>
                         <p class="empty">No upcoming trips</p>
                     </#list>
+                </div>
+
+                <div id="pendingSection" style="display:none;">
+
+                    <#if pendingBookings?has_content>
+
+                        <#list pendingBookings as booking>
+
+                            <div class="upcoming-item" style="opacity:0.8;">
+
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+
+                                <div class="info">
+                                    <p class="title">${booking.tour.title}</p>
+                                    <span>${booking.tourDate}</span>
+
+                                    <div style="color:#f59e0b; font-size:12px;">
+                                        Waiting for approval
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </#list>
+
+                    <#else>
+                        <p class="text-muted">No pending bookings</p>
+                    </#if>
+
                 </div>
 
                 <div id="declinedSection" style="display:none;">
@@ -505,9 +542,11 @@
                 </div>
             </div>
 
-
             <#if pastBookings?has_content>
-                <div class="trip-slider" id="tripSlider"></div>
+
+                <!-- slider wraps the loop -->
+                <div class="trip-slider" id="tripSlider">
+
                     <#list pastBookings as booking>
                         <div class="trip-card">
 
@@ -526,7 +565,9 @@
 
                         </div>
                     </#list>
+
                 </div>
+
             <#else>
                 <p class="text-muted">No trips yet</p>
             </#if>
@@ -535,21 +576,24 @@
         <hr>
 
         <div class="section">
-            <h2>My Reviews</h2>
+            <div class="section-header">
+                <h2>My Reviews</h2>
 
+                <div class="slider-controls">
+                    <button onclick="scrollReviews(-1)">‹</button>
+                    <button onclick="scrollReviews(1)">›</button>
+                </div>
+            </div>
             <#if reviews?has_content>
-                <div class="reviews-grid">
+                <div class="trip-slider" id="reviewSlider">
+
                     <#list reviews as review>
                         <div class="review-card">
 
-                            <!-- TOP ROW -->
                             <div class="review-header">
-
-                                <!-- LEFT: HOST IMAGE -->
                                 <img class="review-avatar"
                                     src="${(review.booking.tour.tourGuide.profileImageUrl)!'/images/default-avatar.png'}" />
 
-                                <!-- RIGHT: TEXT -->
                                 <div class="review-header-info">
                                     <h4 class="review-tour">
                                         ${review.booking.tour.title}
@@ -560,29 +604,27 @@
                                     </p>
 
                                     <p class="review-host">
-                                        Hosted by ${review.booking.tour.tourGuide.firstName} ${review.booking.tour.tourGuide.lastName}
+                                        Hosted by ${review.booking.tour.tourGuide.firstName}
+                                        ${review.booking.tour.tourGuide.lastName}
                                     </p>
                                 </div>
-
                             </div>
 
-                            <!-- STARS -->
                             <div class="review-stars">
                                 <#list 1..review.rating as i>⭐</#list>
                             </div>
 
-                            <!-- DATE -->
                             <p class="review-date">
                                 ${review.createdAt?datetime.iso?string("MMMM yyyy")}
                             </p>
 
-                            <!-- COMMENT -->
                             <p class="review-text">
                                 ${review.comment}
                             </p>
 
                         </div>
                     </#list>
+
                 </div>
             <#else>
                 <p class="text-muted">No reviews yet</p>
@@ -627,18 +669,47 @@
         }
     </script>
 
+
     <script>
-        function showUpcoming() {
-            document.getElementById("upcomingSection").style.display = "block";
-            document.getElementById("declinedSection").style.display = "none";
-            document.getElementById("tripTitle").innerText = "Upcoming Trips";
+        let currentView = 0;
+
+        const views = [
+            { id: "upcomingSection", title: "Upcoming Trips (${upcomingCount!0})" },
+            { id: "pendingSection", title: "Pending Requests (${pendingCount!0})" },
+            { id: "declinedSection", title: "Declined Bookings (${rejectedCount!0})" }
+        ];
+
+        function updateView() {
+
+            // hide all sections
+            views.forEach(v => {
+                document.getElementById(v.id).style.display = "none";
+            });
+
+            // show current section
+            const current = views[currentView];
+            document.getElementById(current.id).style.display = "block";
+            document.getElementById("tripTitle").innerText = current.title;
         }
 
-        function showDeclined() {
-            document.getElementById("upcomingSection").style.display = "none";
-            document.getElementById("declinedSection").style.display = "block";
-            document.getElementById("tripTitle").innerText = "Declined Bookings";
+        function nextView() {
+            currentView = (currentView + 1) % views.length;
+            updateView();
+        }
+
+        function prevView() {
+            currentView = (currentView - 1 + views.length) % views.length;
+            updateView();
+        }
+
+        function scrollReviews(direction) {
+            const slider = document.getElementById("reviewSlider");
+            slider.scrollBy({
+                left: direction * 320,
+                behavior: 'smooth'
+            });
         }
     </script>
+
 </body>
 </html>

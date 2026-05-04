@@ -326,6 +326,50 @@
 
         </div>
 
+        <div class="mt-5">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4>Completed Tours</h4>
+            </div>
+
+            <#if (completedBookings![])?size gt 0>
+                <#list (completedBookings![]) as booking>
+
+                    <div class="card p-3 mb-3 shadow-sm tour-card" style="opacity:0.6;">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <div class="d-flex gap-3">
+
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+
+                                <div>
+                                    <h6>${booking.tour.title}</h6>
+                                    <small class="text-muted">${booking.tour.city}</small><br>
+                                    <small>${booking.groupSize} guests</small>
+                                </div>
+
+                            </div>
+
+                            <div class="text-end">
+                                <h5>$${(booking.tour.price * booking.groupSize)?string["#,##0.00"]}</h5>
+
+                                <div style="font-size:12px; color:#717171;">
+                                    Completed
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </#list>
+            <#else>
+                <p>No completed tours yet</p>
+            </#if>
+
+        </div>
+
     </div>
 
     <script>
