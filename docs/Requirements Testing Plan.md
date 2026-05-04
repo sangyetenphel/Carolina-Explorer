@@ -5,35 +5,21 @@
 **Date:** 2026-05-04  
 **Purpose:** This document outlines comprehensive test scenarios for each functional requirement (user story) in the Carolina Explorer system.
 
----
 
 # Actors
-- Guide G: Tour Guide  
-- Tourist T: Tourist  
+- Provider P: Tour Guide  
+- Customer C: Tourist  
 - Service S: Tour  
-- Booking B: Tour Booking  
 
 ---
 
 # Use Cases
 
-## 1. Guide — Register & Create Tours  
-(US-GUIDE-001, US-GUIDE-002)
+## 1. Provider: US-PROV-00A — Register & manage profile, US-PROV-001 — Create and manage tours
 
-1. Guide G1 logs in for the first time and creates a profile.  
-2. G1 creates tours S1 and S2 with:
-   - title  
-   - description  
-   - price  
-   - city  
-   - images  
+1. Tour Guide P1 logs in for the first time and creates a provider account.
+
 3. G1 exits.
-
-**Expected Outcome:**
-- Tours are saved in database  
-- Tours appear on homepage and browse page  
-
----
 
 ## 2. Tourist — Register & Browse Tours  
 (US-TOURIST-001, US-TOURIST-003)
