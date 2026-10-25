@@ -32,6 +32,7 @@
         <h5 class="text-center mb-3">Welcome to Carolina Explorer!</h5>
 
         <form action="/signup" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
             <h6>Legal Name</h6>
 

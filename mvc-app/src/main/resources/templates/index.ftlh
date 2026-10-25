@@ -690,7 +690,7 @@
 
                 <!-- IMAGE -->
                 <div class="featured-img">
-                    <img src="${(tour.images[0].imageUrl)!'/images/default.jpg'}">
+                    <img src="${(tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                     <!-- CATEGORY TAG -->
                     <span class="tag">${tour.category.displayName}</span>

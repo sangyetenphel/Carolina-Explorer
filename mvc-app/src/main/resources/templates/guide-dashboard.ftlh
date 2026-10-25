@@ -175,7 +175,7 @@
                                 <div class="d-flex align-items-start mb-4">
 
                                     <!-- PROFILE IMAGE -->
-                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
+                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.png'}"
                                         style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
 
                                     <div class="ms-3">
@@ -193,6 +193,7 @@
                                         <div>
                                             <form action="/bookings/${booking.bookingId}/accept"
                                                 method="post" style="display:inline;">
+                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                                 <button type="submit"
                                                         style="border:none; background:none; color:#16a34a;">
                                                     Accept
@@ -203,6 +204,7 @@
 
                                             <form action="/bookings/${booking.bookingId}/reject"
                                                 method="post" style="display:inline;">
+                                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                                 <button type="submit"
                                                         style="border:none; background:none; color:#dc2626;">
                                                     Reject
@@ -237,7 +239,7 @@
 
                                 <div class="d-flex align-items-start mb-4" style="opacity:0.6;">
 
-                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.jpg'}"
+                                    <img src="${booking.tourist.profileImage!'/images/default-avatar.png'}"
                                         style="width:45px; height:45px; border-radius:50%; object-fit:cover;">
 
                                     <div class="ms-3">
@@ -295,7 +297,7 @@
 
                             <div class="d-flex gap-3">
 
-                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                                 <div>
                                     <!-- <span class="badge badge-upcoming mb-2">Upcoming</span> -->
@@ -341,7 +343,7 @@
 
                             <div class="d-flex gap-3">
 
-                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                                 <div>
                                     <h6>${booking.tour.title}</h6>

@@ -100,7 +100,9 @@ public class TouristViewController {
         // FILTER BY GROUP SIZE
         if (guests != null) {
             tours = tours.stream()
-                .filter(t -> t.getMinGuests() <= guests && t.getMaxGuests() >= guests)
+                // min/max guests are optional on a tour, so a missing limit means no limit
+                .filter(t -> (t.getMinGuests() == null || t.getMinGuests() <= guests)
+                        && (t.getMaxGuests() == null || t.getMaxGuests() >= guests))
                 .toList();
         }
 

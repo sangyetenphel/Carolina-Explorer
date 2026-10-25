@@ -8,6 +8,7 @@ import com.carolina_explorer.service.TourGuideService;
 import com.carolina_explorer.service.BookingService;
 import com.carolina_explorer.service.ReviewService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,6 +38,12 @@ public class TourGuideController {
     @Autowired
     private ReviewService reviewService;
 
+    // Never let form data set these fields, or a signup could overwrite an existing account
+    @InitBinder("guide")
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("userId", "role", "createdAt", "tours*");
+    }
+
     // SHOW SIGNUP PAGE
     @GetMapping("/signup")
     public String showSignupForm(Model model) {
@@ -46,7 +54,8 @@ public class TourGuideController {
     // HANDLE FORM SUBMISSION
     @PostMapping("/signup")
     public String registerGuide(
-            @ModelAttribute TourGuide guide,
+            @ModelAttribute("guide") TourGuide guide,
+            HttpServletRequest request,
             HttpSession session,
             RedirectAttributes redirectAttributes
     ) {
@@ -56,6 +65,7 @@ public class TourGuideController {
 
         TourGuide savedGuide = tourGuideService.createTourGuide(guide);
 
+        request.changeSessionId();
         session.setAttribute("loggedInUser", savedGuide);
 
         redirectAttributes.addFlashAttribute("firstTour", true);

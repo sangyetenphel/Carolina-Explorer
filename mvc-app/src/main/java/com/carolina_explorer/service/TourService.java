@@ -59,7 +59,7 @@ public class TourService {
     }
 
     public List<Tour> getTopTours() {
-    return tourRepository.findAll()
+    return attachRatings(tourRepository.findAll())
             .stream()
             .sorted((a, b) -> Double.compare(
                     b.getRating() != null ? b.getRating() : 0,

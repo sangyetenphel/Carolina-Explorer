@@ -112,6 +112,7 @@
         <hr class="mb-0">
 
         <form action="/tours/create" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <input type="hidden" name="tourGuide.tourGuideId" value="1">
 
             <!-- TOUR OVERVIEW -->

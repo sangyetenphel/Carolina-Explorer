@@ -17,8 +17,10 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // CSRF protection stays on (Spring Security default); forms send the token
+        // exposed by CsrfTokenAdvice. Access checks happen in the controllers,
+        // since login is handled through the HTTP session.
         http
-            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().permitAll()
             );
