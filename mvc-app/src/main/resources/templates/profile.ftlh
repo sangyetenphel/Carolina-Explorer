@@ -473,7 +473,7 @@
 
                         <div class="upcoming-item">
 
-                            <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                            <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                             <div class="info">
                                 <p class="title">${booking.tour.title}</p>
@@ -481,6 +481,7 @@
                             </div>
 
                             <form action="/bookings/cancel/${booking.bookingId}" method="post">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                 <button class="cancel-btn">Cancel</button>
                             </form>
 
@@ -499,7 +500,7 @@
 
                             <div class="upcoming-item" style="opacity:0.8;">
 
-                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                                 <div class="info">
                                     <p class="title">${booking.tour.title}</p>
@@ -528,7 +529,7 @@
 
                             <div class="upcoming-item" style="opacity:0.6;">
 
-                                <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                                <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                                 <div class="info">
                                     <p class="title">${booking.tour.title}</p>
@@ -570,7 +571,7 @@
                     <#list pastBookings as booking>
                         <div class="trip-card">
 
-                            <img src="${(booking.tour.images[0].imageUrl)!'/images/default.jpg'}">
+                            <img src="${(booking.tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                             <h4>${booking.tour.title}</h4>
                             <!-- <p>${booking.tour.city}, North Carolina</p> -->
@@ -706,6 +707,7 @@
             <h3>Update Profile Picture</h3>
 
             <form action="/profile/avatar" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                 <input type="text" name="imageUrl" placeholder="Paste image URL..." required>
 
                 <div class="modal-actions">

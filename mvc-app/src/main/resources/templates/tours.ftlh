@@ -229,7 +229,7 @@
                         <!-- IMAGE WRAPPER -->
                         <div class="image-wrapper">
 
-                            <img src="${(tour.images[0].imageUrl)!'/images/placeholder.jpg'}">
+                            <img src="${(tour.images[0].imageUrl)!'/images/hero-image.jpg'}">
 
                             <!-- CATEGORY BADGE (TOP RIGHT) -->
                             <div class="badge-overlay">

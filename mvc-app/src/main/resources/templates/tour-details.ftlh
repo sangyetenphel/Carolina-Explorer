@@ -196,7 +196,7 @@
             <!-- MAIN IMAGE -->
             <div class="col-md-7">
                 <img
-                    src="${(tour.images[0].imageUrl)!'https://via.placeholder.com/800x500'}"
+                    src="${(tour.images[0].imageUrl)!'/images/hero-image.jpg'}"
                     class="w-100"
                     style="
                         border-radius:20px;
@@ -209,8 +209,8 @@
             <div class="col-md-5">
                 <div class="row g-3" style="height:400px;">
 
-                    <#list tour.images[1..] as img>
-                        <#if img?index < 4>
+                    <#list tour.images![] as img>
+                        <#if img?index gt 0 && img?index < 5>
                             <div class="col-6" style="height:50%;">
                                 <img
                                     src="${img.imageUrl!''}"
@@ -260,8 +260,10 @@
                 <h5 class="fw-semibold mt-4">What's Included</h5>
 
                 <ul class="mt-2">
-                    <#list tour.includes?split(",") as item>
-                        <li>${item?trim}</li>
+                    <#list (tour.includes!"")?split(",") as item>
+                        <#if item?trim?has_content>
+                            <li>${item?trim}</li>
+                        </#if>
                     </#list>
                 </ul>
 
@@ -299,7 +301,7 @@
 
                     <p><i class="bi bi-calendar-event"></i> Free Cancellation</p>
 
-                    <p><i class="bi bi-clock"></i> Duration: ${tour.durationHours} hours</p>
+                    <p><i class="bi bi-clock"></i> Duration: ${tour.durationHours!'Flexible'}<#if tour.durationHours??> hours</#if></p>
 
                     <p><i class="bi bi-people"></i> Group Size: ${tour.minGuests!''}-${tour.maxGuests!''} guests</p>
 
@@ -322,6 +324,7 @@
 
                         <!-- REVIEW FORM -->
                         <form action="/reviews" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                             <input type="hidden" name="tourId" value="${tour.tourId}">
                             <input type="hidden" name="bookingId" value="${bookingId}">
@@ -358,6 +361,7 @@
 
                         <!-- ORIGINAL BOOKING FORM -->
                         <form action="/bookings" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
                             <input type="hidden" name="tourId" value="${tour.tourId}">
 

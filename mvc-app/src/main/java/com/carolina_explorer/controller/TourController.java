@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,12 @@ public class TourController {
     @Autowired
     private TourGuideService tourGuideService;
 
+    // Never let form data set these fields, or a guide could overwrite someone else's tour
+    @InitBinder("tour")
+    public void initBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("tourId", "tourGuide*", "createdAt", "images*", "rating", "reviewCount");
+    }
+
     // SHOW CREATE FORM
         @GetMapping("/create")
         public String showCreateForm(Model model) {
@@ -44,7 +51,7 @@ public class TourController {
     // CREATE TOUR
     @PostMapping("/create")
     public String createTour(
-            @ModelAttribute Tour tour,
+            @ModelAttribute("tour") Tour tour,
             @RequestParam("imageUrls") List<String> imageUrls,
             HttpSession session
     ) {

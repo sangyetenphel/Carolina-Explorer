@@ -7,6 +7,7 @@ import com.carolina_explorer.entity.UserRole;
 import com.carolina_explorer.service.TourGuideService;
 import com.carolina_explorer.service.TouristService;
 import com.carolina_explorer.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +40,7 @@ public class AuthController {
     public String login(
             @RequestParam String email,
             @RequestParam String password,
+            HttpServletRequest request,
             HttpSession session
     ) {
 
@@ -47,6 +49,9 @@ public class AuthController {
         if (user == null || !passwordEncoder.matches(password, user.getPasswordHash())) {
             return "redirect:/login?error=true";
         }
+
+        // new session id after login prevents session fixation
+        request.changeSessionId();
 
         if (user.getRole() == UserRole.TOUR_GUIDE) {
 

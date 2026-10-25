@@ -81,6 +81,7 @@
         <hr>
 
         <form action="/guides/signup" method="post">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
             <!-- PERSONAL INFO -->
             <h5>Personal Information</h5>

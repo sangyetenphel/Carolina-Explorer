@@ -70,21 +70,35 @@ public class BookingController {
     }
 
     @PostMapping("/{id}/accept")
-    public String accept(@PathVariable Long id) {
-        bookingService.acceptBooking(id);
+    public String accept(@PathVariable Long id, HttpSession session) {
+
+        if (!(session.getAttribute("loggedInUser") instanceof TourGuide guide)) {
+            return "redirect:/login";
+        }
+
+        bookingService.acceptBooking(id, guide.getUserId());
         return "redirect:/guides/dashboard?accepted=true";
     }
 
     @PostMapping("/{id}/reject")
-    public String reject(@PathVariable Long id) {
-        bookingService.rejectBooking(id);
+    public String reject(@PathVariable Long id, HttpSession session) {
+
+        if (!(session.getAttribute("loggedInUser") instanceof TourGuide guide)) {
+            return "redirect:/login";
+        }
+
+        bookingService.rejectBooking(id, guide.getUserId());
         return "redirect:/guides/dashboard";
     }
 
     @PostMapping("/cancel/{id}")
-    public String cancelBooking(@PathVariable Long id) {
+    public String cancelBooking(@PathVariable Long id, HttpSession session) {
 
-        bookingService.cancelBooking(id);
+        if (!(session.getAttribute("loggedInUser") instanceof Tourist tourist)) {
+            return "redirect:/login";
+        }
+
+        bookingService.cancelBooking(id, tourist.getUserId());
 
         return "redirect:/profile"; // go back to tourist profile
     }
