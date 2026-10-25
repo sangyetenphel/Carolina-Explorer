@@ -1,0 +1,16 @@
+# Render Blueprint: deploys mvc-app as a Docker web service.
+# Secrets are marked sync: false, so Render asks for them in the dashboard; they are never stored in git.
+services:
+  - type: web
+    name: carolina-explorer
+    runtime: docker
+    rootDir: mvc-app
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false

@@ -9,6 +9,7 @@ This project demonstrates real-world implementation of **MVC architecture, booki
 - [Technology Stack](#technology-stack)
 - [Installation & Setup](#installation--setup)
 - [Running the Application](#running-the-application)
+- [Deployment](#deployment)
 - [Project Architecture](#project-architecture)
 - [Web UI Routes](#web-ui-routes)
 - [Key Spring Boot Concepts](#key-spring-boot-concepts)
@@ -80,9 +81,9 @@ Before you begin, ensure you have installed:
    - Download from [Oracle Java](https://www.oracle.com/java/technologies/downloads/) or use a package manager
    - Verify installation: `java -version`
 
-2. **Neon.tech PostgreSQL Database** (Cloud-based, Serverless)
+2. **PostgreSQL Database**: either [Neon.tech](https://neon.tech) (cloud) or a local PostgreSQL install
    - This project uses [Neon.tech](https://neon.tech), a serverless PostgreSQL database in the cloud
-   - You don't need to install PostgreSQL locally
+   - With Neon you don't need to install PostgreSQL locally
    - Sign up for a free account at [Neon.tech](https://neon.tech)
    - You only need an internet connection to connect to the database
 
@@ -124,65 +125,37 @@ The Maven Wrapper is a handy tool that ensures everyone working on the project u
    - `install`: Downloads all dependencies and compiles the project
    - First run may take a few minutes as Maven is downloaded
 
-3. **Database Configuration (Neon.tech Serverless PostgreSQL)**
+3. **Database Configuration**
 
-   #### Step 1: Get Your Neon.tech Connection String
+   The app reads its database connection from environment variables, so credentials never need to be committed:
 
-   1. Navigate to [Neon.tech](https://neon.tech)
-   2. Sign in to your account
-   3. In your project dashboard, find your connection string
-   4. It will look like: `postgresql://username:password@host:5432/dbname`
+   | Variable | Example | Default |
+   |---|---|---|
+   | `DATABASE_URL` | `jdbc:postgresql://ep-xxxx-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require` | `jdbc:postgresql://localhost:5432/carolina` |
+   | `DATABASE_USERNAME` | `neondb_owner` | `carolina` |
+   | `DATABASE_PASSWORD` | your Neon password | *(empty)* |
+   | `PORT` | `8080` | `8080` |
+   | `SQL_LOG_LEVEL` | `DEBUG` to log out sql queries | `WARN` |
 
-   #### Step 2: Stop Tracking `application.properties` Locally
+   **Using Neon.tech:** in your Neon project dashboard, copy the connection details. Use the host and database name in `DATABASE_URL` (prefixed with `jdbc:postgresql://`), and put the username and password in their own variables.
 
-   To prevent accidentally committing your database credentials to Git, use `git skip-worktree` to exclude your local copy:
-
-   ```bash
-   git update-index --skip-worktree src/main/resources/application.properties
-   ```
-
-   This tells Git to ignore any changes you make to this file locally. You can now safely edit the file without worrying about committing sensitive data.
-
-   #### Step 3: Update Your Connection String
-
-   Edit `src/main/resources/application.properties` and add your Neon.tech PostgreSQL connection string:
-
-   ```properties
-   spring.application.name=crud-api
-   spring.datasource.url=jdbc:postgresql://host:5432/dbname
-   spring.datasource.username=your_neon_username
-   spring.datasource.password=your_neon_password
-   spring.jpa.hibernate.ddl-auto=update
-
-   #Log out sql queries
-   logging.level.org.hibernate.SQL=DEBUG
-   logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
-   logging.level.org.hibernate.orm.jdbc.bind=TRACE
-   ```
-
-   Replace with your actual Neon.tech credentials:
-   - `host`: Your Neon.tech host (e.g., `some-cool-projectName-pooler.c-7.us-east-1.aws.neon.tech`)
-   - `dbname`: Your database name (usually `neondb`)
-   - `your_neon_username`: Your Neon.tech username
-   - `your_neon_password`: Your Neon.tech password
-
-   #### Example Connection String
-
-   ```properties
-   spring.datasource.url=jdbc:postgresql://ep-cool-cherry-ai9ih0ua-pooler.c-7.us-east-1.aws.neon.tech:5432/neondb
-   spring.datasource.username=neondb_owner
-   spring.datasource.password=your_password_here
-   ```
-
-   #### To Resume Tracking the File
-
-   If you need to revert and track the file again:
+   **On Mac/Linux:**
 
    ```bash
-   git update-index --no-skip-worktree src/main/resources/application.properties
+   export DATABASE_URL="jdbc:postgresql://your-neon-host/neondb?sslmode=require"
+   export DATABASE_USERNAME="neondb_owner"
+   export DATABASE_PASSWORD="your_password_here"
    ```
 
-   **Important Note**: This approach (using `git skip-worktree`) keeps credentials safe locally while the file can be tracked in Git. However, in production environments, database credentials should be managed using environment variables or cloud-based secret management services like AWS Secrets Manager or Azure Key Vault.
+   **On Windows (PowerShell):**
+
+   ```powershell
+   $env:DATABASE_URL="jdbc:postgresql://your-neon-host/neondb?sslmode=require"
+   $env:DATABASE_USERNAME="neondb_owner"
+   $env:DATABASE_PASSWORD="your_password_here"
+   ```
+
+   In VS Code or IntelliJ, add the same variables to your run configuration instead. Tables are created automatically on first start (`spring.jpa.hibernate.ddl-auto=update`).
 
 4. **Verify Setup**
 
@@ -264,6 +237,33 @@ java -jar target/carolina_explorer-0.0.1-SNAPSHOT.jar
 ### Stopping the Application
 
 Press `Ctrl+C` in your terminal to stop the running application. If using IDE GUI, click the ⏹️ **Stop** button in the Run/Debug toolbar.
+
+---
+
+## Deployment
+
+The app ships with a `Dockerfile` (in `mvc-app/`) and a Render Blueprint (`render.yaml` at the repository root).
+
+### Deploy to Render (free plan)
+
+1. Sign in at [render.com](https://render.com) with GitHub.
+2. Click **New → Blueprint** and pick this repository. Render reads `render.yaml` and creates the `carolina-explorer` web service.
+3. When prompted, enter `DATABASE_URL`, `DATABASE_USERNAME` and `DATABASE_PASSWORD` for your Neon database.
+4. Click **Apply**. The first build takes a few minutes; every push to `main` redeploys automatically.
+
+Free Render services sleep after 15 minutes without traffic, so the first visit after a break takes about 30 seconds to load.
+
+### Run with Docker locally
+
+```bash
+cd mvc-app
+docker build -t carolina-explorer .
+docker run -p 8080:8080 \
+  -e DATABASE_URL="jdbc:postgresql://host.docker.internal:5432/carolina" \
+  -e DATABASE_USERNAME=carolina \
+  -e DATABASE_PASSWORD=your_password \
+  carolina-explorer
+```
 
 ---
 
