@@ -350,7 +350,7 @@ This project follows the MVC architectural pattern with layered architecture:
 
 ## Web UI Routes
 
-The application also provides a web interface for user interaction. All web routes use the base URL: `http://localhost:8080/students`
+The application also provides a web interface for user interaction. All web routes use the base URL: `http://localhost:8080`
 
 ### 1. View All tours
 
@@ -622,7 +622,7 @@ The web interface provides a user-friendly way to interact with the tour data wi
 server.port=8081
 ```
 
-Then access the API at `http://localhost:8081/api/students/`
+Then open the app at `http://localhost:8081`
 
 ### Issue: "Connection refused" when accessing database
 
