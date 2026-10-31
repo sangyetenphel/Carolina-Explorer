@@ -4,7 +4,7 @@ A tour-booking web app for North Carolina. Tourists search guided tours by city,
 
 ![Carolina Explorer demo: browsing tours, searching by city, opening a tour, booking it, and the guide accepting the request](docs/demo.gif)
 
-▶️ **[Watch the full demo video](https://sangyetenphel.com/projects/carolinaExplorer.mp4)** (1 min 54 s, includes sign-up, creating a tour and reviews)
+▶️ **[Watch the full demo video](https://sangyetengkhar.com/projects/carolinaExplorer.mp4)** (1 min 54 s, includes sign-up, creating a tour and reviews)
 
 ## Features
 
